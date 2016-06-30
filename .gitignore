@@ -1,0 +1,6 @@
+.project
+pom.xml
+.settings
+application.properties
+.classpath
+.springBeans
