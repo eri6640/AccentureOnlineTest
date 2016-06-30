@@ -4,3 +4,4 @@ pom.xml
 application.properties
 .classpath
 .springBeans
+/target/
