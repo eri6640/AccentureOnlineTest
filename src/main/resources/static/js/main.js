@@ -1,5 +1,5 @@
 
-var app = angular.module( 'acc_teamb', [ 'ngRoute' ] ); // ... omitted code
+var app = angular.module( 'CoreAPP', [ 'ngRoute' ] );
 
 app.config(function($routeProvider, $httpProvider) {
 
@@ -8,7 +8,7 @@ app.config(function($routeProvider, $httpProvider) {
 		controller : 'home'
 	}).when('/login', {
 		templateUrl : 'login.html',
-		controller : 'navigation'
+		controller : 'login'
 	}).otherwise('/');
 
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -22,7 +22,7 @@ app.controller('home', function($scope, $http) {
 	})
 });
 
-app.controller('navigation', function($rootScope, $scope, $http, $location) {
+app.controller('login', function($rootScope, $scope, $http, $location) {
 
   
 });
