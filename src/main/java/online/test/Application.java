@@ -1,5 +1,7 @@
 package online.test;
 
+import java.util.ArrayList;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -19,12 +21,13 @@ public class Application {
 	@Configuration
 	@Order( SecurityProperties.ACCESS_OVERRIDE_ORDER )
 	protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+		
 		@Override
 		protected void configure( HttpSecurity http ) throws Exception {
 			http
 			.httpBasic().and()
 	        .authorizeRequests()
-	        .antMatchers( "/index.html", "/home.html", "/login.html", "/data/userdata/", "/" ).permitAll().anyRequest()
+	        .antMatchers( "/index.html", "/home.html", "/login.html", "/data/userdata/", "/data/repeat.html", "/" ).permitAll().anyRequest()
 	        .authenticated().and().addFilterAfter( new CsrfHeaderFilter(), CsrfFilter.class );
 		}
 	}

@@ -1,7 +1,7 @@
 
 var app = angular.module( 'CoreAPP', [ 'ngRoute' ] );
 
-app.config(function($routeProvider, $httpProvider) {
+app.config(function( $routeProvider, $httpProvider ) {
 
 	$routeProvider.when('/', {
 		templateUrl : 'home.html',
@@ -15,33 +15,62 @@ app.config(function($routeProvider, $httpProvider) {
 	$httpProvider.defaults.headers.common['Accept'] = 'application/json';
 
 });
-app.controller('home', function($scope, $http) {
+app.controller('home', function( $rootScope, $scope, $http ) {
 	
 	//authenticate
-	var authenticate = function(credentials, callback) {
+	var authenticate = function( credentials, callback ) {
 
 		var headers = credentials ? { authorization : "Basic " + btoa( credentials.username + ":" + credentials.password ) } : {};
 
-		$http.get( 'user', { headers : headers} ).success( function( data ) {
-			if( data.name ) {
-				$rootScope.authenticated = true;
-			}
-			else {
-				$rootScope.authenticated = false;
-			}
-			callback && callback();
-		}).error(function() {
-			$rootScope.authenticated = false;
-			callback && callback();
-		});
+
 
 	}//authenticate
 	
-	$scope.userdata = {content: 'ddddddd'}
-	$http.get('/data/userdata/?first=kkk').success(function(data) {
-		$scope.userdata = data;
-	})
-});
+	//$scope.userdata = { content: 'ddddddd' };
+	//var jqxhr = $http.post('/data/repeat').success(function(data) {
+	//	$scope.userdata = data;
+	//})
+	/*
+	var req = {
+		method: 'POST',
+		url: 'http://localhost:8080/data/repeat.html',
+		headers: {
+			'Content-Type': undefined
+		},
+		data: { field1: 'test' }
+	}
+
+	$http(req).then( function( data ){
+		$scope.repeat = data;
+	});*/
+	
+	var res = $http.post('/data/repeat.html', { field1: 'test' } );
+	res.success(function( data, status ) {
+		$scope.repeat = data;
+	});
+	res.error(function(data, status) {
+		alert( "failure message: " + JSON.stringify({data: data}));
+	});	
+	
+	
+	
+	authenticate();
+	$scope.credentials = {};
+	$scope.login = function() {
+		authenticate($scope.credentials, function() {
+			if ($rootScope.authenticated) {
+				$location.path("/");
+				$scope.error = false;
+			}
+			else {
+				$location.path("/login");
+				$scope.error = true;
+			}
+		});
+	};
+	
+	
+});//controller('home'
 
 app.controller('login', function($rootScope, $scope, $http, $location) {
 
