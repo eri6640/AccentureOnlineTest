@@ -16,6 +16,27 @@ app.config(function($routeProvider, $httpProvider) {
 
 });
 app.controller('home', function($scope, $http) {
+	
+	//authenticate
+	var authenticate = function(credentials, callback) {
+
+		var headers = credentials ? { authorization : "Basic " + btoa( credentials.username + ":" + credentials.password ) } : {};
+
+		$http.get( 'user', { headers : headers} ).success( function( data ) {
+			if( data.name ) {
+				$rootScope.authenticated = true;
+			}
+			else {
+				$rootScope.authenticated = false;
+			}
+			callback && callback();
+		}).error(function() {
+			$rootScope.authenticated = false;
+			callback && callback();
+		});
+
+	}//authenticate
+	
 	$scope.userdata = {content: 'ddddddd'}
 	$http.get('/data/userdata/?first=kkk').success(function(data) {
 		$scope.userdata = data;
