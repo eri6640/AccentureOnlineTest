@@ -1,4 +1,0 @@
-.project
-pom.xml
-.settings
-application.properties
