@@ -1,6 +1,6 @@
 package online.test.controllers;
 
-import online.test.models.TestAnswerType;
+
 import online.test.models.TestQuestions;
 import online.test.models.dao.TestQuestionsDao;
 
@@ -18,5 +18,7 @@ public class TestQuestionsController {
 		Iterable<TestQuestions> list = testQuestionsDao.findAll();
 		return list;
 	}
-	
+	  @Autowired
+	  private TestQuestionsDao testQuestionsDao;
+	 
 } //TestsQuestionsController end

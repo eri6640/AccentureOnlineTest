@@ -1,5 +1,6 @@
 package online.test.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,33 +8,32 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "userAnswers")
-public class UserAnswers{
-	  
-	
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.AUTO)
-	  private long id;
-	  
-	  @ManyToOne
-	  @JoinColumn(name = "questionID")
-	  private TestQuestions testsQuestions;
-	  
-	  
-	  @ManyToOne
-	  @JoinColumn(name = "testsID")
-	  private Tests tests;
-	  
-	  
-	  @ManyToOne
-	  @JoinColumn(name = "userID")
-	  private User user;
+public class UserAnswers {
 
-	  @NotNull
-	  private String answer;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
+	@ManyToOne
+	@JoinColumn(name = "questionID")
+	private TestQuestions testsQuestions;
+
+	@ManyToOne
+	@JoinColumn(name = "testsID")
+	private Tests tests;
+
+	@ManyToOne
+	@JoinColumn(name = "userID")
+	private User user;
+
+	@Column
+	private String answer = "0";
+
+	@Column
+	private byte[] imageAnswer = null;
 
 	public long getId() {
 		return id;
@@ -75,15 +75,12 @@ public class UserAnswers{
 		this.answer = answer;
 	}
 
-	public UserAnswers(TestQuestions testsQuestions, Tests tests, User user, String answer) {
-		
-		this.testsQuestions = testsQuestions;
-		this.tests = tests;
-		this.user = user;
-		this.answer = answer;
+	public byte[] getImageAnswer() {
+		return imageAnswer;
 	}
-	  
-	  
-	  
-	
+
+	public void setImageAnswer(byte[] imageAnswer) {
+		this.imageAnswer = imageAnswer;
+	}
+
 }

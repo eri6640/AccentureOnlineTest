@@ -1,6 +1,6 @@
 package online.test.controllers;
 
-import online.test.models.User;
+
 import online.test.models.UserAnswers;
 import online.test.models.dao.UserAnswersDao;
 
@@ -18,5 +18,6 @@ public class UserAnswersController {
 		Iterable<UserAnswers> list = userAnswersDao.findAll();
 		return list;
 	}
-	
+	@Autowired  
+	private UserAnswersDao userAnswersDao;
 } //UserAnswersController end

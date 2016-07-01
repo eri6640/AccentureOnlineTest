@@ -8,43 +8,58 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "testOuestions")
-public class TestQuestions{
-	  
-	
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.AUTO)
-	  private long id;
-	  
-	  @NotNull
-	  private String question;
-	  
-	  @ManyToOne
-	  @JoinColumn(name = "testsID")
-	  private Tests tests;
-	  
-	  @ManyToOne
-	  @JoinColumn(name = "userID")
-	  private User user;
-	  
-	  @NotNull
-	  private String date;
-	  
-	  //All the answers
-	  @Column
-	  private String answer;
-	  
-	  @Column
-	  private String multipleChoice;
+@Table(name = "testQuestions")
+public class TestQuestions {
 
-	  @Column
-	  private byte[] imageAnswer;
-	  
-	  @Column
-	  private String textAnswer;
+	public static enum TYPE {
+		PICTURE('P'), MULTIPLE_CHOCE('M'), SINGLE_CHOICE('S'), TEXT('T');
+
+		private Character c;
+
+		TYPE(Character c) {
+			this.c = c;
+		}
+
+		public Character getValue() {
+			return c;
+		}
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
+	@Column
+	private TYPE type = TYPE.SINGLE_CHOICE;
+
+	@Column
+	private String question;
+
+	@Column
+	private String date = "01/01/2000";
+
+	@ManyToOne
+	@JoinColumn(name = "testsID")
+	private Tests tests;
+
+	@ManyToOne
+	@JoinColumn(name = "userID")
+	private User user;
+
+	// All the answers
+	@Column
+	private String answer = "0";
+
+	@Column
+	private String multipleChoice = "0";
+
+	@Column
+	private byte[] imageAnswer = null;
+
+	@Column
+	private String textAnswer;
 
 	public long getId() {
 		return id;
@@ -86,6 +101,14 @@ public class TestQuestions{
 		this.date = date;
 	}
 
+	public TYPE getType() {
+		return type;
+	}
+
+	public void setType(TYPE type) {
+		this.type = type;
+	}
+
 	public String getAnswer() {
 		return answer;
 	}
@@ -118,19 +141,4 @@ public class TestQuestions{
 		this.textAnswer = textAnswer;
 	}
 
-	public TestQuestions(String question, Tests tests, User user, String date, String answer, String multipleChoice,
-			byte[] imageAnswer, String textAnswer) {
-		
-		this.question = question;
-		this.tests = tests;
-		this.user = user;
-		this.date = date;
-		this.answer = answer;
-		this.multipleChoice = multipleChoice;
-		this.imageAnswer = imageAnswer;
-		this.textAnswer = textAnswer;
-	}
-
-
-	
 }

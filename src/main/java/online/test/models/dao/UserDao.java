@@ -13,7 +13,6 @@ import online.test.models.User;
  * The magic is that such methods must not be implemented, and moreover it is
  * possible create new query methods working only by defining their signature!
  * 
- * @author netgloo
  */
 @Transactional
 public interface UserDao extends CrudRepository<User, Long> {
@@ -21,16 +20,17 @@ public interface UserDao extends CrudRepository<User, Long> {
 	/**
 	 * Return the user having the passed email or null if no user is found.
 	 * 
-	 * @param email the user email.
+	 * @param email
+	 *            the user email.
 	 */
-	public User findByEmail( String email );
-	
+	public User findByEmail(String email);
 
 	/**
 	 * Return the user having the passed id or null if no user is found.
 	 * 
-	 * @param id the user id.
+	 * @param id
+	 *            the user id.
 	 */
-	public User findById( long id );
+	public User findById(long id);
 
 } // class UserDao
