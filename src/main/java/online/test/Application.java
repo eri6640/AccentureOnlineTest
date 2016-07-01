@@ -9,6 +9,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CsrfFilter;
 
+import online.test.models.TestOuestions;
+import online.test.models.UserAnswers;
+import online.test.models.dao.TestQuestionsDao;
+
 @SpringBootApplication
 public class Application {
 
@@ -21,7 +25,7 @@ public class Application {
 	protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		@Override
-		protected void configure( HttpSecurity http ) throws Exception {
+		protected void configure( HttpSecurity http ) throws Exception {		
 			http
 			.httpBasic().and()
 	        .authorizeRequests()
