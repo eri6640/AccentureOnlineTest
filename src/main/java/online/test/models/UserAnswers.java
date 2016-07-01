@@ -11,29 +11,26 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "userAnswers")
-public class UserAnswers{
-	  
-	
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.AUTO)
-	  private long id;
-	  
-	  @ManyToOne
-	  @JoinColumn(name = "questionID")
-	  private TestOuestions testsQuestions;
-	  
-	  
-	  @ManyToOne
-	  @JoinColumn(name = "testsID")
-	  private Tests tests;
-	  
-	  
-	  @ManyToOne
-	  @JoinColumn(name = "userID")
-	  private User user;
+public class UserAnswers {
 
-	  @NotNull
-	  private String answer;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
+	@ManyToOne
+	@JoinColumn(name = "questionID")
+	private TestOuestions testsQuestions;
+
+	@ManyToOne
+	@JoinColumn(name = "testsID")
+	private Tests tests;
+
+	@ManyToOne
+	@JoinColumn(name = "userID")
+	private User user;
+
+	@NotNull
+	private String answer;
 
 	public long getId() {
 		return id;
@@ -74,8 +71,5 @@ public class UserAnswers{
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	  
-	  
-	  
-	
+
 }

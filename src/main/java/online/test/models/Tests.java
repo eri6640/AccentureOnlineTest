@@ -11,22 +11,21 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tests")
-public class Tests{
-	  
-	
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.AUTO)
-	  private long id;
-	  
-	  @NotNull
-	  private String title;
-	  
-	  @ManyToOne
-	  @JoinColumn(name = "userID")
-	  private User user;
-	  
-	  @NotNull
-	  private String date;
+public class Tests {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
+	@NotNull
+	private String title;
+
+	@ManyToOne
+	@JoinColumn(name = "userID")
+	private User user;
+
+	@NotNull
+	private String date;
 
 	public long getId() {
 		return id;
@@ -59,10 +58,5 @@ public class Tests{
 	public void setDate(String date) {
 		this.date = date;
 	}
-	  
 
-	  
-	  
-	
-	
 }

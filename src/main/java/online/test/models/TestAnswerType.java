@@ -16,7 +16,7 @@ public class TestAnswerType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "testQuestionID")
 	private TestOuestions testQuestion;
@@ -47,8 +47,5 @@ public class TestAnswerType {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-
-	
 
 }
