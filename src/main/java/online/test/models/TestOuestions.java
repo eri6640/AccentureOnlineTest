@@ -12,39 +12,38 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "testOuestions")
-public class TestOuestions{
-	  
-	
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.AUTO)
-	  private long id;
-	  
-	  @NotNull
-	  private String question;
-	  
-	  @ManyToOne
-	  @JoinColumn(name = "testsID")
-	  private Tests tests;
-	  
-	  @ManyToOne
-	  @JoinColumn(name = "userID")
-	  private User user;
-	  
-	  @NotNull
-	  private String date;
-	  
-	  //All the answers
-	  @Column
-	  private String answer;
-	  
-	  @Column
-	  private String multipleChoice;
+public class TestOuestions {
 
-	  @Column
-	  private byte[] imageAnswer;
-	  
-	  @Column
-	  private String textAnswer;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
+	@NotNull
+	private String question;
+
+	@ManyToOne
+	@JoinColumn(name = "testsID")
+	private Tests tests;
+
+	@ManyToOne
+	@JoinColumn(name = "userID")
+	private User user;
+
+	@NotNull
+	private String date;
+
+	// All the answers
+	@Column
+	private String answer;
+
+	@Column
+	private String multipleChoice;
+
+	@Column
+	private byte[] imageAnswer;
+
+	@Column
+	private String textAnswer;
 
 	public long getId() {
 		return id;
@@ -118,6 +117,4 @@ public class TestOuestions{
 		this.textAnswer = textAnswer;
 	}
 
-
-	
 }

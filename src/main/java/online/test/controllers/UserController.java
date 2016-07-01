@@ -32,7 +32,7 @@ public class UserController {
 	public String create(String email, String password, String name, String surname, Boolean adminStatus) {
 		User user = null;
 		try {
-			user = new User(email, password, name, surname, adminStatus);
+			user = new User(email, password);
 			userDao.save(user);
 		}
 		catch (Exception ex) {

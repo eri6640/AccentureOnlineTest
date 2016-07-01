@@ -40,7 +40,6 @@ public class MainController {
 	/*@RequestMapping( "/data/repeat/" )
 	public Map<String,Object> repeat( @RequestParam("field1") String first, HttpServletRequest request ) {
 	    Map<String,Object> model = new HashMap<String,Object>();
-
 	    model.put( "content", first );
 	    return model;
 	}*/
