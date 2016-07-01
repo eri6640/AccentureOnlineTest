@@ -44,14 +44,32 @@ app.controller('home', function( $rootScope, $scope, $http ) {
 		$scope.repeat = data;
 	});*/
 	
-	var res = $http.post('/data/repeat.html', { field1: 'test' } );
+	/*var res = $http.post('/data/repeat.html', { field1: 'test' } );
 	res.success(function( data, status ) {
 		$scope.repeat = data;
 	});
 	res.error(function(data, status) {
 		alert( "failure message: " + JSON.stringify({data: data}));
-	});	
+	});*/
 	
+	
+	var request = new XMLHttpRequest();
+	request.onreadystatechange= function () {
+	    if ( request.readyState==4 ) {
+	        //handle response
+	    }
+	}
+	request.open("POST", "/data/repeat.html");
+	request.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+	request.setRequestHeader("Accept","application/json");
+	request.send( { field1: "test" } );
+	
+	request.success(function( data, status ) {
+		$scope.repeat = data;
+	});
+	reuest.error(function(data, status) {
+		alert( "failure message: " + JSON.stringify({data: data}));
+	});*/
 	
 	
 	authenticate();

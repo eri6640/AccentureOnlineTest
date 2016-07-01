@@ -41,18 +41,18 @@ public class MainController {
 	    return model;
 	}
 	
-	/*@RequestMapping( "/data/repeat.html" )
+	@RequestMapping( "/data/repeat.html" )
 	public Map<String,Object> repeat( @RequestParam("field1") String first, HttpServletRequest request ) {
 	    Map<String,Object> model = new HashMap<String,Object>();
 
 	    model.put( "content", first );
 	    return model;
-	}*/
+	}
 	
-	@RequestMapping( value = "/data/repeat.html", method = RequestMethod.POST )
+	/*@RequestMapping( value = "/data/repeat.html", method = RequestMethod.POST )
 	public ModelAndView httpServicePostJSONDataExample( ModelMap model ) {
 		return new ModelAndView("httpservice_post_json");
-	}
+	}*/
 	
 	
 	
