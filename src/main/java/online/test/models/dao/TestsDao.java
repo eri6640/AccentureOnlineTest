@@ -14,5 +14,5 @@ public interface TestsDao extends CrudRepository<Tests, Long> {
 
 	@Query("from Tests")
 	public List<Tests> getAllTests();
-	
+
 }
