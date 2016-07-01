@@ -35,11 +35,51 @@ public class User {
   @NotNull
   private String password;
 
+  @NotNull
+  private String name;
+  
+  @NotNull
+  private String surname;
+  
+  @NotNull
+  private Boolean adminStatus;
+  
   // ------------------------
   // PUBLIC METHODS
   // ------------------------
   
-  public String getPassword() {
+  
+  
+  
+  
+  public Boolean getAdminStatus() {
+	return adminStatus;
+}
+
+
+public void setAdminStatus(Boolean adminStatus) {
+	this.adminStatus = adminStatus;
+}
+
+
+public String getName() {
+	return name;
+}
+
+
+public void setName(String name) {
+	this.name = name;
+}
+
+public String getSurname() {
+	return surname;
+}
+
+public void setSurname(String surname) {
+	this.surname = surname;
+}
+
+public String getPassword() {
 	return password;
 }
 
