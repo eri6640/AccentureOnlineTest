@@ -98,6 +98,17 @@ public User() { }
     this.password = password;
   }
 
+  public User(String email, String password, String name, String surname, Boolean adminStatus) {
+	
+	this.email = email;
+	this.password = password;
+	this.name = name;
+	this.surname = surname;
+	this.adminStatus = adminStatus;
+}
+
+
+
   // Getter and setter methods
 
   public long getId() {

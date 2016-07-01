@@ -29,10 +29,10 @@ public class UserController {
 	 * */
 	@RequestMapping("/create")
 	@ResponseBody
-	public String create(String email, String name) {
+	public String create(String email, String password, String name, String surname, Boolean adminStatus) {
 		User user = null;
 		try {
-			user = new User(email, name);
+			user = new User(email, password, name, surname, adminStatus);
 			userDao.save(user);
 		}
 		catch (Exception ex) {
