@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "testOuestions")
-public class TestOuestions{
+public class TestQuestions{
 	  
 	
 	  @Id
@@ -115,6 +115,19 @@ public class TestOuestions{
 	}
 
 	public void setTextAnswer(String textAnswer) {
+		this.textAnswer = textAnswer;
+	}
+
+	public TestQuestions(String question, Tests tests, User user, String date, String answer, String multipleChoice,
+			byte[] imageAnswer, String textAnswer) {
+		
+		this.question = question;
+		this.tests = tests;
+		this.user = user;
+		this.date = date;
+		this.answer = answer;
+		this.multipleChoice = multipleChoice;
+		this.imageAnswer = imageAnswer;
 		this.textAnswer = textAnswer;
 	}
 

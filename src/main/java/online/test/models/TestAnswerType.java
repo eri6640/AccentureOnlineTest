@@ -19,7 +19,7 @@ public class TestAnswerType {
 	
 	@ManyToOne
 	@JoinColumn(name = "testQuestionID")
-	private TestOuestions testQuestion;
+	private TestQuestions testQuestion;
 
 	@NotNull
 	private String type;
@@ -32,11 +32,11 @@ public class TestAnswerType {
 		this.id = id;
 	}
 
-	public TestOuestions getTestQuestion() {
+	public TestQuestions getTestQuestion() {
 		return testQuestion;
 	}
 
-	public void setTestQuestion(TestOuestions testQuestion) {
+	public void setTestQuestion(TestQuestions testQuestion) {
 		this.testQuestion = testQuestion;
 	}
 
@@ -48,7 +48,12 @@ public class TestAnswerType {
 		this.type = type;
 	}
 
+	public TestAnswerType(TestQuestions testQuestion, String type) {
+		this.testQuestion = testQuestion;
+		this.type = type;
+	}
 
+	
 	
 
 }

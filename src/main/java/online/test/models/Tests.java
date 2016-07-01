@@ -59,6 +59,13 @@ public class Tests{
 	public void setDate(String date) {
 		this.date = date;
 	}
+
+	public Tests(String title, User user, String date) {
+		super();
+		this.title = title;
+		this.user = user;
+		this.date = date;
+	}
 	  
 
 	  
