@@ -27,7 +27,7 @@ public class Application {
 			http
 			.httpBasic().and()
 	        .authorizeRequests()
-	        .antMatchers( "/index.html", "/home.html", "/login.html", "/data/userdata/", "/data/repeat.html", "/" ).permitAll().anyRequest()
+	        .antMatchers( "/index.html", "/home.html", "/login.html", "/data/userdata/", "/img/*", "/data/repeat.html", "/" ).permitAll().anyRequest()
 	        .authenticated().and().addFilterAfter( new CsrfHeaderFilter(), CsrfFilter.class );
 		}
 	}
