@@ -29,11 +29,24 @@ public class CsrfHeaderFilter extends OncePerRequestFilter {
 				response.addCookie(cookie);
 			}
 
-			Cookie cookie2 = WebUtils.getCookie( request, "AccentureOnlineTest" );
-			if ( cookie2 == null ) {
-				cookie2 = new Cookie( "AccentureOnlineTest", "yo" );
-				cookie2.setPath("/");
-				response.addCookie(cookie2);
+			Cookie cookieId = WebUtils.getCookie( request, "user_id" );
+			if ( cookieId == null ) {
+				cookieId = new Cookie( "AccentureOnlineTest", "yo" );
+				cookieId.setPath("/");
+				response.addCookie(cookieId);
+			}
+			else{
+				int user_id = 0;
+				try{
+					user_id = Integer.parseInt( cookieId.getValue() );
+				}
+				catch( NumberFormatException error ){
+					//logout
+				}
+				 
+				if( user_id <= 0 ){
+					//logout
+				}
 			}
 		}
 		filterChain.doFilter( request, response );

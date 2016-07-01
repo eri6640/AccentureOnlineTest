@@ -27,7 +27,7 @@ public class UserController {
 	 * @param name User's name
 	 * @return A string describing if the user is succesfully created or not.
 	 * */
-	@RequestMapping("/create")
+	@RequestMapping("/createa")
 	@ResponseBody
 	public String create(String email, String password, String name, String surname, Boolean adminStatus) {
 		User user = null;
