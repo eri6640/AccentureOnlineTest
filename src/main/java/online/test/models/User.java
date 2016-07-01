@@ -1,5 +1,6 @@
 package online.test.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+/**
+ * An entity User composed by three fields (id, email, name). The Entity
+ * annotation indicates that this class is a JPA entity. The Table annotation
+ * specifies the name for the table in the db.
+ *
+ * @author 
+ */
 @Entity
 @Table(name = "users")
 public class User {
@@ -25,17 +33,17 @@ public class User {
 	private String email;
 
 	// The user's name
-	@NotNull
-	private String password;
+	@Column
+	private String password = "password";
 
-	@NotNull
-	private String name;
+	@Column
+	private String name = "None";
 
-	@NotNull
-	private String surname;
+	@Column
+	private String surname = "None";
 
-	@NotNull
-	private Boolean adminStatus;
+	@Column
+	private Boolean adminStatus = false;
 
 	// ------------------------
 	// PUBLIC METHODS
