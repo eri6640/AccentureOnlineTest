@@ -30,10 +30,17 @@ public class CsrfHeaderFilter extends OncePerRequestFilter {
 			}
 
 			Cookie cookieId = WebUtils.getCookie( request, "user_id" );
-			if ( cookieId == null ) {
-				cookieId = new Cookie( "AccentureOnlineTest", "yo" );
-				cookieId.setPath("/");
-				response.addCookie(cookieId);
+			Cookie cookieHash = WebUtils.getCookie( request, "user_hash" );
+			
+			if ( cookieId == null || cookieHash == null ) {
+				if( cookieId != null ){
+					cookieId.setMaxAge( -3600 );
+					response.addCookie( cookieId );
+				}
+				if( cookieHash != null ){
+					cookieHash.setMaxAge( -3600 );
+					response.addCookie( cookieHash );
+				}
 			}
 			else{
 				int user_id = 0;

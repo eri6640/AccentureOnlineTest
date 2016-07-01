@@ -9,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import online.test.Functions;
+
 import online.test.models.dao.UserDao;
+import online.test.utils.MainUtils;
 
 //@Controller
 @RestController
 public class MainController {
+	
+	MainUtils utils = new MainUtils();
 
 
 	@RequestMapping( "/data/userdata" )
@@ -33,7 +36,7 @@ public class MainController {
 	    
 	    
 	    
-	    model.put( "content", "ajax?:" + Functions.isAjax( request ) );
+	    model.put( "content", "ajax?:" + utils.isAjax( request ) );
 	    return model;
 	}
 	
@@ -50,7 +53,7 @@ public class MainController {
   
         Map<String,Object> model = new HashMap<String,Object>();
 
-	    model.put( "content", Functions.isAjax(request) );
+	    model.put( "content", utils.isAjax(request) );
 	    return model;
     }
 	
