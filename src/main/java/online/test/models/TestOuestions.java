@@ -1,5 +1,6 @@
 package online.test.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,44 +26,25 @@ public class TestOuestions{
 	  @JoinColumn(name = "testsID")
 	  private Tests tests;
 	  
+	  @ManyToOne
+	  @JoinColumn(name = "userID")
+	  private User user;
 	  
 	  @NotNull
 	  private String date;
 	  
 	  //All the answers
-	  @NotNull
+	  @Column
 	  private String answer;
 	  
-	  @NotNull
-	  private 	String multipleAnswers;
+	  @Column
+	  private String multipleChoice;
+
+	  @Column
+	  private byte[] imageAnswer;
 	  
-	  @NotNull
-	  private byte videoAnswer;
-	  
-	  
-	  
-
-
-
-	public String getMultipleAnswers() {
-		return multipleAnswers;
-	}
-
-	public void setMultipleAnswers(String multipleAnswers) {
-		this.multipleAnswers = multipleAnswers;
-	}
-
-	public byte getVideoAnswer() {
-		return videoAnswer;
-	}
-
-	public void setVideoAnswer(byte videoAnswer) {
-		this.videoAnswer = videoAnswer;
-	}
-
-	@ManyToOne
-	  @JoinColumn(name = "userID")
-	  private User user;
+	  @Column
+	  private String textAnswer;
 
 	public long getId() {
 		return id;
@@ -88,6 +70,13 @@ public class TestOuestions{
 		this.tests = tests;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public String getDate() {
 		return date;
@@ -105,15 +94,30 @@ public class TestOuestions{
 		this.answer = answer;
 	}
 
-	public User getUser() {
-		return user;
+	public String getMultipleChoice() {
+		return multipleChoice;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setMultipleChoice(String multipleChoice) {
+		this.multipleChoice = multipleChoice;
+	}
+
+	public byte[] getImageAnswer() {
+		return imageAnswer;
+	}
+
+	public void setImageAnswer(byte[] imageAnswer) {
+		this.imageAnswer = imageAnswer;
+	}
+
+	public String getTextAnswer() {
+		return textAnswer;
+	}
+
+	public void setTextAnswer(String textAnswer) {
+		this.textAnswer = textAnswer;
 	}
 
 
-	  
 	
 }

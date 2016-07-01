@@ -22,7 +22,7 @@ public class TestAnswerType {
 	private TestOuestions testQuestion;
 
 	@NotNull
-	private String title;
+	private String type;
 
 	public long getId() {
 		return id;
@@ -40,12 +40,12 @@ public class TestAnswerType {
 		this.testQuestion = testQuestion;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getType() {
+		return type;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 
