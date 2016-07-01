@@ -21,68 +21,14 @@ app.controller('home', function( $rootScope, $scope, $http ) {
 	var authenticate = function( credentials, callback ) {
 
 		var headers = credentials ? { authorization : "Basic " + btoa( credentials.username + ":" + credentials.password ) } : {};
-	
-		var url = 'http://localhost:8080/data/repeat';
-		var xsrf = { content: 'field1' };
-
-		$.ajax({
-		    type: 'POST',
-		    url: url,
-		    data: xsrf,
-		    dataType: 'json',
-		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-		    success: function( data ) {
-				$scope.repeat = data;
-				alert( "data: " + data );
-			}
-		});
+		
+		var emaill = "repeat?";
+		$http.get("/data/repeat?field1="+emaill).success(function (data){
+			$scope.repeat = data;
+		})
+		//$scope.users[0].email
 
 	}//authenticate
-	
-	//$scope.userdata = { content: 'ddddddd' };
-	//var jqxhr = $http.post('/data/repeat').success(function(data) {
-	//	$scope.userdata = data;
-	//})
-	/*
-	var req = {
-		method: 'POST',
-		url: 'http://localhost:8080/data/repeat.html',
-		headers: {
-			'Content-Type': undefined
-		},
-		data: { field1: 'test' }
-	}
-
-	$http(req).then( function( data ){
-		$scope.repeat = data;
-	});*/
-	
-	/*var res = $http.post('/data/repeat.html', { field1: 'test' } );
-	res.success(function( data, status ) {
-		$scope.repeat = data;
-	});
-	res.error(function(data, status) {
-		alert( "failure message: " + JSON.stringify({data: data}));
-	});*/
-	
-	
-	/*var request = new XMLHttpRequest();
-	request.onreadystatechange= function () {
-	    if ( request.readyState==4 ) {
-	        //handle response
-	    }
-	}
-	request.open("POST", "/data/repeat.html");
-	request.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-	request.setRequestHeader("Accept","application/json");
-	request.send( { field1: "test" } );
-	
-	request.success(function( data, status ) {
-		$scope.repeat = data;
-	});
-	reuest.error(function(data, status) {
-		alert( "failure message: " + JSON.stringify({data: data}));
-	});*/
 	
 	
 	authenticate();
@@ -90,11 +36,11 @@ app.controller('home', function( $rootScope, $scope, $http ) {
 	$scope.login = function() {
 		authenticate($scope.credentials, function() {
 			if ($rootScope.authenticated) {
-				$location.path("/");
+				//$location.path("/");
 				$scope.error = false;
 			}
 			else {
-				$location.path("/login");
+				//$location.path("/login");
 				$scope.error = true;
 			}
 		});
@@ -107,3 +53,4 @@ app.controller('login', function($rootScope, $scope, $http, $location) {
 
   
 });
+
