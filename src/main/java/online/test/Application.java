@@ -1,7 +1,5 @@
 package online.test;
 
-import java.util.ArrayList;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -27,7 +25,7 @@ public class Application {
 			http
 			.httpBasic().and()
 	        .authorizeRequests()
-	        .antMatchers( "/index.html", "/home.html", "/login.html", "/data/userdata/", "/img/*", "/data/repeat.html", "/" ).permitAll().anyRequest()
+	        .antMatchers( "/index.html", "/home.html", "/login.html", "/data/userdata/", "/img/*", "/data/*", "/data/repeat/", "/" ).permitAll().anyRequest()
 	        .authenticated().and().addFilterAfter( new CsrfHeaderFilter(), CsrfFilter.class );
 		}
 	}

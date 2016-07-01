@@ -21,8 +21,21 @@ app.controller('home', function( $rootScope, $scope, $http ) {
 	var authenticate = function( credentials, callback ) {
 
 		var headers = credentials ? { authorization : "Basic " + btoa( credentials.username + ":" + credentials.password ) } : {};
+	
+		var url = 'http://localhost:8080/data/repeat';
+		var xsrf = { content: 'field1' };
 
-
+		$.ajax({
+		    type: 'POST',
+		    url: url,
+		    data: xsrf,
+		    dataType: 'json',
+		    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		    success: function( data ) {
+				$scope.repeat = data;
+				alert( "data: " + data );
+			}
+		});
 
 	}//authenticate
 	

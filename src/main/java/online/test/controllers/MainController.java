@@ -6,12 +6,16 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import online.test.Functions;
 import online.test.models.dao.UserDao;
@@ -41,13 +45,24 @@ public class MainController {
 	    return model;
 	}
 	
-	@RequestMapping( "/data/repeat.html" )
+	/*@RequestMapping( "/data/repeat/" )
 	public Map<String,Object> repeat( @RequestParam("field1") String first, HttpServletRequest request ) {
 	    Map<String,Object> model = new HashMap<String,Object>();
 
 	    model.put( "content", first );
 	    return model;
-	}
+	}*/
+	
+	//@RequestMapping( value = "/data/repeat/", method = RequestMethod.POST )
+	@RequestMapping( "/data/repeat" )
+    public Map<String,Object> repeat( @RequestParam("field1") String string, HttpServletRequest request ) {
+        System.out.println( "repeat: " + string );
+  
+        Map<String,Object> model = new HashMap<String,Object>();
+
+	    model.put( "content", string );
+	    return model;
+    }
 	
 	/*@RequestMapping( value = "/data/repeat.html", method = RequestMethod.POST )
 	public ModelAndView httpServicePostJSONDataExample( ModelMap model ) {
