@@ -28,13 +28,17 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	// The user's email
 	@NotNull
 	private String email;
 
-	// The user's name
 	@Column
-	private String password = "password";
+	private String password_hash = "password";
+
+	@Column
+	private String ip = "None";
+
+	@Column
+	private String token = "None";
 
 	@Column
 	private String name = "None";
@@ -43,43 +47,14 @@ public class User {
 	private String surname = "None";
 
 	@Column
-	private Boolean adminStatus = false;
+	private Boolean admin_status = false;
+
+	@Column
+	private long last_activity = 0;
 
 	// ------------------------
 	// PUBLIC METHODS
 	// ------------------------
-
-	public Boolean getAdminStatus() {
-		return adminStatus;
-	}
-
-	public void setAdminStatus(Boolean adminStatus) {
-		this.adminStatus = adminStatus;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	public User() {
 	}
@@ -88,9 +63,9 @@ public class User {
 		this.id = id;
 	}
 
-	public User(String email, String password) {
+	public User( String email, String password_hash ) {
 		this.email = email;
-		this.password = password;
+		this.password_hash = password_hash;
 	}
 
 	// Getter and setter methods
@@ -99,7 +74,7 @@ public class User {
 		return id;
 	}
 
-	public void setId(long value) {
+	public void setId( long value ) {
 		this.id = value;
 	}
 
@@ -107,8 +82,66 @@ public class User {
 		return email;
 	}
 
-	public void setEmail(String value) {
+	public void setEmail( String value ) {
 		this.email = value;
+	}
+
+	public String getPasswordHash() {
+		return password_hash;
+	}
+
+	public void setPasswordHash( String password_hash ) {
+		this.password_hash = password_hash;
+	}
+	public String getIp() {
+		return ip;
+	}
+
+	public void setId( String ip ) {
+		this.ip = ip;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken( String token ) {
+		this.token = token;
+	}
+	public void removeToken() {
+		setToken( null );
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName( String name ) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname( String surname ) {
+		this.surname = surname;
+	}
+
+	public Boolean isAdmin() {
+		return admin_status;
+	}
+
+	public void setAdminStatus( Boolean admin_status ) {
+		this.admin_status = admin_status;
+	}
+	
+	public long getActivity(){
+		return last_activity;
+	}
+	
+	public void updateActivity(){
+		this.last_activity = System.currentTimeMillis();
 	}
 
 } // class User

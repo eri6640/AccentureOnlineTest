@@ -24,7 +24,7 @@ public interface UserDao extends CrudRepository<User, Long> {
 	 * @param email
 	 *            the user email.
 	 */
-	public User findByEmail(String email);
+	public User findByEmail( String email );
 
 	/**
 	 * Return the user having the passed id or null if no user is found.
@@ -32,6 +32,10 @@ public interface UserDao extends CrudRepository<User, Long> {
 	 * @param id
 	 *            the user id.
 	 */
-	public User findById(long id);
+	public User findById( long id );
+	
+	public User findByIp( String ip );
+	
+	public User findByToken( String token );
 
 } // class UserDao

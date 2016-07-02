@@ -9,10 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CsrfFilter;
 
-import online.test.models.TestOuestions;
-import online.test.models.UserAnswers;
-import online.test.models.dao.TestQuestionsDao;
-
 @SpringBootApplication
 public class Application {
 
@@ -26,11 +22,11 @@ public class Application {
 		
 		@Override
 		protected void configure( HttpSecurity http ) throws Exception {		
-			http
-			.httpBasic().and()
-	        .authorizeRequests()
-	        .antMatchers( "/index.html", "/createa", "/home.html", "/login.html", "/data/userdata/", "/img/*", "/data/*", "/data/repeat/", "/" ).permitAll().anyRequest()
-	        .authenticated().and().addFilterAfter( new CsrfHeaderFilter(), CsrfFilter.class );
+			http.authorizeRequests()
+	        .antMatchers( "/index.html", "/login.html", "/img/*", "/js/*", "/css/*", "/data/**", "/"  ).permitAll()
+	        .anyRequest().authenticated()
+	        .and().formLogin().loginPage( "/#/" ).permitAll()
+	        .and().addFilterAfter( new CsrfHeaderFilter(), CsrfFilter.class );
 		}
 	}
 
