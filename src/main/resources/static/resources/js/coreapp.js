@@ -5,12 +5,12 @@ app.config( function( $routeProvider, $httpProvider ) {
 	
 	$routeProvider.when('/home', {
 		controller : 'MainController',
-		templateUrl : 'home.html'
+		templateUrl : 'templates/home.html'
 	}).when('/', {
 		redirectTo: '/home'
 	}).when('/login', {
 		controller : 'LoginController',
-		templateUrl : 'login.html'
+		templateUrl : 'templates/login.html'
 	}).otherwise({ redirectTo: '/home' });
 
 	/*$locationProvider.html5Mode({
