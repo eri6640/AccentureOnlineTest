@@ -34,8 +34,8 @@ public interface UserDao extends CrudRepository<User, Long> {
 	 */
 	public User findById( long id );
 	
-	public User findByIp( String ip );
+	public User findByIpLike( String ip );
 	
-	public User findByToken( String token );
+	public User findByTokenLike( String token );
 
 } // class UserDao

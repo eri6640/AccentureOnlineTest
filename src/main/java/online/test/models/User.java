@@ -56,10 +56,9 @@ public class User {
 	// PUBLIC METHODS
 	// ------------------------
 
-	public User() {
-	}
+	public User() {}
 
-	public User(long id) {
+	public User( long id ) {
 		this.id = id;
 	}
 
@@ -97,7 +96,7 @@ public class User {
 		return ip;
 	}
 
-	public void setId( String ip ) {
+	public void setIp( String ip ) {
 		this.ip = ip;
 	}
 
@@ -108,7 +107,20 @@ public class User {
 	public void setToken( String token ) {
 		this.token = token;
 	}
-	public void removeToken() {
+	
+	public void setAuth( String ip, String token_hash ){
+		setIp( ip );
+		setToken( token_hash );
+		updateActivity();
+	}
+	
+	/**
+	 * 
+	 * removes user ip and token
+	 * 
+	 */
+	public void unSetAuth() {
+		setIp( null );
 		setToken( null );
 	}
 

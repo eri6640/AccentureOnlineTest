@@ -13,11 +13,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.UrlPathHelper;
 import org.springframework.web.util.WebUtils;
 
+import online.test.utils.LoginUtils;
 import online.test.utils.MainUtils;
 
 public class CsrfHeaderFilter extends OncePerRequestFilter {
 	
 	MainUtils utils = new MainUtils();
+	LoginUtils loginUtils = new LoginUtils();
 	
 	@Override
 	protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain filterChain ) throws ServletException, IOException {
@@ -25,10 +27,10 @@ public class CsrfHeaderFilter extends OncePerRequestFilter {
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
 		if( csrf != null ){
 			
-			Cookie cookie = WebUtils.getCookie( request, utils.TokenName );
+			Cookie cookie = WebUtils.getCookie( request, loginUtils.TokenName );
 			String token = csrf.getToken();
 			if ( cookie == null || token != null && ! token.equals( cookie.getValue() )) {
-				cookie = new Cookie( utils.TokenName, token );
+				cookie = new Cookie( loginUtils.TokenName, token );
 				cookie.setPath("/");
 				response.addCookie(cookie);				
 			}

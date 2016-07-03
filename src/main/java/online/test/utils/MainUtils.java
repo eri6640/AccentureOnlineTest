@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class MainUtils {
-	
-	public String TokenName = "XSRF-TOKEN";
 
 	/**
 	 * isAjax  --> checks request....
@@ -24,17 +22,19 @@ public class MainUtils {
 	
 	
 	public String MD5( String string ){
-		MessageDigest md5_password = null;
+
 		try {
-			md5_password = MessageDigest.getInstance("MD5");
-		} catch ( NoSuchAlgorithmException error ) {
-			error.printStackTrace();
-			showThis( "MD5 error" );
-			return null;
+			java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+			byte[] array = md.digest(string.getBytes());
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < array.length; ++i) {
+				sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+			}
+			return sb.toString();
 		}
+		catch (java.security.NoSuchAlgorithmException e) {}
 		
-		md5_password.update( string.getBytes() );
-		return string;
+		return null;
 	}
 	
 	
@@ -44,17 +44,6 @@ public class MainUtils {
 	
 	public String getIp( HttpServletRequest request ){
 		return request.getHeader( "X-FORWARDED-FOR" ) == null ? request.getRemoteAddr() : null;
-	}
-	
-	public HttpServletResponse removeToken( HttpServletResponse response ){
-		
-		Cookie cookie = new Cookie( TokenName, null );
-		cookie.setPath( "/" );
-		cookie.setHttpOnly( true );
-		cookie.setMaxAge( -3600 );
-		response.addCookie( cookie );
-		
-		return response;
 	}
 	
 	public HttpServletResponse redirect( HttpServletResponse response, String url ){
