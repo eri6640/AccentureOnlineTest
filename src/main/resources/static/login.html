@@ -1,13 +1,17 @@
 	<div class="xxx"></div>
-	<img src="img/logo.png" alt="Accenture" class="img-responsive" style="margin:0 auto;"/>
+	<img src="resources/img/logo.png" alt="Accenture" class="img-responsive" style="margin:0 auto;"/>
     
 	<div class="container">
+	
+		<div class="alert alert-danger" role="alert" ng-show="error">{{error.message}}</div>
+		<div class="alert alert-danger" role="alert" ng-show="success">{{success.message}}</div>
+		
 		<form class="form-signin" ng-submit="loginSubmit()">
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<label for="inputEmail" class="sr-only">Email address</label>
 			<input type="email" id="inputEmail" ng-model="email" name="email" class="form-control" placeholder="Email address" required="" autofocus="">
 			<label for="inputPassword" class="sr-only">Password</label>
 			<input type="password" id="inputPassword" ng-model="password" name="password" class="form-control" placeholder="Password" required="" style="margin-top:5px;">
-			<button class="btn btn-lg btn-primary btn-block"  type="submit" id="submit">Sign in</button>
+			<button class="btn btn-lg btn-primary btn-block"  type="submit" id="submit" style="margin-top:5px;">Sign in</button>
 		</form>
     </div> <!-- /container -->

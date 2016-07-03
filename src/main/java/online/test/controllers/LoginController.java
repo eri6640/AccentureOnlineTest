@@ -17,8 +17,21 @@ public class LoginController {
 	MainUtils utils = new MainUtils();
 	LoginUtils loginUtils = new LoginUtils();
 	
-	@RequestMapping( "/data/loggedin/" )
+	@RequestMapping( "/data/loggedin" )
     public Map<String,Object> loggedIn( HttpServletRequest request ) {
+		
+		boolean isLoggedIn = loginUtils.isLoggedIn( request );
+		
+        System.out.println( "loggedIn: " + isLoggedIn );
+  
+        Map<String,Object> model = new HashMap<String,Object>();
+	    model.put( "response", isLoggedIn );
+	    
+	    return model;
+    }
+	
+	@RequestMapping( "/data/dologin" )
+    public Map<String,Object> doLogin( HttpServletRequest request ) {
 		
 		boolean isLoggedIn = loginUtils.isLoggedIn( request );
 		

@@ -23,7 +23,7 @@ public class Application {
 		protected void configure( HttpSecurity http ) throws Exception {
 			http
 			.authorizeRequests()
-	        .antMatchers( "/index.html", "/login.html", "/home.html", "/img/**", "/js/**", "/css/**", "/data/**", "/favicon.ico", "/"  ).permitAll()
+	        .antMatchers( "/index.html", "/login.html", "/home.html", "/resources/**", "/data/**", "/favicon.ico", "/"  ).permitAll()
 	        .anyRequest().authenticated().and()
 	        //.formLogin().loginPage( "/#/login" ).permitAll().and()
 	        .addFilterAfter( new CsrfHeaderFilter(), CsrfFilter.class );
