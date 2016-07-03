@@ -40,10 +40,10 @@ public class CsrfHeaderFilter extends OncePerRequestFilter {
 		}*/
 		
 
-		response.setStatus(HttpServletResponse.SC_OK);
+		utils.showThis(  new UrlPathHelper().getOriginatingRequestUri(request) );
 		
 		//utils.showThis( utils.getIp( request ) );
-		if( utils.isAjax( request ) ){
+		/*if( utils.isAjax( request ) ){
 			utils.showThis(  new UrlPathHelper().getOriginatingRequestUri(request) );
 			
 			String url = new UrlPathHelper().getOriginatingRequestUri( request );
@@ -58,7 +58,7 @@ public class CsrfHeaderFilter extends OncePerRequestFilter {
 					//response.setHeader( "Location", "http://5.196.149.161:8080/" );
 				}
 			}
-		}
+		}*/
 		
 		//utils.removeToken( response );
 		//utils.redirect( response, "https://www.google.lv/" );

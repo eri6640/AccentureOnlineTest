@@ -3,7 +3,12 @@ package online.test.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.web.util.WebUtils;
 
 import online.test.models.User;
 import online.test.models.dao.UserDao;
@@ -11,6 +16,21 @@ import online.test.models.dao.UserDao;
 public class LoginUtils {
 	
 	MainUtils utils = new MainUtils();
+	
+	public boolean isLoggedIn( HttpServletRequest request ){
+		
+		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
+
+		if( csrf == null ) return false;
+		
+		Cookie cookie = WebUtils.getCookie( request, utils.TokenName );
+		String token = csrf.getToken();
+		if ( cookie == null || token != null && ! token.equals( cookie.getValue() )) {
+			return false;
+		}		
+		
+		return true;
+	}
 	
 	/**
 	 * checkPassword  --> checks password....
