@@ -1,0 +1,314 @@
+/* /-/-/-/-/-/-/-/-PARALAX/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- */
+
+
+
+/* ============================================================
+  PRIMARY STRUCTURE
+============================================================ */
+
+#header {
+    font-size: 50px;
+    background-color: white;
+    height: 100px;
+    margin-right: 10%;
+   
+}
+
+img.logo {
+    width: 204px; 
+    margin-left: 30px;
+    float: left;
+}
+
+body {
+background-color: white; 
+}
+/*h2 {
+    color: white;
+}
+p {
+    color: white;
+}*/
+/*
+#logo {
+    display: block;
+    margin: 0 auto;
+} */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+/* ============================================================
+  SECTIONS
+============================================================ */
+section.module:last-child {
+  margin-bottom: 0;
+}
+section.module h2 {
+  margin-bottom: 40px;
+  font-family: "Roboto Slab", serif;
+  font-size: 30px;
+}
+section.module p {
+  margin-bottom: 40px;
+  font-size: 16px;
+  font-weight: 300;
+}
+section.module p:last-child {
+  margin-bottom: 0;
+}
+section.module.content {
+  padding: 40px 0;
+}
+section.module.parallax {
+  height: 900px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+section.module.parallax-1 {
+  height: 1200px;
+}
+
+
+
+section.module.parallax h1 {
+    margin: 10px auto;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 48px;
+  line-height: 450px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+section.module.parallax-3 h1 {
+  line-height: 1250px;
+}
+
+section.module.parallax-1 {
+  background-image: url("http://kolyan.net/uploads/posts/2009-08/1250797017_00.jpg ");
+    /* http://kolyan.net/uploads/posts/2009-08/1250797017_00.jpg */
+    /* http://fonday.ru/images/tmp/12/6/original/12667YinokqvgJmxOPBSCjDdNhyZ.jpg */
+}
+section.module.parallax-2 {
+  background-image: url("http://st.gde-fon.com/wallpapers_original/353429_pole_raps_leto_derevo_nebo_oblaka_1920x1280_www.Gde-Fon.com.jpg");
+}
+section.module.parallax-3 {
+  background-image: url("http://www.visitventspils.com/images/bg/earth.jpg");
+}
+
+@media all and (min-width: 900px) {
+  section.module h2 {
+    font-size: 42px;
+  }
+  section.module p {
+    font-size: 20px;
+  }
+  section.module.parallax h1 {
+    font-size: 96px;
+  }
+}
+@media all and (min-width: 960px) {
+  section.module.parallax h1 {
+    font-size: 130px;
+  }
+}
+
+/* /-/-/-/-/-/-/-/-BUTTON/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/- */
+.buttonFin {
+  display: inline-block;
+  position: relative;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 240px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  overflow: hidden;
+
+}
+.buttonFin span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.buttonFin span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.buttonFin:hover span {
+  padding-right: 25px;
+}
+.buttonFin:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+
+
+.buttonTop {
+    display: inline-block;
+    float: right;
+    margin-top: 20px;
+   /* background-image: url("http://kolyan.net/uploads/posts/2009-08/1250797017_00.jpg "); */
+    background-color: #4573a6;
+    
+}
+
+@media screen and (max-width:950px) {
+  .buttonTop {display: none;}
+}
+
+/**/
+.buttonFin:after {
+    content: "";
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.buttonFin:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+/**/
+
+.button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #999999; /*#4CAF50*/
+}
+
+.button1 {
+    
+    opacity: 0.2;
+    margin: 20px 2px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    float: right;
+    font-size: 16px;
+   
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.button1:hover {
+opacity: 1;
+    background-color: white/*#4CAF50*/;
+    color: black;
+}
+
+/*New Menu*/
+
+
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: inline-block;
+  float: left;
+  margin-left: 30px;
+  margin-top: 30px;
+  background-color: white;
+}
+
+ul.topnav li {float: left; }
+
+ul.topnav li a {
+  display: inline-block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 17px;
+  
+}
+
+ul.topnav li a:hover {background-color: #4573a6; color: white}
+
+ul.topnav li.icon {display: none;}
+ul.topnav li.last {border: none;}
+@media screen and (max-width:680px) {
+  ul.topnav li:not(:first-child) {display: none;}
+  ul.topnav li.icon {
+    float: right;
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width:680px) {
+  ul.topnav.responsive {position: relative;}
+  ul.topnav.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+      left: 50px;
+  }
+  ul.topnav.responsive li {
+    float: none;
+    display: inline;
+  }
+  ul.topnav.responsive li a {
+    display: block;
+    text-align: left;
+  }
+}
+
+/**/
+
+.middleRight {
+	position: absolute;
+	height: 500px;
+	width: 500px;
+	background-color: white;
+	margin-top: 380px;
+	margin-left: 520px;
+		text-align: center;
+		opacity: 0.5;
+}
+
+article {
+  position: relative;
+  z-index: 1;
+}
+
+article::before {
+  content: "";
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;  
+  opacity: .4; 
+  z-index: -1;
+  background: url(path/to/your/image);
+}
