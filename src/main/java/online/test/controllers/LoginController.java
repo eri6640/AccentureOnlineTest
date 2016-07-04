@@ -1,15 +1,17 @@
 package online.test.controllers;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
+
+import online.test.models.User;
 import online.test.models.dao.UserDao;
 import online.test.utils.LoginUtils;
 import online.test.utils.MainUtils;
@@ -18,6 +20,7 @@ import online.test.utils.MainUtils;
 public class LoginController {
 	
 	MainUtils utils = new MainUtils();
+	@Autowired
 	LoginUtils loginUtils = new LoginUtils();
 	
 	/*
@@ -32,7 +35,7 @@ public class LoginController {
 		ModelAndView mv_response = new ModelAndView( "/templates" + page_name );
 		ModelAndView mv_response_login = new ModelAndView( "/templates" + "/login.html" );
 		
-		/*CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
+		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
 		if( csrf == null ) return mv_response_login;
 		
 		Cookie cookie = WebUtils.getCookie( request, loginUtils.TokenName );
@@ -47,7 +50,7 @@ public class LoginController {
 		if( token_user.getIp() == null || ! token_user.getIp().equals( utils.getIp( request ) ) ){
 			token_user.unSetAuth();
 			return mv_response_login;
-		}*/
+		}
 		
 		if( ! page_name.equalsIgnoreCase( "/login.html" ) && ! loginUtils.isLoggedIn( request ) ) return mv_response_login;
 		

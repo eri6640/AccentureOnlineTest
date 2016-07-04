@@ -6,16 +6,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
 import online.test.models.dao.UserDao;
 import online.test.utils.MainUtils;
 
@@ -57,7 +50,7 @@ public class MainController {
   
         Map<String,Object> model = new HashMap<String,Object>();
 
-	    model.put( "content", utils.isAjax(request) );
+	    model.put( "content", userDao.findById( 1 ) );
 	    return model;
     }
 	

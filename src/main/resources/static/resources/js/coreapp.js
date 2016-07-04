@@ -64,6 +64,13 @@ app.controller( 'LoginController', function( $rootScope, $scope, $http, $locatio
 	$scope.error = false;
 	$scope.success = false;
 	
+	
+	/*var emaill = "repeat?";
+	$http.get("/data/repeat?field1="+emaill).success(function (data){
+		$scope.repeat = data;
+	});*/
+	
+	
 	$scope.loginSubmit = function() {
 		
 		if( $scope.email && $scope.password ){

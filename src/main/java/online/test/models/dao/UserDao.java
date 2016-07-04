@@ -3,7 +3,6 @@ package online.test.models.dao;
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
-
 import online.test.models.User;
 
 /**
@@ -32,10 +31,17 @@ public interface UserDao extends CrudRepository<User, Long> {
 	 * @param id
 	 *            the user id.
 	 */
-	public User findById( long id );
+	public User findById(long id);
 	
-	public User findByIpLike( String ip );
+	public User findByIp( String ip );
 	
-	public User findByTokenLike( String token );
+	/**
+	 * Return the user having the passed token or null if no user is found.
+	 * 
+	 * @param token
+	 *            the user token.
+	 */
+	//@Query( "from User where email = ?1" )
+	public User findByToken( String token ) throws Exception;
 
 } // class UserDao

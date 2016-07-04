@@ -4,17 +4,18 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
 import online.test.models.User;
 import online.test.models.dao.UserDao;
 
+@Component
 public class LoginUtils {
 	
 	MainUtils utils = new MainUtils();
 
 	public String TokenName = "XSRF-TOKEN";
-	
 	
 	public boolean isLoggedIn( HttpServletRequest request ){
 		
@@ -37,7 +38,7 @@ public class LoginUtils {
 		User token_user = null;
 		
 		try{
-			token_user = userDao.findByTokenLike( token_hash );
+			token_user = userDao.findByToken( token_hash );
 		}
 		catch ( Exception error ){
 			token_user = null;
@@ -45,7 +46,7 @@ public class LoginUtils {
 		}
 		
 		if( token_user == null ) return false; // <--- null error 
-		/**/
+		/**
 		if( token_user.getIp() == null || ! token_user.getIp().equals( utils.getIp( request ) ) ){
 			token_user.unSetAuth();
 			utils.showThis( "wrong ip" );
@@ -78,7 +79,7 @@ public class LoginUtils {
 		
 		User user_user = null;
 		
-		if( ( user_user = userDao.findByEmail( check_email ) ) == null ) return false;
+		//if( ( user_user = userDao.findByEmail( check_email ) ) == null ) return false;
 		
 		String user_password_hash = user_user.getPasswordHash(); //hash
 		String check_password_hash = utils.MD5( check_password ); //hash
@@ -93,15 +94,13 @@ public class LoginUtils {
 		user_user.unSetAuth();
 		user_user.updateActivity();
 	}
-	
-	
-	
-	
-	
-	// ------------------------
-	// PRIVATE FIELDS
-	// ------------------------
 
+	/**
+	 * 
+	 *  UserDao
+	 * 
+	 */
+	
 	@Autowired
 	private UserDao userDao;
 
