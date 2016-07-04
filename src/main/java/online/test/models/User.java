@@ -1,6 +1,5 @@
 package online.test.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,17 +32,17 @@ public class User {
 	private String email;
 
 	// The user's name
-	@Column
-	private String password = "password";
+	@NotNull
+	private String password ;
 
-	@Column
-	private String name = "None";
+	@NotNull
+	private String name;
 
-	@Column
-	private String surname = "None";
+	@NotNull
+	private String surname;
 
-	@Column
-	private Boolean adminStatus = false;
+	@NotNull
+	private Boolean adminStatus;
 
 	// ------------------------
 	// PUBLIC METHODS

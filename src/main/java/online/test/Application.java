@@ -29,7 +29,7 @@ public class Application {
 			http
 			.httpBasic().and()
 	        .authorizeRequests()
-	        .antMatchers( "/index.html", "/createa", "/home.html", "/login.html", "/data/userdata/", "/img/*", "/data/*", "/data/repeat/", "/" ).permitAll().anyRequest()
+	        .antMatchers( "/index.html", "/create", "/home.html", "/login.html","/admin_main.html", "/data/userdata/", "/img/*", "/data/*", "/data/repeat/", "/" ).permitAll().anyRequest()
 	        .authenticated().and().addFilterAfter( new CsrfHeaderFilter(), CsrfFilter.class );
 		}
 	}

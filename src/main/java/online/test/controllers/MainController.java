@@ -53,7 +53,7 @@ public class MainController {
   
         Map<String,Object> model = new HashMap<String,Object>();
 
-	    model.put( "content", utils.isAjax(request) );
+	    model.put( "content", userDao.findById( 1 ) );
 	    return model;
     }
 	

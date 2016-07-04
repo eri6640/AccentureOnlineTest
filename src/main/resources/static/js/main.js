@@ -9,6 +9,9 @@ app.config(function( $routeProvider, $httpProvider ) {
 	}).when('/login', {
 		templateUrl : 'login.html',
 		controller : 'login'
+	}).when('/admin_main', {
+		templateUrl : 'admin_main.html',
+		controller : 'login'
 	}).otherwise('/');
 
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

@@ -30,10 +30,10 @@ public class UserAnswers {
 	private User user;
 
 	@Column
-	private String answer = "0";
+	private String answer;
 
 	@Column
-	private byte[] imageAnswer = null;
+	private byte[] imageAnswer;
 
 	public long getId() {
 		return id;

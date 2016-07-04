@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "testOuestions")
@@ -31,14 +32,14 @@ public class TestOuestions {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@Column
+	@NotNull
 	private TYPE type = TYPE.SINGLE_CHOICE;
 
-	@Column
+	@NotNull
 	private String question;
 
-	@Column
-	private String date = "01/01/2000";
+	@NotNull
+	private String date;
 
 	@ManyToOne
 	@JoinColumn(name = "testsID")
@@ -50,13 +51,13 @@ public class TestOuestions {
 
 	// All the answers
 	@Column
-	private String answer = "0";
+	private String answer;
 
 	@Column
-	private String multipleChoice = "0";
+	private String multipleChoice;
 
 	@Column
-	private byte[] imageAnswer = null;
+	private byte[] imageAnswer;
 
 	@Column
 	private String textAnswer;
