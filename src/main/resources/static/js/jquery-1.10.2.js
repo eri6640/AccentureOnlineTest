@@ -11,7 +11,7 @@
  *
  * Date: 2014-01-23T21:02Z
  */
-var table = $('#view-student-grades').DataTable();
+var table = $('#user_table').DataTable();
  
 (function( global, factory ) {
 
