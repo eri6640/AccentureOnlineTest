@@ -29,9 +29,9 @@ public class MainUtils {
 			}
 			return sb.toString();
 		}
-		catch (java.security.NoSuchAlgorithmException e) {}
-		
-		return null;
+		catch (java.security.NoSuchAlgorithmException e) {
+			return null;
+		}
 	}
 	
 	

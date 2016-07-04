@@ -8,6 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * A class to test interactions with the MySQL database using the UserDao class.
+ *
+ */
 @Controller
 public class UserController {
 
@@ -22,7 +26,7 @@ public class UserController {
 	 * @param name User's name
 	 * @return A string describing if the user is succesfully created or not.
 	 * */
-	@RequestMapping("/createa")
+	@RequestMapping("/data/user/create")
 	@ResponseBody
 	public String create(String email, String password, String name, String surname, Boolean adminStatus) {
 		User user = null;
@@ -44,7 +48,7 @@ public class UserController {
 	 * @param id The id of the user to delete
 	 * @return A string describing if the user is succesfully deleted or not.
 	*/
-	@RequestMapping("/delete")
+	@RequestMapping("/data/user/delete")
 	@ResponseBody
 	public String delete(long id) {
 		try {
@@ -63,7 +67,7 @@ public class UserController {
 	 * @param email The email to search in the database.
 	 * @return The user id or a message error if the user is not found.
 	*/
-	@RequestMapping("/get-by-email")
+	@RequestMapping("/data/user/get-by-email")
 	@ResponseBody
 	public String getByEmail(String email) {
 		String userId;
@@ -86,7 +90,7 @@ public class UserController {
 	 * @param name The new name.
 	 * @return A string describing if the user is succesfully updated or not.
 	*/
-	@RequestMapping("/update")
+	@RequestMapping("/data/user/update")
 	@ResponseBody
 	public String updateUser(long id, String email, String name) {
 		try {
