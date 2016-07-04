@@ -19,7 +19,7 @@ public class UserAnswers {
 
 	@ManyToOne
 	@JoinColumn(name = "questionID")
-	private TestOuestions testsQuestions;
+	private TestQuestions testsQuestions;
 
 	@ManyToOne
 	@JoinColumn(name = "testsID")
@@ -43,11 +43,11 @@ public class UserAnswers {
 		this.id = id;
 	}
 
-	public TestOuestions getTestsQuestions() {
+	public TestQuestions getTestsQuestions() {
 		return testsQuestions;
 	}
 
-	public void setTestsQuestions(TestOuestions testsQuestions) {
+	public void setTestsQuestions(TestQuestions testsQuestions) {
 		this.testsQuestions = testsQuestions;
 	}
 
