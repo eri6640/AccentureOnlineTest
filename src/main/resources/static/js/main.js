@@ -9,6 +9,9 @@ app.config(function( $routeProvider, $httpProvider ) {
 	}).when('/login', {
 		templateUrl : 'login.html',
 		controller : 'login'
+	}).when('/tests', {
+		templateUrl : 'tests.html',
+		controller : 'lister'
 	}).otherwise('/');
 
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -48,6 +51,27 @@ app.controller('home', function( $rootScope, $scope, $http ) {
 	
 	
 });//controller('home'
+
+
+app.controller('lister', function($scope, $http) {
+    var urlBase="";
+    $scope.toggle=true;
+    $scope.selection = [];
+    $scope.statuses=['ACTIVE','COMPLETED'];
+    $scope.priorities=['HIGH','LOW','MEDIUM'];
+    $http.defaults.headers.post["Content-Type"] = "application/json";
+	$http.get(urlBase + '/data/tests/selectallTests').success(function (data) {
+
+ 	
+    	if (data != undefined) {
+        	$scope.tests = data;
+    	} else {
+        	$scope.tests = [];
+    	}
+   	 
+    	
+	});
+});
 
 app.controller('login', function($rootScope, $scope, $http, $location) {
 
