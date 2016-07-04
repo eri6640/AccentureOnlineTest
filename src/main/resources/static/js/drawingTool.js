@@ -60,6 +60,8 @@ sizeHotspotWidthObject.normal = 18;
 sizeHotspotWidthObject.small = 16;
 var totalLoadResources = 8;
 var curLoadResNum = 0;
+
+
 /**
 * Calls the redraw function after all neccessary resources are loaded.
 */
