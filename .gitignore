@@ -5,3 +5,4 @@ application.properties
 .classpath
 .springBeans
 /target/
+src/main/resources/static/resources/js/jquery-1.10.2.js

@@ -14,6 +14,9 @@ app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 	}).when('/admin_main', {
 		controller : 'AdminController',
 		templateUrl : 'page/admin_main.html'
+	}).when('/tests', {
+		controller : 'lister',
+		templateUrl : 'page/tests.html'
 	}).otherwise({ redirectTo: '/home' });
 
 	/*$locationProvider.html5Mode({
@@ -27,68 +30,104 @@ app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 });
 
 
+
+
+app.controller('lister', function($scope, $http) {
+    var urlBase="";
+    $scope.toggle=true;
+    $scope.selection = [];
+    $scope.statuses=['ACTIVE','COMPLETED'];
+    $scope.priorities=['HIGH','LOW','MEDIUM'];
+    $http.defaults.headers.post["Content-Type"] = "application/json";
+	$http.get(urlBase + '/data/tests/selectallTests').success(function (data) {
+
+ 	
+    	if (data != undefined) {
+        	$scope.tests = data;
+    	} else {
+        	$scope.tests = [];
+    	}
+   	 
+    	
+	});
+});
+
+app.run( [ '$route', '$rootScope', '$location', function ( $route, $rootScope, $location ) {
+    var original = $location.path;
+    $location.path = function (path, reload) {
+        if (reload === false) {
+            var lastRoute = $route.current;
+            var un = $rootScope.$on('$locationChangeSuccess', function () {
+                $route.current = lastRoute;
+                un();
+            });
+        }
+        return original.apply($location, [path]);
+    };
+}]);
+
 app.controller( 'MainController', function( $rootScope, $scope, $http, $location, $window ) {
 	
-	//$scope.hidePage = true;
+	if( $location.path == "/login" ){
+		$location.path('/');
+	}
 	
-	/*$http.get( "/data/loggedin" ).success( function ( data ) {
-		$scope.loggedIn = data.response;
-		//if( $location.path() != '/login' && data.response == 'false' ){
-		//$window.alert( data.response );
-		if( ! data.response ){
-			$location.path("/login");
+	$scope.logout = function() {
+		
+		$http.get( "/data/auth/isloggedin" ).success( function ( data ) {
+			$scope.loggedIn = data;
+		});
+		
+		if( $scope.loggedIn ){
+			$http.get( "/data/auth/logout" ).success( function ( data ) {
+				$scope.loggedIn = data;
+			});
 		}
-		else{
-			$scope.hidePage = false;
-		}
-	});*/
-	
-	
-	//$window.location.href = 'http://eri6640.eu/forum/';
-	//$location.path("/login");
-	
+		
+		$location.path('/');
+		
+	};
 	
 	
 });
 
-
-app.controller( 'AdminController', function( $rootScope, $scope, $http, $location, $window ) {
+app.controller( 'TestsController', function( $rootScope, $scope, $http, $location, $window ) {
 
 	
-	
-	  
 });
 
 
 app.controller( 'LoginController', function( $rootScope, $scope, $http, $location, $window ) {
 
-	//$scope.hideContainer = true;
-	
-	/*$http.get( "/data/loggedin" ).success( function ( data ) {
-		$scope.loggedIn = data.response;
-		//$window.alert( data.response );
-		if( data.response ){
-			$location.path("/home");
-		}
-	});*/
-	
-	//$scope.hideContainer = false;
+	$scope.showLogin = false;
 	$scope.error = false;
 	$scope.success = false;
 	
+	$http.get( "/data/auth/isloggedin" ).success( function ( data ) {
+		$scope.showLogin = ! data;
+		if( data ){
+			$window.location.href = "/";
+		}
+	});
 	
-	/*var emaill = "repeat?";
-	$http.get("/data/repeat?field1="+emaill).success(function (data){
-		$scope.repeat = data;
-	});*/
+
+	$location.path( '/login', false );
 	
 	
 	$scope.loginSubmit = function() {
 		
 		if( $scope.email && $scope.password ){
-			$window.alert( "email: " + $scope.email + " password: " + $scope.password );
+			//$window.alert( "email: " + $scope.email + " password: " + $scope.password );
 			
+			var email = $scope.email;
+			var password = $scope.password;
+			$scope.success = false;
 			
+			$http.get( "/data/auth/submitlogin?email="+email+"&password="+password ).success( function ( data ){
+				$scope.success = data;
+				$window.location.href = "/";
+				//$location.path( '/' );
+			});
 			
 		}
 		else{
@@ -99,7 +138,3 @@ app.controller( 'LoginController', function( $rootScope, $scope, $http, $locatio
 	
   
 });
-
-
-
-

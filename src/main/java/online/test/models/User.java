@@ -117,9 +117,11 @@ public class User implements Serializable {
 	}
 	
 	public void setAuth( String ip, String token_hash ){
-		setIp( ip );
-		setToken( token_hash );
-		updateActivity();
+
+		this.ip = ip;
+		this.token = token_hash;
+		this.last_activity = System.currentTimeMillis();
+
 	}
 	
 	/**
@@ -128,8 +130,9 @@ public class User implements Serializable {
 	 * 
 	 */
 	public void unSetAuth() {
-		setIp( null );
-		setToken( null );
+
+		setToken( "" );
+
 	}
 
 	public String getName() {
