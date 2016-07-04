@@ -39,6 +39,8 @@ app.run( [ '$route', '$rootScope', '$location', function ( $route, $rootScope, $
     };
 }]);
 
+
+
 app.controller( 'MainController', function( $rootScope, $scope, $http, $location, $window ) {
 	
 	if( $location.path == "/login" ){
@@ -65,7 +67,6 @@ app.controller( 'MainController', function( $rootScope, $scope, $http, $location
 });
 
 app.controller( 'TestsController', function( $rootScope, $scope, $http, $location, $window ) {
-
 	
 });
 

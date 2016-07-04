@@ -24,7 +24,7 @@ public class Application {
 			http
 			.authorizeRequests()
 			//.antMatchers( "/**"  ).permitAll()
-	        .antMatchers( "/login", "/templates/**", "/page/**", "/resources/**", "/data/**", "/favicon.ico", "/"  ).permitAll()
+	        .antMatchers( "/login", "/acp.html", "/templates/**", "/admin/**", "/acp/**", "/page/**", "/resources/**", "/data/**", "/favicon.ico", "/"  ).permitAll()
 	        .anyRequest().authenticated().and()
 	        //.formLogin().loginPage( "/#/login" ).permitAll().and()
 	        .addFilterAfter( new CsrfHeaderFilter(), CsrfFilter.class );
