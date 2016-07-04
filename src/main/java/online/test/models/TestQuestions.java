@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "testOuestions")
+@Table(name = "testQuestions")
 public class TestQuestions {
 
 	public static enum TYPE {
