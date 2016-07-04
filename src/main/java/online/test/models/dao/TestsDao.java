@@ -12,7 +12,7 @@ import online.test.models.Tests;
 @Transactional
 public interface TestsDao extends CrudRepository<Tests, Long> {
 
-	@Query("from Tests")
-	public List<Tests> getAllTests();
+	//@Query("from Tests")
+	//public List<Tests> getAllTests();
 
 }
