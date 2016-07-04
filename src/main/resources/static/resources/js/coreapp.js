@@ -11,6 +11,9 @@ app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 	}).when('/login', {
 		controller : 'LoginController',
 		templateUrl : 'page/login.html'
+	}).when('/admin_main', {
+		controller : 'AdminController',
+		templateUrl : 'page/admin_main.html'
 	}).otherwise({ redirectTo: '/home' });
 
 	/*$locationProvider.html5Mode({
@@ -47,6 +50,15 @@ app.controller( 'MainController', function( $rootScope, $scope, $http, $location
 	
 	
 });
+
+
+app.controller( 'AdminController', function( $rootScope, $scope, $http, $location, $window ) {
+
+	
+	
+	  
+});
+
 
 app.controller( 'LoginController', function( $rootScope, $scope, $http, $location, $window ) {
 
@@ -87,4 +99,7 @@ app.controller( 'LoginController', function( $rootScope, $scope, $http, $locatio
 	
   
 });
+
+
+
 
