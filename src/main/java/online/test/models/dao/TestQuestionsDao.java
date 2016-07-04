@@ -12,8 +12,6 @@ import online.test.models.TestOuestions;
 
 @Transactional
 public interface TestQuestionsDao extends CrudRepository<TestOuestions, Long> {
-
 	@Query("select q from TestOuestions q inner join q.tests as t where t.id = :testID")
-	public List<TestOuestions> getCurrentTestQuestions(@Param("testID")Long testID);
-
+	public List<TestOuestions> getCurrentTestQuestions(@Param("testID") Long testID);
 }

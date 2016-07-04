@@ -11,6 +11,13 @@
   font-weight: normal;
   font-style: normal;
 }
+.add_button{
+	margin-top:168px;
+}
+.add_user_row{
+margin-left:15px;	
+}
+
 .fa {
   display: inline-block;
   font-family: FontAwesome;
