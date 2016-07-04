@@ -1,7 +1,6 @@
 (function ($) {
     "use strict";
     var mainApp = {
-    var mainApp = {
 
         main_fun: function () {
            
