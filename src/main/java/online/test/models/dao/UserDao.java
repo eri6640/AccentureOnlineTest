@@ -3,7 +3,6 @@ package online.test.models.dao;
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
-
 import online.test.models.User;
 
 /**
@@ -13,6 +12,7 @@ import online.test.models.User;
  * The magic is that such methods must not be implemented, and moreover it is
  * possible create new query methods working only by defining their signature!
  * 
+ * @author netgloo
  */
 @Transactional
 public interface UserDao extends CrudRepository<User, Long> {
@@ -23,7 +23,7 @@ public interface UserDao extends CrudRepository<User, Long> {
 	 * @param email
 	 *            the user email.
 	 */
-	public User findByEmail(String email);
+	public User findByEmail( String email );
 
 	/**
 	 * Return the user having the passed id or null if no user is found.
@@ -32,5 +32,16 @@ public interface UserDao extends CrudRepository<User, Long> {
 	 *            the user id.
 	 */
 	public User findById(long id);
+	
+	public User findByIp( String ip );
+	
+	/**
+	 * Return the user having the passed token or null if no user is found.
+	 * 
+	 * @param token
+	 *            the user token.
+	 */
+	//@Query( "from User where email = ?1" )
+	public User findByToken( String token ) throws Exception;
 
 } // class UserDao

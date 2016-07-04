@@ -9,16 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import online.test.models.dao.UserDao;
 import online.test.utils.MainUtils;
 
-//@Controller
 @RestController
 public class MainController {
 	
 	MainUtils utils = new MainUtils();
-
 
 	@RequestMapping( "/data/userdata" )
 	public Map<String,Object> home( @RequestParam("first") String first, HttpServletRequest request ) {
@@ -53,7 +50,7 @@ public class MainController {
   
         Map<String,Object> model = new HashMap<String,Object>();
 
-	    model.put( "content", utils.isAjax(request) );
+	    model.put( "content", userDao.findById( 1 ) );
 	    return model;
     }
 	
@@ -71,6 +68,6 @@ public class MainController {
 	 */
 	
 	@Autowired
-	  private UserDao userDao;
+	private UserDao userDao;
 
 }
