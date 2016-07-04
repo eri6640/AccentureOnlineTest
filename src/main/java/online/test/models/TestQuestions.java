@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "testOuestions")
-public class TestOuestions {
+public class TestQuestions {
 
 	public static enum TYPE {
 		PICTURE('P'), MULTIPLE_CHOCE('M'), SINGLE_CHOICE('S'), TEXT('T');
