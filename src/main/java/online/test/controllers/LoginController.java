@@ -17,11 +17,6 @@ public class LoginController {
 	@Autowired
 	LoginUtils loginUtils = new LoginUtils();
 	
-	/**
-	 * loggedIn
-	 * 
-	 * @return true if user is logged on, false if isnt logged in
-	 * */
 	@RequestMapping( "/data/auth/isloggedin" )
     public boolean isLoggedIn( HttpServletRequest request ) {    
 	    return loginUtils.isLoggedIn( request );
@@ -37,15 +32,13 @@ public class LoginController {
 		
 
 		if( email.isEmpty() || password.isEmpty() ) return mv_response_login;
-		utils.showThis( "submitlogin ----------" );
 		
 	    return loginUtils.doLogin( email, password, request ) ? mv_response_home : mv_response_login;
     }
 	
 	@RequestMapping( "/data/auth/logout" )
     public boolean logout( HttpServletRequest request ) {
-		boolean loggedOut = loginUtils.logout( request );
-	    return loggedOut;
+	    return loginUtils.logout( request );
     }
 	
 

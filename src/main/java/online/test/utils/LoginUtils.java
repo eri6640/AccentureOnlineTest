@@ -28,12 +28,8 @@ public class LoginUtils {
 		//if something is wrong with token or cookie, redirect to login page
 		if ( cookie == null || token != null && ! token.equals( cookie.getValue() ) ) return false;
 		
-
-		
 		String token_hash = utils.MD5( token );
-		if( token_hash.isEmpty() || token_hash.length() < 28 ) return false;
-		
-		//utils.showThis( token_hash );
+		if( token_hash.isEmpty() ) return false;
 		
 		User token_user = null;
 		
@@ -62,15 +58,11 @@ public class LoginUtils {
 		}
 		
 		//if last activity was about 24 hours back... reset token and ip ... return false
-		//if( ( System.currentTimeMillis() - token_user.getActivity() ) / 1000 >= 60 * 60 * 24 ){
-			//token_user.unSetAuth();
-			//return false;
-		//}
+		if( ( System.currentTimeMillis() - token_user.getActivity() ) / 1000 >= 60 * 60 * 24 ){
+			token_user.unSetAuth();
+			return false;
+		}
 		/**/
-		
-
-		utils.showThis( "isLoggedIn ----------" );
-		utils.showThis( "isLoggedIn ----------" );
 		
 		token_user.updateActivity();
 		userDao.save( token_user );
@@ -86,22 +78,13 @@ public class LoginUtils {
 		Cookie cookie = WebUtils.getCookie( request, TokenName );
 		String token = csrf.getToken();
 		
-		if ( cookie == null || token != null && ! token.equals( cookie.getValue() ) ){
-			utils.showThis( "cookie || token ----------" );
-			return false;
-		}
+		if ( cookie == null || token != null && ! token.equals( cookie.getValue() ) ) return false;
 		
 		String form_password_hash = utils.MD5( form_password );
-		if( form_password_hash.isEmpty() || form_password_hash.length() < 28 ){
-			utils.showThis( "size ----------" );
-			return false;
-		}
+		if( form_password_hash.isEmpty() ) return false;
 
 		String token_hash = utils.MD5( token );
-		if( token_hash.isEmpty() || token_hash.length() < 28 ){
-			utils.showThis( "size ----------" );
-			return false;
-		}
+		if( token_hash.isEmpty() ) return false;
 		
 		User form_user = null;
 		
@@ -118,16 +101,11 @@ public class LoginUtils {
 		
 		//
 		
-		if( ! form_user.getPasswordHash().equals( form_password_hash ) ){
-			utils.showThis( "password ----------" );
-			return false;
-		}
+		if( ! form_user.getPasswordHash().equals( form_password_hash ) ) return false;
 		
 		form_user.setAuth( utils.getIp( request ), token_hash );
 		userDao.save( form_user );
 
-		utils.showThis( "doLogin ----------" );
-		utils.showThis( "doLogin ----------" );
 		return true;
 		
 	}
@@ -140,13 +118,10 @@ public class LoginUtils {
 		Cookie cookie = WebUtils.getCookie( request, TokenName );
 		String token = csrf.getToken();
 		
-		if ( cookie == null || token != null && ! token.equals( cookie.getValue() ) ){
-			utils.showThis( "cookie || token ----------" );
-			return false;
-		}
+		if ( cookie == null || token != null && ! token.equals( cookie.getValue() ) ) return false;
 		
 		String token_hash = utils.MD5( token );
-		if( token_hash.isEmpty() || token_hash.length() < 28 ) return false;
+		if( token_hash.isEmpty() ) return false;
 		
 		User token_user = null;
 		

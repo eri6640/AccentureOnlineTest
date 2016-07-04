@@ -24,11 +24,15 @@ public class MainController {
 	@Autowired
 	LoginUtils loginUtils = new LoginUtils();
 	
-	@RequestMapping( value = "/acp/", method = RequestMethod.GET )
+	@RequestMapping( value = "/acp/**", method = RequestMethod.GET )
     public ModelAndView acpControl( Model model, HttpServletRequest request, ModelAndView md ) throws Exception {
 		
 		//String page_name = request.getServletPath().replaceFirst( "/admin/page", "" );
 		ModelAndView mv_response = new ModelAndView( "/admin/index.html" );
+		
+		boolean loggedIn = loginUtils.isLoggedIn( request );
+		
+		if( ! loggedIn ) return new ModelAndView("redirect:/#/login");
 		
 		return mv_response;
     }
@@ -59,34 +63,13 @@ public class MainController {
 		utils.showThis( "/templates/** " + page_name );
 		return mv_response;
     }
-
-	@RequestMapping( "/data/userdata" )
-	public Map<String,Object> home( @RequestParam("first") String first, HttpServletRequest request ) {
-	    Map<String,Object> model = new HashMap<String,Object>();
-	    
-	    //if( first.equals("kjest") ) model.put( "content", "get:if:" + first );
-	    //else model.put( "content", "get:else:" + first );
-	    //System.out.println(request.getRemoteAddr());
-	    /*for( User user_user : userDao.findAll() ){
-    	System.out.println( user_user.getId() + " " + user_user.getName() );
-	    }*/
-	    
-	    //User user_user = userDao.findOne( (long) 1 );
-	    //System.out.println( user_user.getId() );
-	    
-	    
-	    
-	    model.put( "content", "ajax?:" + utils.isAjax( request ) );
-	    return model;
-	}
 	
-	/*@RequestMapping( "/data/repeat/" )
-	public Map<String,Object> repeat( @RequestParam("field1") String first, HttpServletRequest request ) {
-	    Map<String,Object> model = new HashMap<String,Object>();
-	    model.put( "content", first );
-	    return model;
-	}*/
 	
+	/*
+	 * 
+	 * for testing
+	 * 
+	 */
 	@RequestMapping( "/data/repeat" )
     public Map<String,Object> repeat( @RequestParam("field1") String string, HttpServletRequest request ) {
         System.out.println( "repeat: " + string );
@@ -95,13 +78,7 @@ public class MainController {
 
 	    model.put( "content", userDao.findById( 1 ) );
 	    return model;
-    }
-	
-	/*@RequestMapping( value = "/data/repeat.html", method = RequestMethod.POST )
-	public ModelAndView httpServicePostJSONDataExample( ModelMap model ) {
-		return new ModelAndView("httpservice_post_json");
-	}*/
-	
+    }	
 	
 	
 	/**

@@ -1,7 +1,5 @@
 package online.test.utils;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,7 +34,7 @@ public class MainUtils {
 	
 	
 	public void showThis( String string ){
-		System.out.println( string );
+		System.out.println( "AccentureOnlineTest:showThis(): " + string );
 	}
 	
 	public String getIp( HttpServletRequest request ){
@@ -46,22 +44,6 @@ public class MainUtils {
 	public HttpServletResponse redirect( HttpServletResponse response, String url ){
 		response.setHeader( "Location", url );
 		return response;
-	}
-	
-	public boolean isResource( String page ){
-		
-		ArrayList<String> resources = new ArrayList<String>();
-		
-		resources.add( "/css/" );
-		resources.add( "/fonts/" );
-		resources.add( "/img/" );
-		resources.add( "/js/" );
-		
-		for( String string : resources ){
-			if( page.startsWith( string ) ) return true;
-		}
-		
-		return false;
 	}
 
 }

@@ -43,10 +43,6 @@ app.run( [ '$route', '$rootScope', '$location', function ( $route, $rootScope, $
 
 app.controller( 'MainController', function( $rootScope, $scope, $http, $location, $window ) {
 	
-	if( $location.path == "/login" ){
-		$location.path('/');
-	}
-	
 	$scope.logout = function() {
 		
 		$http.get( "/data/auth/isloggedin" ).success( function ( data ) {
@@ -58,8 +54,8 @@ app.controller( 'MainController', function( $rootScope, $scope, $http, $location
 				$scope.loggedIn = data;
 			});
 		}
-		
-		$location.path('/');
+
+		$window.location.href = "/";
 		
 	};
 	
@@ -99,13 +95,14 @@ app.controller( 'LoginController', function( $rootScope, $scope, $http, $locatio
 			
 			$http.get( "/data/auth/submitlogin?email="+email+"&password="+password ).success( function ( data ){
 				$scope.success = data;
+				$scope.success = { "message" : "Success" };
 				$window.location.href = "/";
 				//$location.path( '/' );
 			});
 			
 		}
 		else{
-			$scope.error = { "message" : "Nav aizpilditi visi lauki!" };
+			$scope.error = { "message" : "error" };
 		}
 		
 	};
