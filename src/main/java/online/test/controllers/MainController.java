@@ -31,8 +31,10 @@ public class MainController {
 		ModelAndView mv_response = new ModelAndView( "/admin/index.html" );
 		
 		boolean loggedIn = loginUtils.isLoggedIn( request );
+		boolean isAdmin = loginUtils.isAdmin( request );
 		
 		if( ! loggedIn ) return new ModelAndView("redirect:/#/login");
+		if( ! isAdmin ) return new ModelAndView("redirect:/#/home");
 		
 		return mv_response;
     }
