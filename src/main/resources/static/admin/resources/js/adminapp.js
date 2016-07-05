@@ -167,16 +167,16 @@ app.controller('UserController', function( $rootScope, $scope, $http, $location,
     	}
 	});
 	
-	 //add a new task
-	 $scope.addTask = function addTask() {
-		 //Data from html page 
-		 var data = $.param({
-             name: $scope.name,
-             surname: $scope.surname,
-             email:   $scope.email
-         });
-		 alert(data);
-	 };
+//	 //add a new task
+//	 $scope.addTask = function addTask() {
+//		 //Data from html page 
+//		 var data = $.param({
+//             name: $scope.name,
+//             surname: $scope.surname,
+//             email:   $scope.email
+//         });
+//		 alert(data);
+//	 };
 	
 });
 
