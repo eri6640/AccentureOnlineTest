@@ -70,9 +70,23 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public User( String email, String password_hash ) {
+	
+	
+	public User(String email, String password_hash, String ip, String token, String name, String surname,
+			Boolean admin_status, long last_activity) {
+		
 		this.email = email;
 		this.password_hash = password_hash;
+		this.ip = ip;
+		this.token = token;
+		this.name = name;
+		this.surname = surname;
+		this.admin_status = admin_status;
+		this.last_activity = last_activity;
+	}
+	
+	public User(String email, String password_hash, String name, String surname, Boolean admin_status) {
+		this(email,password_hash,"","",name,surname,admin_status,0);
 	}
 
 	// Getter and setter methods
