@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 
 
@@ -14,8 +13,6 @@
     ========================================================  */
 
 
-=======
->>>>>>> refs/remotes/origin/master
 (function ($) {
     "use strict";
     var mainApp = {
@@ -49,8 +46,4 @@
         mainApp.main_fun();
     });
 
-<<<<<<< HEAD
 }(jQuery));
-=======
-}(jQuery));
->>>>>>> refs/remotes/origin/master

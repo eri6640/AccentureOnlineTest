@@ -23,11 +23,8 @@ public class Application {
 		protected void configure( HttpSecurity http ) throws Exception {
 			http
 			.authorizeRequests()
-			//.antMatchers( "/**"  ).permitAll()
-	        .antMatchers( "/login", "/templates/**","/admin_main", "/page/**", "/resources/**", "/data/**", "/favicon.ico", "/"  ).permitAll()
-	        .anyRequest().authenticated().and()
-	        //.formLogin().loginPage( "/#/login" ).permitAll().and()
-	        .addFilterAfter( new CsrfHeaderFilter(), CsrfFilter.class );
+	        .antMatchers( "/templates/**", "/admin/**", "/acp/**", "/page/**", "/resources/**", "/data/**", "/favicon.ico", "/"  ).permitAll()
+	        .anyRequest().authenticated().and().addFilterAfter( new CsrfHeaderFilter(), CsrfFilter.class );
 		}
 	}
 

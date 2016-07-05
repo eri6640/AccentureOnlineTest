@@ -1,27 +1,16 @@
 
-var app = angular.module( 'CoreAPP', [ 'ngRoute' ] );
+var app = angular.module( 'AdminAPP', [ 'ngRoute' ] );
 
 app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 	
 	$routeProvider.when('/home', {
 		controller : 'MainController',
-		templateUrl : 'page/home.html'
+		templateUrl : '/admin/page/admin_main.html'
 	}).when('/', {
 		redirectTo: '/home'
-	}).when('/login', {
-		controller : 'LoginController',
-		templateUrl : 'page/login.html'
-<<<<<<< HEAD
-	}).when('/tests', {
-		controller : 'TestsController',
-=======
-	}).when('/admin_main', {
-		controller : 'AdminController',
-		templateUrl : 'page/admin_main.html'
-	}).when('/tests', {
-		controller : 'lister',
->>>>>>> refs/remotes/origin/master
-		templateUrl : 'page/tests.html'
+	}).when('/ui', {
+		controller : 'MainController',
+		templateUrl : '/admin/page/ui.html'
 	}).otherwise({ redirectTo: '/home' });
 
 	//$locationProvider.html5Mode({
@@ -49,51 +38,12 @@ app.run( [ '$route', '$rootScope', '$location', function ( $route, $rootScope, $
 
 
 
-
-
-app.controller('lister', function($scope, $http) {
-    var urlBase="";
-    $scope.toggle=true;
-    $scope.selection = [];
-    $scope.statuses=['ACTIVE','COMPLETED'];
-    $scope.priorities=['HIGH','LOW','MEDIUM'];
-    $http.defaults.headers.post["Content-Type"] = "application/json";
-	$http.get(urlBase + '/data/tests/selectallTests').success(function (data) {
-
- 	
-    	if (data != undefined) {
-        	$scope.tests = data;
-    	} else {
-        	$scope.tests = [];
-    	}
-   	 
-    	
-	});
-});
-
-app.run( [ '$route', '$rootScope', '$location', function ( $route, $rootScope, $location ) {
-    var original = $location.path;
-    $location.path = function (path, reload) {
-        if (reload === false) {
-            var lastRoute = $route.current;
-            var un = $rootScope.$on('$locationChangeSuccess', function () {
-                $route.current = lastRoute;
-                un();
-            });
-        }
-        return original.apply($location, [path]);
-    };
-}]);
-
 app.controller( 'MainController', function( $rootScope, $scope, $http, $location, $window ) {
 	
-<<<<<<< HEAD
-=======
 	if( $location.path == "/login" ){
 		$location.path('/');
 	}
 	
->>>>>>> refs/remotes/origin/master
 	$scope.logout = function() {
 		
 		$http.get( "/data/auth/isloggedin" ).success( function ( data ) {
@@ -105,13 +55,8 @@ app.controller( 'MainController', function( $rootScope, $scope, $http, $location
 				$scope.loggedIn = data;
 			});
 		}
-<<<<<<< HEAD
-
-		$window.location.href = "/";
-=======
 		
 		$location.path('/');
->>>>>>> refs/remotes/origin/master
 		
 	};
 	
@@ -119,10 +64,6 @@ app.controller( 'MainController', function( $rootScope, $scope, $http, $location
 });
 
 app.controller( 'TestsController', function( $rootScope, $scope, $http, $location, $window ) {
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
 	
 });
 
@@ -155,20 +96,17 @@ app.controller( 'LoginController', function( $rootScope, $scope, $http, $locatio
 			
 			$http.get( "/data/auth/submitlogin?email="+email+"&password="+password ).success( function ( data ){
 				$scope.success = data;
-<<<<<<< HEAD
-				$scope.success = { "message" : "Success" };
-=======
->>>>>>> refs/remotes/origin/master
 				$window.location.href = "/";
 				//$location.path( '/' );
 			});
 			
 		}
 		else{
-			$scope.error = { "message" : "error" };
+			$scope.error = { "message" : "Nav aizpilditi visi lauki!" };
 		}
 		
 	};
 	
   
 });
+
