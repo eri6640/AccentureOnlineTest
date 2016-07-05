@@ -1,4 +1,6 @@
 body {
+    background-image: url(../img/bg.png);
+    background-repeat: repeat;
     margin: 0;
     padding: 0;
 }
@@ -31,6 +33,10 @@ video {
     background-color: #aaa;
 }
 
+.question{
+    margin-bottom: 20px;
+}
+
 .tests{
     color: white;
     text-align: center;
@@ -53,3 +59,29 @@ video {
 	position: unset;
 }
 
+.container .row .col-md-12{
+    text-align: center;
+    color: white;
+}
+
+#timerPlace{
+    font-size: 36px;
+    color: white;
+    text-align: center;
+    font-weight: 400;
+}
+
+.progress{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.question-form{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.col-md-12{
+    position: static!important;
+    margin:1.3% 0 1.3% 0;
+}

@@ -17,6 +17,36 @@ public class LoginUtils {
 
 	public String TokenName = "XSRF-TOKEN";
 	
+	public boolean isAdmin( HttpServletRequest request ){
+		
+		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
+		if( csrf == null ) return false;
+		
+		Cookie cookie = WebUtils.getCookie( request, TokenName );
+		String token = csrf.getToken();
+		
+		//if something is wrong with token or cookie, redirect to login page
+		if ( cookie == null || token != null && ! token.equals( cookie.getValue() ) ) return false;
+		
+		String token_hash = utils.MD5( token );
+		if( token_hash.isEmpty() ) return false;
+		
+		User token_user = null;
+		
+		try{
+			token_user = userDao.findByToken( token_hash );
+		}
+		catch ( Exception error ){
+			token_user = null;
+			utils.showThis( "user null" );
+		}
+		
+		if( token_user == null ) return false;
+		
+		return token_user.isAdmin();
+		
+	}
+	
 	public boolean isLoggedIn( HttpServletRequest request ){
 		
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
