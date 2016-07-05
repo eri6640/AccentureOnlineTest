@@ -117,17 +117,9 @@ public class User implements Serializable {
 	}
 	
 	public void setAuth( String ip, String token_hash ){
-<<<<<<< HEAD
 		this.ip = ip;
 		this.token = token_hash;
 		this.last_activity = System.currentTimeMillis();
-=======
-
-		this.ip = ip;
-		this.token = token_hash;
-		this.last_activity = System.currentTimeMillis();
-
->>>>>>> refs/remotes/origin/master
 	}
 	
 	/**
@@ -136,13 +128,7 @@ public class User implements Serializable {
 	 * 
 	 */
 	public void unSetAuth() {
-<<<<<<< HEAD
 		setToken( "" );
-=======
-
-		setToken( "" );
-
->>>>>>> refs/remotes/origin/master
 	}
 
 	public String getName() {
