@@ -23,7 +23,7 @@ public class Application {
 		protected void configure( HttpSecurity http ) throws Exception {
 			http
 			.authorizeRequests()
-	        .antMatchers( "/templates/**", "/admin/**", "/acp/**", "/page/**", "/resources/**", "/data/**", "/favicon.ico", "/"  ).permitAll()
+	        .antMatchers( "/sendMail", "/templates/**", "/admin/**", "/acp/**", "/page/**", "/resources/**", "/data/**", "/favicon.ico", "/"  ).permitAll()
 	        .anyRequest().authenticated().and().addFilterAfter( new CsrfHeaderFilter(), CsrfFilter.class );
 		}
 	}
