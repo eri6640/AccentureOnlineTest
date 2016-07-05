@@ -12,6 +12,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "userAnswers")
 public class UserAnswers {
+	
+	
+
+	public UserAnswers(TestQuestions testsQuestions, Tests tests, User user, String answer, byte[] imageAnswer) {
+		this.testsQuestions = testsQuestions;
+		this.tests = tests;
+		this.user = user;
+		this.answer = answer;
+		this.imageAnswer = imageAnswer;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
