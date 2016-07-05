@@ -21,6 +21,8 @@ public class UserAnswers {
 		this.user = user;
 		this.answer = answer;
 		this.imageAnswer = imageAnswer;
+		this.status = 0;
+		this.posted = System.currentTimeMillis();
 	}
 
 	@Id
@@ -44,6 +46,12 @@ public class UserAnswers {
 
 	@Column
 	private byte[] imageAnswer = null;
+
+	@Column
+	private int status;
+	
+	@Column
+	private long posted;
 
 	public long getId() {
 		return id;
@@ -91,6 +99,28 @@ public class UserAnswers {
 
 	public void setImageAnswer(byte[] imageAnswer) {
 		this.imageAnswer = imageAnswer;
+	}
+	
+	public int getStatus(){
+		return status;
+	}
+	
+	/**
+	 * 
+	 * @param status 0-?? 1-started 2-rew.later 3-fin
+	 * 
+	 */
+	public void setStatus( int status ){
+		this.status = status;
+	}
+	
+	/**
+	 * 
+	 * @return currentTimeMillis()
+	 * 
+	 */
+	public long getPosted(){
+		return posted;
 	}
 
 }
