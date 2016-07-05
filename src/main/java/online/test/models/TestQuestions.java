@@ -13,6 +13,19 @@ import javax.persistence.Table;
 @Table(name = "testQuestions")
 public class TestQuestions {
 
+	public TestQuestions(TYPE type, String question, String date, Tests tests, User user, String answer,
+			String multipleChoice, byte[] imageAnswer, String textAnswer) {
+		this.type = type;
+		this.question = question;
+		this.date = date;
+		this.tests = tests;
+		this.user = user;
+		this.answer = answer;
+		this.multipleChoice = multipleChoice;
+		this.imageAnswer = imageAnswer;
+		this.textAnswer = textAnswer;
+	}
+
 	public static enum TYPE {
 		PICTURE('P'), MULTIPLE_CHOCE('M'), SINGLE_CHOICE('S'), TEXT('T');
 
