@@ -1,6 +1,8 @@
 package online.test.controllers;
 
+import online.test.models.TestQuestions;
 import online.test.models.Tests;
+import online.test.models.User;
 import online.test.models.dao.TestsDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +21,33 @@ public class TestsController {
 	}
 	  @Autowired
 	  private TestsDao testsDao;
+	
+	@RequestMapping("/data/tests/create")
+	@ResponseBody
+	public String addTest(String title, User user, String date){
+		Tests test = null;
+		try {
+			test = new Tests(title, user, date);
+			testsDao.save(test);
+		}
+		catch (Exception ex) {
+				return "Error adding test: " + ex.toString();
+		}
+		return "Test succesfully added!";
+	}
+	
+	@RequestMapping("/data/tests/remove")
+	@ResponseBody
+	public String removeTest(String title, User user, String date){
+		Tests test = null;
+		try {
+			test = new Tests(title, user, date);
+			testsDao.delete(test);
+		}
+		catch (Exception ex) {
+				return "Error delete test: " + ex.toString();
+		}
+		return "Test succesfully deleted!";
+	}
 	  
 } //TestsController end

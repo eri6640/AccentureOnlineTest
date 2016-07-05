@@ -25,6 +25,27 @@ app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 	$httpProvider.defaults.headers.common['Accept'] = 'application/json';
 
 });
+
+app.controller('lister', function($scope, $http) {
+    var urlBase="";
+    $scope.toggle=true;
+    $scope.selection = [];
+    $scope.statuses=['ACTIVE','COMPLETED'];
+    $scope.priorities=['HIGH','LOW','MEDIUM'];
+    $http.defaults.headers.post["Content-Type"] = "application/json";
+	$http.get(urlBase + '/data/tests/selectallTests').success(function (data) {
+
+ 	
+    	if (data != undefined) {
+        	$scope.tests = data;
+    	} else {
+        	$scope.tests = [];
+    	}
+   	 
+    	
+	});
+});
+
 app.run( [ '$route', '$rootScope', '$location', function ( $route, $rootScope, $location ) {
     var original = $location.path;
     $location.path = function (path, reload) {

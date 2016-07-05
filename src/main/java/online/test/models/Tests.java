@@ -26,6 +26,13 @@ public class Tests {
 
 	@NotNull
 	private String date;
+	
+
+	public Tests(String title, User user, String date) {
+		this.title = title;
+		this.user = user;
+		this.date = date;
+	}
 
 	public long getId() {
 		return id;
@@ -59,4 +66,5 @@ public class Tests {
 		this.date = date;
 	}
 
+	
 }
