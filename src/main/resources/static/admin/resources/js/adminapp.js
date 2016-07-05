@@ -1,6 +1,5 @@
 
 var app = angular.module( 'AdminAPP', [ 'ngRoute' ] );
-
 app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 	
 	$routeProvider.when('/home', {
@@ -8,9 +7,18 @@ app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 		templateUrl : '/admin/page/admin_main.html'
 	}).when('/', {
 		redirectTo: '/home'
-	}).when('/ui', {
+	}).when('/users', {
 		controller : 'MainController',
-		templateUrl : '/admin/page/ui.html'
+		templateUrl : '/admin/page/users.html'
+	}).when('/create-test', {
+		controller : 'MainController',
+		templateUrl : '/admin/page/create_test.html'
+	}).when('/user-tests', {
+		controller : 'MainController',
+		templateUrl : '/admin/page/user_tests.html'
+	}).when('/test-list', {
+		controller : 'MainController',
+		templateUrl : '/admin/page/view_tests.html'
 	}).otherwise({ redirectTo: '/home' });
 
 	//$locationProvider.html5Mode({
