@@ -2,13 +2,10 @@ package online.test.controllers;
 
 
 import online.test.models.TestQuestions;
+import online.test.models.TestQuestions.TYPE;
 import online.test.models.Tests;
 import online.test.models.User;
-import online.test.models.UserAnswers;
-import online.test.models.TestQuestions.TYPE;
 import online.test.models.dao.TestQuestionsDao;
-import online.test.models.dao.UserAnswersDao;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

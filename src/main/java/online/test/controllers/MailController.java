@@ -14,7 +14,7 @@ public class MailController{
 	
 	@Autowired
 	private JavaMailSender javaMailSender;
-	
+
 	@RequestMapping("/sendMail")
 	@ResponseBody
 	public boolean send( String email, String password ) {

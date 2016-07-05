@@ -131,3 +131,54 @@ app.controller( 'LoginController', function( $rootScope, $scope, $http, $locatio
   
 });
 
+
+
+
+
+
+
+
+app.controller( 'Timer', [ '$scope', '$interval', '$window', function( $scope, $interval, $window ) {
+	$scope.timerTime = new Date().getTime();
+	$scope.timeleft = 0;
+
+    var stop;
+    var startTimer = function() {
+
+		if( angular.isDefined( stop ) ) return;
+	
+		stop = $interval( function() {
+			$scope.timeleft = ( new Date().getTime() - $scope.timerTime ) / 1000;
+			
+			if( $scope.timeleft >= 10 ) {
+				$scope.stopTimer();
+				
+				var confirmThis = $window.confirm("Press a button!");
+				if( confirmThis == true ) {
+					$window.alert("yes");
+				}
+				else {
+					$window.alert("false");
+				}
+			}
+		}, 1000);
+    };
+
+    $scope.stopTimer = function() {
+    	if( angular.isDefined( stop ) ) {
+    		$interval.cancel( stop );
+    		stop = undefined;
+    	}
+    };
+
+    $scope.resetTimer = function() {
+    	$scope.timerTime = new Date().getTime();
+    	$scope.stopTimer();
+    };
+
+    $scope.$on('$destroy', function() {
+    	$scope.stopTimer();
+	});
+    
+    startTimer();
+}]);
