@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import online.test.models.Tests;
 import online.test.models.User;
 import online.test.models.UserAnswers;
-import online.test.models.dao.TestsDao;
-import online.test.models.dao.UserAnswersDao;
 import online.test.utils.AdminUtils;
 import online.test.utils.LoginUtils;
 import online.test.utils.MainUtils;
@@ -35,9 +33,10 @@ public class AdminController {
 		return adminUtils.selectAllUsers();
 	}
 
-	@Autowired
+//	@Autowired
 	LoginUtils loginUtils = new LoginUtils();
-	@Autowired
+//	@Autowired
 	AdminUtils adminUtils = new AdminUtils();
+	
 	MainUtils utils = new MainUtils();
 }
