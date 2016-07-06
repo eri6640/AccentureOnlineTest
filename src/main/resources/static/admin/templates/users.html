@@ -1,72 +1,66 @@
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs/jqc-1.12.3,dt-1.10.12/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/u/bs/jqc-1.12.3,dt-1.10.12/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs/jqc-1.12.3,dt-1.10.12/datatables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/u/bs/jqc-1.12.3,dt-1.10.12/datatables.min.js"></script>
 
 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <h4>Add user</h4>
-                              <hr>
-                       <div class="input-group">
-  <span class="input-group-addon">E-mail</span>
-  <input type="text" class="form-control" placeholder="E-mail" />
-</div>
-<br />
-<div class="input-group">
-  <span class="input-group-addon">Name</span>
-  <input type="text" class="form-control" placeholder="Name"  />
-</div>
-<br />
-<div class="input-group">
-  <span class="input-group-addon">Surname</span>
-  <input type="text" class="form-control"  placeholder="Surname"  />
-  
-</div>
-                    </div>
-                   
-                    <div class="col-lg-6 col-md-6">
-                        <div class="add_button">
-                        <a href="#" class="btn btn-success">Add</a>
-                        </div>
-                    </div>
+    <form ng-submit="addUser()">
 
-                </div>
-                <!-- /. ROW  -->
-                <hr>
-             <hr>
-           <div ng-controller="UserController">
-           
-            
-                <div class="row">
-                    <div class = "add_user_row" >
-                        <h4>All added users</h4>
-                              <hr>
-                              
-                        <table id="user_table" class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
-                                    <th>Delete User</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="user in users">
-                                    <td>{{user.id}}</td>
-                                    <td>{{user.name}}</td>
-                                    <td>{{user.surname}}</td>
-                                    <td>{{user.email}}</td>
-                                    <td><a href="#" id="" class="deleteBtn" style="text-decoration:none; color:white; background-color:#5cb85c; padding:4px; border-radius: 28px;" role="button">Delete</a></td>
-                                </tr>
-                               
-                                
-                            </tbody>
-                        </table>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <h4>Add user</h4>
+            <hr>
+            <div class="input-group">
+                <span class="input-group-addon">E-mail</span>
+                <input type="text" class="form-control" ng-model="email" />
+            </div>
+            <br />
+            <div class="input-group">
+                <span class="input-group-addon">Name</span>
+                <input type="text" class="form-control" ng-model="name" />
+            </div>
+            <br />
+            <div class="input-group">
+                <span class="input-group-addon">Surname</span>
+                <input type="text" class="form-control" ng-model="surname" />
+            </div>
 
-                    </div>
-        
+            <div class="col-lg-6 col-md-6">
+                <div class="add_button">
+                    <input type="submit" value="Add user">
                 </div>
-                
-                </div>
-                	<script type="text/javascript" src="/admin/resources/js/jquery-1.10.2.js" charset="utf-8"></script>
-                
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- /. ROW  -->
+<hr>
+<hr>
+
+
+   <div class="row">
+      <div class = "add_user_row" >
+         <h4>All added users</h4>
+         <hr>
+         <table id="user_table" class="table table-striped table-bordered table-hover">
+            <thead>
+               <tr>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Username</th>
+                  <th>Delete User</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="user in users">
+                  <td>{{user.id}}</td>
+                  <td>{{user.name}}</td>
+                  <td>{{user.surname}}</td>
+                  <td>{{user.email}}</td>
+                  <td><button type="button" ng-click="del(user.id)" class="btn btn-danger">Delete</button></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+
+<script type="text/javascript" src="/admin/resources/js/jquery-1.10.2.js" charset="utf-8"></script>

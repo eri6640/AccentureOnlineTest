@@ -31,9 +31,10 @@ public class TestQuestionsController {
 				testQuestionsDao.save(testQuestion);
 			}
 			catch (Exception ex) {
-				return "Error adding answer: " + ex.toString();
+				return false;
+				//return "Error adding answer: " + ex.toString();
 			}
-			return "Answer succesfully added!";
+				return true;
 	 }
 	 
 	@RequestMapping("/data/testquestions/delete")
@@ -46,9 +47,10 @@ public class TestQuestionsController {
 				testQuestionsDao.delete(testQuestion);
 			}
 			catch (Exception ex) {
-				return "Error deleting answer: " + ex.toString();
+				return false;
+				//return "Error deleting answer: " + ex.toString();
 			}
-			return "Answer succesfully deleted!";
+				return true;
 	 }
 	
 	  @Autowired
