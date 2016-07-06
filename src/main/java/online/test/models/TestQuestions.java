@@ -14,8 +14,6 @@ import javax.persistence.Table;
 public class TestQuestions {
 	
 	
-	public TestQuestions() {
-		
 	}
 
 	public TestQuestions() {}
