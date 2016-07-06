@@ -224,7 +224,7 @@ app.controller('UserTestController', function($rootScope, $scope, $http,
 						
 					};
 
-	};
+	
 
 
 });
@@ -267,7 +267,7 @@ app.controller( 'UserController', function( $rootScope, $scope, $http, $location
 		});
 	};
 	
-	$scope.loadUsers();
+});
 	
 
 
