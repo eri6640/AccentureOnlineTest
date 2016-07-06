@@ -180,5 +180,11 @@ app.controller('UserController', function( $rootScope, $scope, $http, $location,
 	
 });
 
+app.controller('UserAddController', function($rootScope, $scope, $http, $location, $window ) {
+	   $scope.add = function(email, name, surname) { 
+		     $scope.password="parole";
+		     $http.get( "/data/user/create?email="+email+"&password_hash=paroleshash"+"&name="+name+"&surname="+surname+"&admin_status=false" );
+		   };
+		});
 
 
