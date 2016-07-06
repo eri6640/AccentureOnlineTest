@@ -42,10 +42,10 @@ public class User implements Serializable {
 	@NotNull
 	private String password_hash;
 
-	@NotNull
+	
 	private String ip;
 
-	@NotNull
+	
 	private String token;
 
 	@NotNull
@@ -57,7 +57,7 @@ public class User implements Serializable {
 	@NotNull
 	private Boolean admin_status;
 
-	@NotNull
+	
 	private long last_activity;
 
 	// ------------------------
