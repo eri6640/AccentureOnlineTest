@@ -27,8 +27,7 @@ public class Tests {
 	@NotNull
 	private String date;
 	
-	public Tests(){}
-	
+
 	public Tests(String title, User user, String date) {
 		this.title = title;
 		this.user = user;
