@@ -13,5 +13,5 @@ import online.test.models.UserAnswers;
 @Transactional
 public interface UserAnswersDao extends CrudRepository<UserAnswers, Long> {
 	@Query("select a from UserAnswers a inner join a.tests as t inner join a.user as u where t.id= :testID and u.id= :userID")
-	public List<UserAnswers> getCurrentUserTestAnswers(@Param("testID")Long testID, @Param("userID")Long userID);
+	public List<UserAnswers> getCurrentUserTestAnswers(@Param("testID") Long testID, @Param("userID")Long userID);
 }

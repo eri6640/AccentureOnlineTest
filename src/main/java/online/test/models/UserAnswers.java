@@ -12,6 +12,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "userAnswers")
 public class UserAnswers {
+	
+	
+
+	public UserAnswers() {
+	}
+
+	public UserAnswers(TestQuestions testsQuestions, Tests tests, User user, String answer, byte[] imageAnswer) {
+		this.testsQuestions = testsQuestions;
+		this.tests = tests;
+		this.user = user;
+		this.answer = answer;
+		this.imageAnswer = imageAnswer;
+		this.status = 0;
+		this.posted = System.currentTimeMillis();
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,7 +34,7 @@ public class UserAnswers {
 
 	@ManyToOne
 	@JoinColumn(name = "questionID")
-	private TestOuestions testsQuestions;
+	private TestQuestions testsQuestions;
 
 	@ManyToOne
 	@JoinColumn(name = "testsID")
@@ -33,7 +48,13 @@ public class UserAnswers {
 	private String answer;
 
 	@Column
-	private byte[] imageAnswer;
+	private byte[] imageAnswer = null;
+
+	@Column
+	private int status;
+	
+	@Column
+	private long posted;
 
 	public long getId() {
 		return id;
@@ -43,11 +64,11 @@ public class UserAnswers {
 		this.id = id;
 	}
 
-	public TestOuestions getTestsQuestions() {
+	public TestQuestions getTestsQuestions() {
 		return testsQuestions;
 	}
 
-	public void setTestsQuestions(TestOuestions testsQuestions) {
+	public void setTestsQuestions(TestQuestions testsQuestions) {
 		this.testsQuestions = testsQuestions;
 	}
 
@@ -82,5 +103,23 @@ public class UserAnswers {
 	public void setImageAnswer(byte[] imageAnswer) {
 		this.imageAnswer = imageAnswer;
 	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public long getPosted() {
+		return posted;
+	}
+
+	public void setPosted(long posted) {
+		this.posted = posted;
+	}
+
+	
 
 }

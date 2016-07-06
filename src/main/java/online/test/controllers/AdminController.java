@@ -33,10 +33,9 @@ public class AdminController {
 		return adminUtils.selectAllUsers();
 	}
 
-//	@Autowired
+	@Autowired
 	LoginUtils loginUtils = new LoginUtils();
-//	@Autowired
+	@Autowired
 	AdminUtils adminUtils = new AdminUtils();
-	
 	MainUtils utils = new MainUtils();
 }

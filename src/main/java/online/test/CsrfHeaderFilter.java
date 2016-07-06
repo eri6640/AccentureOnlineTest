@@ -10,52 +10,61 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.UrlPathHelper;
 import org.springframework.web.util.WebUtils;
+
+import online.test.utils.LoginUtils;
+import online.test.utils.MainUtils;
 
 public class CsrfHeaderFilter extends OncePerRequestFilter {
 	
+	MainUtils utils = new MainUtils();
+	LoginUtils loginUtils = new LoginUtils();
+	
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-		
-		//if( Functions.isAjax( request ) ) return;
+	protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain filterChain ) throws ServletException, IOException {
 		
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
 		if( csrf != null ){
-			Cookie cookie = WebUtils.getCookie( request, "XSRF-TOKEN" );
+			
+			Cookie cookie = WebUtils.getCookie( request, loginUtils.TokenName );
 			String token = csrf.getToken();
 			if ( cookie == null || token != null && ! token.equals( cookie.getValue() )) {
-				cookie = new Cookie( "XSRF-TOKEN", token );
+				cookie = new Cookie( loginUtils.TokenName, token );
 				cookie.setPath("/");
-				response.addCookie(cookie);
+				response.addCookie(cookie);				
 			}
-
-			Cookie cookieId = WebUtils.getCookie( request, "user_id" );
-			Cookie cookieHash = WebUtils.getCookie( request, "user_hash" );
 			
-			if ( cookieId == null || cookieHash == null ) {
-				if( cookieId != null ){
-					cookieId.setMaxAge( -3600 );
-					response.addCookie( cookieId );
-				}
-				if( cookieHash != null ){
-					cookieHash.setMaxAge( -3600 );
-					response.addCookie( cookieHash );
-				}
-			}
-			else{
-				int user_id = 0;
-				try{
-					user_id = Integer.parseInt( cookieId.getValue() );
-				}
-				catch( NumberFormatException error ){
-					//logout
-				}
-				 
-				if( user_id <= 0 ){
-					//logout
-				}
-			}
 		}
+		
+		/*if( ! utils.isResource( request.getRequestURI() ) && ! request.getRequestURI().equals( "/login.html" ) ){
+			utils.redirect( response, "http://5.196.149.161:8080/#/login" );
+		}*/
+		
+
+		utils.showThis(  new UrlPathHelper().getOriginatingRequestUri(request) );
+		
+		//utils.showThis( utils.getIp( request ) );
+		/*if( utils.isAjax( request ) ){
+			utils.showThis(  new UrlPathHelper().getOriginatingRequestUri(request) );
+			
+			String url = new UrlPathHelper().getOriginatingRequestUri( request );
+			
+			if( url.contains( ".html" ) ){
+				if( ! url.contains( "/login.html" ) ){
+					utils.showThis( "true" );
+					utils.showThis( "true" );
+					utils.showThis( "true" );
+					//utils.redirect( response, "http://5.196.149.161:8080/" );
+					//response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+					//response.setHeader( "Location", "http://5.196.149.161:8080/" );
+				}
+			}
+		}*/
+		
+		//utils.removeToken( response );
+		//utils.redirect( response, "https://www.google.lv/" );
+		
 		filterChain.doFilter( request, response );
 		
 	}

@@ -1,0 +1,72 @@
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs/jqc-1.12.3,dt-1.10.12/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/u/bs/jqc-1.12.3,dt-1.10.12/datatables.min.js"></script>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>NEW TESTS</h2>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+             
+             <hr>
+           
+            
+                <div class="row">
+                   
+                      
+                      <div class="col-lg-4 col-md-4">
+                        <div class="form-group">
+                            <h4>Test Title</h4>
+                            <input class="form-control" />
+                        </div>
+                    </div>
+
+                   <div class="col-lg-4 col-md-4">
+                        <a id="test_submit_button" href="#" class="btn btn-primary btn-medium ">Submit</a>
+                    </div>
+        
+                </div>
+                <!-- /. ROW  -->
+                <hr>
+
+               <div ng-controller="AdminController">
+                  <div class="row">
+                        <table id="user_table" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Test Title</th>
+                                    <th>Date</th>
+                                    <th>Add Question</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="test in tests">
+                                    <td>{{test.id}}</td>
+                                    <td>{{test.title}}</td>
+                                    <td>{{test.date}}</td>
+                                    <td><a href="#" id="" class="viewBtn" style="text-decoration:none; color:white; background-color:#428bca; padding:4px; border-radius: 28px;" role="button">View</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+                </div>
+                <!-- /. ROW  -->		 							<h4>Question Type</h4>
+                
+															<ul id="" class="nav nav-pills">
+															
+																<li>
+																	<a class="faculty-selection" href="#">Image</a>
+																</li>
+																<li>
+																	<a class="faculty-selection" href="#">Plain Text</a>
+																</li>
+																<li>
+																	<a class="faculty-selection" href="#">Multiple Choices</a>
+																</li>
+																<li>
+																	<a class="faculty-selection" href="#">One Choice</a>
+																</li>
+														</ul>
+  
+	<script type="text/javascript" src="/admin/resources/js/jquery-1.10.2.js" charset="utf-8"></script>
+  

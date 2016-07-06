@@ -1,17 +1,9 @@
 package online.test.utils;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import online.test.models.User;
-import online.test.models.dao.UserDao;
+import javax.servlet.http.HttpServletResponse;
 
 public class MainUtils {
-	
 
 	/**
 	 * isAjax  --> checks request....
@@ -24,23 +16,34 @@ public class MainUtils {
 	}
 	
 	
-	public String getMD5( String string ){
-		MessageDigest md5_password = null;
+	public String MD5( String string ){
+
 		try {
-			md5_password = MessageDigest.getInstance("MD5");
-		} catch ( NoSuchAlgorithmException error ) {
-			error.printStackTrace();
-			showThis( "getMD5 error" );
+			java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+			byte[] array = md.digest(string.getBytes());
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < array.length; ++i) {
+				sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+			}
+			return sb.toString();
+		}
+		catch (java.security.NoSuchAlgorithmException e) {
 			return null;
 		}
-		
-		md5_password.update( string.getBytes() );
-		return string;
 	}
 	
 	
 	public void showThis( String string ){
-		System.out.println( string );
+		System.out.println( "AccentureOnlineTest:showThis(): " + string );
+	}
+	
+	public String getIp( HttpServletRequest request ){
+		return request.getHeader( "X-FORWARDED-FOR" ) == null ? request.getRemoteAddr() : null;
+	}
+	
+	public HttpServletResponse redirect( HttpServletResponse response, String url ){
+		response.setHeader( "Location", url );
+		return response;
 	}
 
 }
