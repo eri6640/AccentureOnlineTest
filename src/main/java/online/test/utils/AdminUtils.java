@@ -48,6 +48,7 @@ public class AdminUtils {
 		return questionList;
 	}
 
+
 	public Iterable<QuestionChoices> selectCurrentQuestionChoices(Long testID) {
 		List<QuestionChoices> choices = new ArrayList<QuestionChoices>();
 		Iterable<QuestionChoices> choiceList = questionChoiceDao.findAll();
@@ -61,6 +62,7 @@ public class AdminUtils {
 		}
 		return (Iterable<QuestionChoices>) choices;
 	}
+
 
 	@Autowired
 	UserAnswersDao userAnswerDao;

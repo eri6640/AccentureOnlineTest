@@ -43,11 +43,14 @@ public class AdminController {
 	return adminUtils.selectCurrentUserTest(userID, testID);
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping("/data/tests/questionChoices")
 	@ResponseBody
 	public Iterable<QuestionChoices> getQuestionChoices(@RequestParam("testID") Long testID, HttpServletRequest request) {
 		return adminUtils.selectCurrentQuestionChoices(testID);
 	}
+=======
+>>>>>>> b5133c3cc5d4035c5e7d7cdc418c1958253fc4da
 
 	@RequestMapping("/data/tests/deleteQuestionChoices")
 	@ResponseBody

@@ -12,17 +12,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "testQuestions")
 public class TestQuestions {
-	
-	
-	public TestQuestions() {
-	
-	}
-	
-	
 
+	public TestQuestions() {}
+	
 	public TestQuestions(TYPE type, String question, String date, Tests tests, User user, String answer,
 			String multipleChoice, byte[] imageAnswer, String textAnswer) {
-		super();
 		this.type = type;
 		this.question = question;
 		this.date = date;
@@ -33,8 +27,6 @@ public class TestQuestions {
 		this.imageAnswer = imageAnswer;
 		this.textAnswer = textAnswer;
 	}
-
-
 
 	public static enum TYPE {
 		PICTURE('P'), MULTIPLE_CHOCE('M'), SINGLE_CHOICE('S'), TEXT('T');

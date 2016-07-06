@@ -80,6 +80,19 @@ app.controller( 'MainController', function( $rootScope, $scope, $http, $location
 		
 	};
 	
+	$scope.testDescription = function( testId ) {
+		
+		$http.get( "/data/tests/getTest?testId=" + testId ).success( function ( data ) {
+			if( data ){
+				
+			}
+			else{
+				
+			}
+		});
+		
+	};
+	
 	
 });
 
@@ -138,7 +151,7 @@ app.controller( 'LoginController', function( $rootScope, $scope, $http, $locatio
 
 
 
-app.controller( 'Timer', [ '$scope', '$interval', '$window', function( $scope, $interval, $window ) {
+app.controller( 'TimerController', [ '$scope', '$interval', '$window', function( $scope, $interval, $window ) {
 	$scope.timerTime = new Date().getTime();
 	$scope.timeleft = 0;
 
@@ -182,3 +195,12 @@ app.controller( 'Timer', [ '$scope', '$interval', '$window', function( $scope, $
     
     startTimer();
 }]);
+
+app.filter('secondsToDateTime', function() {
+    return function(seconds) {
+        var d = new Date(0,0,0,0,0,0,0);
+        d.setSeconds(seconds);
+        return d;
+    };
+});
+
