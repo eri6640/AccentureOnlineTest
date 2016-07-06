@@ -1,6 +1,6 @@
 body {
-    background-image: url(../img/bg.png);
-    background-repeat: repeat;
+    background-image: url(../img/background_6.jpg)!important;
+	background-size: cover!important;
     margin: 0;
     padding: 0;
 }
@@ -57,6 +57,21 @@ video {
 }
 .sr-only{
 	position: unset;
+}
+
+#descr {
+	background-color: white;
+	margin: 15% 0;
+	padding-bottom: 4%;
+	color: black;
+	font-size: 20px;
+	text-align: center;
+	opacity: 0.6;
+	display: none;
+}
+
+#descr span {
+	font-size: 50px;
 }
 
 .container .row .col-md-12{
