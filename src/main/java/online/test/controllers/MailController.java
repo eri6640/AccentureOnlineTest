@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 @Controller
 public class MailController{
 	
+	@Autowired
 	private JavaMailSender javaMailSender;
 
 	@RequestMapping("/sendMail")
