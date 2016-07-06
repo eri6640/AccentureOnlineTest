@@ -80,6 +80,19 @@ app.controller( 'MainController', function( $rootScope, $scope, $http, $location
 		
 	};
 	
+	$scope.testDescription = function( testId ) {
+		
+		$http.get( "/data/tests/getTest?testId=" + testId ).success( function ( data ) {
+			if( data ){
+				
+			}
+			else{
+				
+			}
+		});
+		
+	};
+	
 	
 });
 
@@ -190,3 +203,4 @@ app.filter('secondsToDateTime', function() {
         return d;
     };
 });
+
