@@ -15,6 +15,9 @@ public class UserAnswers {
 	
 	
 
+	public UserAnswers() {
+	}
+
 	public UserAnswers(TestQuestions testsQuestions, Tests tests, User user, String answer, byte[] imageAnswer) {
 		this.testsQuestions = testsQuestions;
 		this.tests = tests;
@@ -42,7 +45,7 @@ public class UserAnswers {
 	private User user;
 
 	@Column
-	private String answer = "0";
+	private String answer;
 
 	@Column
 	private byte[] imageAnswer = null;
@@ -100,27 +103,23 @@ public class UserAnswers {
 	public void setImageAnswer(byte[] imageAnswer) {
 		this.imageAnswer = imageAnswer;
 	}
-	
-	public int getStatus(){
+
+	public int getStatus() {
 		return status;
 	}
-	
-	/**
-	 * 
-	 * @param status 0-?? 1-started 2-rew.later 3-fin
-	 * 
-	 */
-	public void setStatus( int status ){
+
+	public void setStatus(int status) {
 		this.status = status;
 	}
-	
-	/**
-	 * 
-	 * @return currentTimeMillis()
-	 * 
-	 */
-	public long getPosted(){
+
+	public long getPosted() {
 		return posted;
 	}
+
+	public void setPosted(long posted) {
+		this.posted = posted;
+	}
+
+	
 
 }

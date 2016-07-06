@@ -115,6 +115,70 @@ app.controller( 'LoginController', function( $rootScope, $scope, $http, $locatio
 		
 	};
 	
-  
 });
+
+app.controller('AdminController', function( $rootScope, $scope, $http, $location, $window ) {
+    var urlBase="";
+    $scope.toggle=true;
+    $scope.selection = [];
+    $scope.statuses=['ACTIVE','COMPLETED'];
+    $scope.priorities=['HIGH','LOW','MEDIUM'];
+    $http.defaults.headers.post["Content-Type"] = "application/json";
+	$http.get(urlBase + '/data/tests/getAllTests').success(function (data) {
+
+		if (data != undefined) {
+        	$scope.tests = data;
+    	} else {
+        	$scope.tests = [];
+    	}
+	});
+});
+
+app.controller('UserTestController', function( $rootScope, $scope, $http, $location, $window ) {
+    var urlBase="";
+    $scope.toggle=true;
+    $scope.selection = [];
+    $scope.statuses=['ACTIVE','COMPLETED'];
+    $scope.priorities=['HIGH','LOW','MEDIUM'];
+    $http.defaults.headers.post["Content-Type"] = "application/json";
+	$http.get(urlBase + '/data/tests/getUserTests').success(function (data) {
+
+		if (data != undefined) {
+        	$scope.userAnswers = data;
+    	} else {
+        	$scope.userAnswers = [];
+    	}
+	});
+});
+
+app.controller('UserController', function( $rootScope, $scope, $http, $location, $window ) {
+    var urlBase="";
+    $scope.toggle=true;
+    $scope.selection = [];
+    $scope.statuses=['ACTIVE','COMPLETED'];
+    $scope.priorities=['HIGH','LOW','MEDIUM'];
+    $http.defaults.headers.post["Content-Type"] = "application/json";
+	$http.get(urlBase + '/data/tests/getUsers').success(function (data) {
+
+		if (data != undefined) {
+        	$scope.users = data;
+    	} else {
+        	$scope.users = [];
+    	}
+	});
+	
+//	 //add a new task
+//	 $scope.addTask = function addTask() {
+//		 //Data from html page 
+//		 var data = $.param({
+//             name: $scope.name,
+//             surname: $scope.surname,
+//             email:   $scope.email
+//         });
+//		 alert(data);
+//	 };
+	
+});
+
+
 
