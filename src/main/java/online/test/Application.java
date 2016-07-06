@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.csrf.CsrfFilter;
 
 @SpringBootApplication
+@Configuration
 public class Application {
 
 	public static void main(String[] args) {

@@ -12,7 +12,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 @Controller
 public class MailController{
 	
-	@Autowired
 	private JavaMailSender javaMailSender;
 
 	@RequestMapping("/sendMail")
@@ -25,7 +24,7 @@ public class MailController{
             helper.setReplyTo("accbootcamp2016@gmail.com");
             helper.setFrom("accbootcamp2016@gmail.com");
             helper.setSubject("Jūsu piekļuve Accenture testam");
-            helper.setText("");
+            helper.setText("Jūsu piekļuves dati ir: \n\nLietotājvārds: "+email+"\nParole: "+password+"\n\nVeiksmi testā!");
         } catch (MessagingException e) {
         	e.printStackTrace();
             return false;
