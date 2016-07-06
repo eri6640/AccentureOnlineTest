@@ -23,7 +23,7 @@ public class TestQuestionsController {
 	
 	@RequestMapping("/data/testquestions/create")
 	@ResponseBody
-	public Boolean addQuestion(TYPE type, String question, Tests tests, User user, String answer,
+	public boolean addQuestion(TYPE type, String question, Tests tests, User user, String answer,
 				String multipleChoice, byte[] imageAnswer, String textAnswer){
 		 TestQuestions testQuestion = null;
 			try {
@@ -39,7 +39,7 @@ public class TestQuestionsController {
 	 
 	@RequestMapping("/data/testquestions/delete")
 	@ResponseBody
-	 public Boolean removeQuestion(TYPE type, String question, Tests tests, User user, String answer,
+	 public boolean removeQuestion(TYPE type, String question, Tests tests, User user, String answer,
 				String multipleChoice, byte[] imageAnswer, String textAnswer){
 		 TestQuestions testQuestion = null;
 			try {

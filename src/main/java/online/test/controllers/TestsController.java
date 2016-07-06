@@ -10,12 +10,14 @@ import online.test.utils.LoginUtils;
 import online.test.utils.TestsUtils;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -47,7 +49,6 @@ public class TestsController {
 			testsDao.save(test);
 		}
 		catch (Exception ex) {
-			//return "Error adding test: " + ex.toString();
 			return false;
 		}
 			return true;
@@ -62,7 +63,6 @@ public class TestsController {
 			testsDao.delete(test);
 		}
 		catch (Exception ex) {
-			//return "Error delete test: " + ex.toString();
 			return false;
 		}
 		return true;
@@ -73,6 +73,12 @@ public class TestsController {
 	public Iterable<Tests> selectAvailableTests( HttpServletRequest request ) {
 		Iterable<Tests> list = testsUtils.getAvailableTests( request );
 		return list;
+	}
+	
+	@RequestMapping("/data/tests/getTest")
+	@ResponseBody
+	public Map<String,Object> getTest( @RequestParam("testId") String testId_string ) {
+		return testsUtils.getTest( testId_string );
 	}
 	  
 } //TestsController end

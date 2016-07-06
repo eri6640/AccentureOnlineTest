@@ -25,6 +25,9 @@ public class Tests {
 	private User user;
 
 	@NotNull
+	private String description;
+
+	@NotNull
 	private long created;
 	
 	public Tests() {}
@@ -57,6 +60,14 @@ public class Tests {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public long getCreated() {

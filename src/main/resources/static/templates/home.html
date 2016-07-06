@@ -1,15 +1,20 @@
+<style>
+body { background-image: none; }
+</style>
 <div class="container-fluid">
 	<div class="row">
     	<div class="col-md-7">
         	<div id="leftBlock">
-            	<div id="descr"></div>
+            	<div class="descr" ng-show="show_desc">
+            		<br><span>{{test_title}}</span><br><p>{{test_description}}</p><br><p>Try this test!</p>
+            	</div>
 			</div>
 		</div>
 		<div class="col-md-5" style="margin-top:4%;">
-			<h1 class="tests">All Tests</h1>
+			<h1 class="tests">Available Tests</h1>
 			<form method="get" ng-submit"">
 				<select name="select-list" id="testList" multiple class="form-control test-form">
-					<option ng-repeat="test in test_list" value="asf" ng-click="testDescription()">{{test.title}}</option>
+					<option ng-repeat="test in test_list" value="{{test.id}}" ng-click="testDescription( test.id )">{{test.title}}</option>
 				</select>
 				<div class="container-fluid" style="max-width:335px;">
 					<button type="submit" value="submit" class="btn btn-primary btn-lg btn-block">Start</button>
@@ -18,29 +23,3 @@
 		</div>
 	</div>
 </div>
-      
-<script>
-      
-	function description() {
-
-		var list = document.getElementById('testList');
-		var optionTag = "text";
-		var selected = (list[list.selectedIndex].value);
-
-		var text0 = "<br> <span> Math test</span> <br> <p>This test is will help you to...</p> <p>It covers the following topics: </p> <p>Something new for you</p> <p>Something you allready know</p> <p>Something that you don't remember</p> <br> <p>Try this test!</p>";
-		var text1 = "<br> <span> Biology test</span> <br> <p>This test is will help you to...</p> <p>It covers the following topics: </p> <p>Something new for you</p> <p>Something you allready know</p> <p>Something that you don't remember</p> <br> <p>Try this test!</p>";
-		var text2 = "<br> <span> Science test</span> <br> <p>This test is will help you to...</p> <p>It covers the following topics: </p> <p>Something new for you</p> <p>Something you allready know</p> <p>Something that you don't remember</p> <br> <p>Try this test!</p>";
-		var text3 = "<br> <span> English test</span> <br> <p>This test is will help you to...</p> <p>It covers the following topics: </p> <p>Something new for you</p> <p>Something you allready know</p> <p>Something that you don't remember</p> <br> <p>Try this test!</p>";
-		var text4 = "<br> <span> Social test</span> <br> <p>This test is will help you to...</p> <p>It covers the following topics: </p> <p>Something new for you</p> <p>Something you allready know</p> <p>Something that you don't remember</p> <br> <p>Try this test!</p>";
-
-
-
-		$("#descr").fadeOut(200, function() {
-			document.getElementById('descr').innerHTML = eval(optionTag + list.selectedIndex);
-		});
-		$("#descr").fadeIn(200)
-		// document.getElementById("descr").style.visibility='visible';
-
-	}
-	
-</script>
