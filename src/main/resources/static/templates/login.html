@@ -24,8 +24,15 @@
 
 </div>
 
-<div ng-controller="TimerController" class="progress">
-	<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ 100 - ( 100 / ( 60 * 60 ) * timeleft ) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ 100 - ( 100 / ( 60 * 60 ) * timeleft ) }}%;">
-		{{ 60 * 60 - timeleft | secondsToDateTime | date:'mm:ss' }}
-	</div>
+<div>
+  <div ng-controller="ExampleController">
+    <label>Date format: <input ng-model="format"></label> <hr/>
+    Current time is: <span my-current-time="format"></span>
+    <hr/>
+    Blood 1 : <font color='red'>{{blood_1}}</font>
+    Blood 2 : <font color='red'>{{blood_2}}</font>
+    <button type="button" data-ng-click="fight()">Fight</button>
+    <button type="button" data-ng-click="stopFight()">StopFight</button>
+    <button type="button" data-ng-click="resetFight()">resetFight</button>
+  </div>
 </div>

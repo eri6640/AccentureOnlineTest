@@ -1,6 +1,6 @@
 body {
-    background-image: url(../img/background_6.jpg)!important;
-	background-size: cover!important;
+    background-image: url(../img/bg.png);
+    background-repeat: repeat;
     margin: 0;
     padding: 0;
 }
@@ -59,21 +59,6 @@ video {
 	position: unset;
 }
 
-#descr {
-	background-color: white;
-	margin: 15% 0;
-	padding-bottom: 4%;
-	color: black;
-	font-size: 20px;
-	text-align: center;
-	opacity: 0.6;
-	display: none;
-}
-
-#descr span {
-	font-size: 50px;
-}
-
 .container .row .col-md-12{
     text-align: center;
     color: white;
@@ -99,9 +84,4 @@ video {
 .col-md-12{
     position: static!important;
     margin:1.3% 0 1.3% 0;
-}
-
-#sampleBoard{
-	background-color: #fff;
-	touch-action: none; //For IE10+ and future browsers supporting touch-action property
 }

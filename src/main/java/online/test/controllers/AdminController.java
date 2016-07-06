@@ -1,7 +1,10 @@
 package online.test.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,6 +35,13 @@ public class AdminController {
 	public Iterable<User> getUsers() {
 		return adminUtils.selectAllUsers();
 	}
+	
+	@RequestMapping("/data/tests/userAnswers")
+	@ResponseBody
+	public Iterable<UserAnswers> getSelectedUserAnswers(@RequestParam("userID") Long userID, @RequestParam("testID") Long testID, HttpServletRequest request) {
+	return adminUtils.selectCurrentUserTest(userID, testID);
+	}
+	
 
 	@Autowired
 	LoginUtils loginUtils = new LoginUtils();
