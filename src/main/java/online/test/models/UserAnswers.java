@@ -15,8 +15,7 @@ public class UserAnswers {
 	
 	
 
-	public UserAnswers() {
-	}
+	public UserAnswers() {}
 
 	public UserAnswers(TestQuestions testsQuestions, Tests tests, User user, String answer, byte[] imageAnswer) {
 		this.testsQuestions = testsQuestions;
