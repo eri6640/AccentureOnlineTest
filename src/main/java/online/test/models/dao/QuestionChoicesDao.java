@@ -8,10 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import online.test.models.QuestionChoices;
 import online.test.models.TestQuestions;
 
 @Transactional
-public interface QuestionChoicesDao extends CrudRepository<TestQuestions, Long> {
+public interface QuestionChoicesDao extends CrudRepository<QuestionChoices, Long> {
 
 	@Query("select q from QuestionChoices q inner join q.testQuestion as t where t.id = :testQuestionID")
 	public List<TestQuestions> getCurrentTestQuestions(@Param("testQuestionID")Long testQuestionID);
