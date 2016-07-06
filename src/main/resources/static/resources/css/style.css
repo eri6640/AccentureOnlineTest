@@ -59,7 +59,7 @@ video {
 	position: unset;
 }
 
-#descr {
+.descr {
 	background-color: white;
 	margin: 15% 0;
 	padding-bottom: 4%;
@@ -67,12 +67,19 @@ video {
 	font-size: 20px;
 	text-align: center;
 	opacity: 0.6;
-	display: none;
+    border-radius:5px;
 }
 
-#descr span {
-	font-size: 50px;
-}
+.descr span { font-size: 50px; }
+
+.descr.ng-hide { opacity: 0; }
+
+.descr.ng-hide-remove,
+.descr.ng-hide-add { display: block !important; }
+
+.descr.ng-hide-remove { transition: all linear 1000ms; }
+
+.descr.ng-hide-add { transition: all linear 500ms; }
 
 .container .row .col-md-12{
     text-align: center;
