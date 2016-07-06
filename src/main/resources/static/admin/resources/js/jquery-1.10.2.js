@@ -12,6 +12,8 @@
  * Date: 2014-01-23T21:02Z
  */
 
+
+
  
 (function( global, factory ) {
 	if ( typeof module === "object" && typeof module.exports === "object" ) {
@@ -62,8 +64,6 @@ var hasOwn = class2type.hasOwnProperty;
 var trim = "".trim;
 
 var support = {};
-
-
 
 var
 	version = "1.11.0",

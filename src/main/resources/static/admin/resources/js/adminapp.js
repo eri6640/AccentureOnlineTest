@@ -23,11 +23,6 @@ app
 				redirectTo : '/home'
 			});
 
-			// $locationProvider.html5Mode({
-			// enabled: true,
-			// requireBase: false
-			// });
-
 			$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 			$httpProvider.defaults.headers.common['Accept'] = 'application/json';
 
@@ -100,8 +95,6 @@ app.controller('LoginController', function($rootScope, $scope, $http,
 	$scope.loginSubmit = function() {
 
 		if ($scope.email && $scope.password) {
-			// $window.alert( "email: " + $scope.email + " password: " +
-			// $scope.password );
 
 			var email = $scope.email;
 			var password = $scope.password;
@@ -127,6 +120,7 @@ app.controller('LoginController', function($rootScope, $scope, $http,
 
 app.controller('AdminController', function($rootScope, $scope, $http,
 		$location, $window) {
+
 	var urlBase = "";
 	$scope.toggle = true;
 	$scope.selection = [];
@@ -141,39 +135,86 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 			$scope.tests = [];
 		}
 	});
+
+	$scope.editData = {};
+	$scope.Edit = function(test) {
+		var testId = test.id;
+		var data = $.param({
+			testID : testId
+		})
+		$http.get("/data/tests/questionChoices?testID=" + testId).success(
+				function(data) {
+					$scope.questionChoices = data;
+				}).error(function() {
+			alert("CAN'T DELETE THIS CHOICE");
+		});
+
+	}
+
+	$scope.DeleteQuestion = function(questionChoice) {
+		var questionID = questionChoice.testQuestion.id;
+		var data = $.param({
+			questionID : questionID
+		})
+		$http.get("/data/tests/deleteQuestion?questionID=" + questionID)
+				.success(function() {
+					alert("DELETED");
+				}).error(function() {
+					alert("CAN'T DELETE THIS QUESTION");
+				});
+	}
+
+	$scope.Delete = function(questionChoice) {
+		var choiceID = questionChoice.id;
+		var data = $.param({
+			choiceID : choiceID
+		})
+
+		$http.get("/data/tests/deleteQuestionChoices?choiceID=" + choiceID)
+				.success(function() {
+					alert("DELETED");
+				});
+
+	}
+
 });
 
-app.controller(
-				'UserTestController',
-				function($rootScope, $scope, $http, $location, $window) {
-					var urlBase = "";
-					$scope.toggle = true;
-					$scope.selection = [];
-					$scope.statuses = [ 'ACTIVE', 'COMPLETED' ];
-					$scope.priorities = [ 'HIGH', 'LOW', 'MEDIUM' ];
-					$http.defaults.headers.post["Content-Type"] = "application/json";
-					$http.get(urlBase + '/data/tests/getUserTests').success(
-							function(data) {
 
-								if (data != undefined) {
-									$scope.userAnswers = data;
-								} else {
-									$scope.userAnswers = [];
-								}
-							});
 
-					$scope.editData = {};
+app.controller('UserTestController', function($rootScope, $scope, $http,
+		$location, $window) {
+	var urlBase = "";
+	$scope.toggle = true;
+	$scope.selection = [];
+	$scope.statuses = [ 'ACTIVE', 'COMPLETED' ];
+	$scope.priorities = [ 'HIGH', 'LOW', 'MEDIUM' ];
+	$http.defaults.headers.post["Content-Type"] = "application/json";
+	$http.get(urlBase + '/data/tests/getUserTests').success(function(data) {
 
-					$scope.Edit = function(userAnswer) {
-						var userId = userAnswer.user.id;
-						var testId = userAnswer.tests.id;
-						var data = $.param({
-							userID : userId,
-							testID : testId
-						})
+		if (data != undefined) {
+			$scope.userAnswers = data;
+		} else {
+			$scope.userAnswers = [];
+		}
+	});
 
-						alert(data);
-						
+
+	$scope.editData = {};
+
+	$scope.Edit = function(userAnswer) {
+		var userId = userAnswer.user.id;
+		var testId = userAnswer.tests.id;
+		var data = $.param({
+			userID : userId,
+			testID : testId
+		})
+
+		$http.get(
+				"/data/tests/userAnswers?userID=" + userId + "&testID="
+						+ testId).success(function(data) {
+			$scope.currentUserAnswers = data;
+		});
+
 
 						$http.get( "/data/tests/userAnswers?userID="+userId+"&testID="+testId ).success( function ( data ){
 							$scope.currentUserAnswers = data;
@@ -183,11 +224,15 @@ app.controller(
 						
 					};
 
-				});
+	
+
+
+});
+
 
 app.controller( 'UserController', function( $rootScope, $scope, $http, $location, $window ) {
 	
-	$scope.loadUsers = function() { 
+		$scope.loadUsers = function() { 
 		var urlBase = "";
 		$scope.toggle = true;
 		$scope.selection = [];
@@ -213,7 +258,17 @@ app.controller( 'UserController', function( $rootScope, $scope, $http, $location
 		});
 	};
 	
-	$scope.loadUsers();
+	$scope.del = function(id) {
+		
+		$http.get( "/data/user/delete?id=" + id).success( function(data) {
+		
+			$scope.loadUsers();
+			
+		});
+	};
 	
 });
+	
+
+
 
