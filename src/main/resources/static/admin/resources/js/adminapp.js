@@ -232,7 +232,7 @@ app.controller('UserTestController', function($rootScope, $scope, $http,
 
 app.controller( 'UserController', function( $rootScope, $scope, $http, $location, $window ) {
 	
-	$scope.loadUsers = function() { 
+		$scope.loadUsers = function() { 
 		var urlBase = "";
 		$scope.toggle = true;
 		$scope.selection = [];
@@ -252,6 +252,15 @@ app.controller( 'UserController', function( $rootScope, $scope, $http, $location
 	$scope.addUser = function() {
 		
 		$http.get( "/data/user/create?email="+$scope.email+"&name="+$scope.name+"&surname="+$scope.surname+"&admin_status=false" ).success( function(data) {
+		
+			$scope.loadUsers();
+			
+		});
+	};
+	
+	$scope.del = function(id) {
+		
+		$http.get( "/data/user/delete?id=" + id).success( function(data) {
 		
 			$scope.loadUsers();
 			
