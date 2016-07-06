@@ -14,52 +14,53 @@
       <link href="css/style.css" rel="stylesheet">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
+ 	  <link href="css/newstyle.css" rel="stylesheet">
+ 	  <script src="js/descriptionLogic.js"></script>
       <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shivs.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
+       <style>
+		body {
+		background-image: url("img/background_6.jpg");
+		background-size: cover;
+		}
+		</style> 
    </head>
    <body>
-
+   <div id="leftBlock">
+	<div id="descr"></div>
+   </div>
+	<div class="rightBlock">
       <div class="container-fluid">
-         <video autoplay loop>
+         <!-- <video autoplay loop>
             <source src="img/bg_video.mp4" type="video/mp4">
-         </video>
+         </video> -->
       </div>
-
+	
       <div class="container-fluid">
             <h1 class="tests">All Tests</h1>
+            <form method="get">
 
-            <select multiple class="form-control test-form">
-                <option value="one">Math</option>
-                <option value="two">Biology</option>
-                <option value="three">Since</option>
-                <option value="four">English</option>
-                <option value="five">Social</option>
-                <option value="one">Business</option>
-                <option value="two">Homework</option>
-                <option value="three">Sport</option>
-                <option value="four">Drawing</option>
-                <option value="five">Listening</option>
-                <option value="one">Mathematic</option>
-                <option value="two">Physic</option>
-                <option value="three">Internet</option>
-                <option value="one">Informatic</option>
-                <option value="two">Speaking</option>
-                <option value="three">Three</option>
-                <option value="four">Drawing</option>
-                <option value="five">Listening</option>
-                <option value="one">Mathematic</option>
-                <option value="three">Since</option>
-                <option value="four">English</option>
-                <option value="five">Social</option>
-                <option value="one">Business</option>
-            </select>
-      </div>
+                <select name="select-list" id="testList" multiple class="form-control test-form"  onchange="if (this.selectedIndex>=0) description();">
+                    <option value="maths">Math</option>
+                    <option value="biol">Biology</option>
+                    <option value="since">Science</option>
+                    <option value="eng">English</option>
+                    <option value="five">Social</option>
+                </select>
 
-      <div class="container-fluid" style="max-width:335px;">
-          <a href="#"><button type="button" class="btn btn-primary btn-lg btn-block">Start</button></a>
+                <div class="container-fluid" style="max-width:335px;">
+                    <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block">Start</button>
+                </div>
+            </form>
       </div>
+</div>
+
+
+
+
 
    </body>
+   
 </html>
