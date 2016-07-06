@@ -1,4 +1,4 @@
-﻿package online.test.controllers;
+package online.test.controllers;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -25,7 +25,7 @@ public class MailController{
             helper.setReplyTo("accbootcamp2016@gmail.com");
             helper.setFrom("accbootcamp2016@gmail.com");
             helper.setSubject("Jūsu piekļuve Accenture testam");
-            helper.setText("Jūsu piekļuves dati ir: \n\nLietotājvārds: "+email+"\nParole: "+password+"\n\nVeiksmi testā!");
+            helper.setText("");
         } catch (MessagingException e) {
         	e.printStackTrace();
             return false;
