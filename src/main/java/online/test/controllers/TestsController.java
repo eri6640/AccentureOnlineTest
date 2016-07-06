@@ -24,30 +24,32 @@ public class TestsController {
 	
 	@RequestMapping("/data/tests/create")
 	@ResponseBody
-	public String addTest(String title, User user, String date){
+	public Boolean addTest(String title, User user, String date){
 		Tests test = null;
 		try {
 			test = new Tests(title, user, date);
 			testsDao.save(test);
 		}
 		catch (Exception ex) {
-				return "Error adding test: " + ex.toString();
+			//return "Error adding test: " + ex.toString();
+			return false;
 		}
-		return "Test succesfully added!";
+			return true;
 	}
 	
 	@RequestMapping("/data/tests/remove")
 	@ResponseBody
-	public String removeTest(String title, User user, String date){
+	public Boolean removeTest(String title, User user, String date){
 		Tests test = null;
 		try {
 			test = new Tests(title, user, date);
 			testsDao.delete(test);
 		}
 		catch (Exception ex) {
-				return "Error delete test: " + ex.toString();
+			//return "Error delete test: " + ex.toString();
+			return false;
 		}
-		return "Test succesfully deleted!";
+		return true;
 	}
 	  
 } //TestsController end

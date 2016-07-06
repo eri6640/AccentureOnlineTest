@@ -26,29 +26,31 @@ public class UserAnswersController {
 	
 	@RequestMapping("/data/useranswers/create")
 	@ResponseBody
-	public String addAnswer(TestQuestions testsQuestions, Tests tests, User user, String answer, byte[] imageAnswer) {
+	public Boolean addAnswer(TestQuestions testsQuestions, Tests tests, User user, String answer, byte[] imageAnswer) {
 		UserAnswers questionAnswer = null;
 		try {
 			questionAnswer = new UserAnswers(testsQuestions, tests, user, answer, imageAnswer);
 			userAnswersDao.save(questionAnswer);
 		}
 		catch (Exception ex) {
-			return "Error adding answer: " + ex.toString();
+			return false;
+			//return "Error adding answer: " + ex.toString();
 		}
-		return "Answer succesfully added!";
+		return false;
 	}
 	
 	@RequestMapping("/data/useranswers/delete")
 	@ResponseBody
-	public String removeAnswer(TestQuestions testsQuestions, Tests tests, User user, String answer, byte[] imageAnswer) {
+	public Boolean removeAnswer(TestQuestions testsQuestions, Tests tests, User user, String answer, byte[] imageAnswer) {
 		try {
 			UserAnswers questionAnswer = new UserAnswers(testsQuestions, tests, user, answer, imageAnswer);
 			userAnswersDao.delete(questionAnswer);
 		}
 		catch (Exception ex) {
-			return "Error deleting the answer: " + ex.toString();
+			return false;
+			//return "Error deleting the answer: " + ex.toString();
 		}
-		return "Answer succesfully deleted!";
+		return true;
 	}
 	
 	@Autowired  
