@@ -30,6 +30,11 @@ public class AdminUtils{
 		return userList;
 	}
 	
+	public Iterable<UserAnswers> selectCurrentUserTest(Long userID, Long testID) {
+		Iterable<UserAnswers> questionList =userAnswerDao.getCurrentUserTestAnswers(testID, userID);
+		return questionList;
+	}
+	
 	@Autowired
 	UserAnswersDao userAnswerDao;
 	@Autowired
