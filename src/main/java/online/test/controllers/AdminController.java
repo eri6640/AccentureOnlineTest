@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import online.test.models.QuestionChoices;
 import online.test.models.Tests;
 import online.test.models.User;
 import online.test.models.UserAnswers;
@@ -42,7 +43,31 @@ public class AdminController {
 	return adminUtils.selectCurrentUserTest(userID, testID);
 	}
 	
+	@RequestMapping("/data/tests/questionChoices")
+	@ResponseBody
+	public Iterable<QuestionChoices> getQuestionChoices(@RequestParam("testID") Long testID, HttpServletRequest request) {
+		return adminUtils.selectCurrentQuestionChoices(testID);
+	}
 
+	@RequestMapping("/data/tests/deleteQuestionChoices")
+	@ResponseBody
+	public void deleteQuestionChoice(@RequestParam("choiceID") Long choiceID, HttpServletRequest request) {
+		
+		adminUtils.deleteChoice(choiceID);
+	}
+	
+	@RequestMapping("/data/tests/deleteQuestion")
+	@ResponseBody
+	public void deleteQuestion(@RequestParam("questionID") Long questionID, HttpServletRequest request) {
+		Iterable<QuestionChoices> choices = adminUtils.selectCurrentQuestionChoices(questionID);
+		for (QuestionChoices questionChoices : choices) {
+			if(questionChoices.getTestQuestion().getId()==questionID){
+			adminUtils.deleteChoice(questionChoices.getId());
+			}
+		}
+		adminUtils.deleteQuestion(questionID);
+	}
+	
 	@Autowired
 	LoginUtils loginUtils = new LoginUtils();
 	@Autowired

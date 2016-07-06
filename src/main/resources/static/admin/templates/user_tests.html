@@ -13,9 +13,9 @@
 <div ng-controller="UserTestController">
 	<div class="row">
 		<div class="add_user_row">
-			<h4>All added users</h4>
+			<h4>All user tests</h4>
 			<hr>
-			<table id="user_table"
+			<table id="user_test_table"
 				class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
@@ -36,11 +36,29 @@
 					</tr>
 				</tbody>
 			</table>
+			<hr>
+			
+			<table id="user_answer_table"
+				class="table table-striped table-bordered table-hover" >
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Answer</th>
+						<th>Question</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="currentUserAnswer in currentUserAnswers">
+						<td>{{currentUserAnswer.id}}</td>
+						<td>{{currentUserAnswer.answer}}</td>
+						<td>{{currentUserAnswer.testsQuestions.question}}</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			
 		</div>
 	</div>
-		<h4 ng-repeat="currentUserAnswer in currentUserAnswers">{{currentUserAnswer.tests.title}}</h4>
-		<p ng-repeat="currentUserAnswer in currentUserAnswers">{{currentUserAnswer.testsQuestions.question}} "Answer" {{currentUserAnswer.answer}}</p>
-	
 </div>
 <!-- /. ROW  -->
 <hr>

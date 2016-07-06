@@ -1,5 +1,8 @@
 package online.test.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,44 +18,50 @@ import online.test.models.dao.UserAnswersDao;
 import online.test.models.dao.UserDao;
 
 @Component
-public class AdminUtils{
+public class AdminUtils {
 	
+	public void deleteChoice(Long choiceID){
+		questionChoiceDao.delete(choiceID);
+	}
+
+	public void deleteQuestion(Long questionID){
+		testQuestions.delete(questionID);
+	}
 	
-	
-	public Iterable<UserAnswers> getAllUserTests(){
+	public Iterable<UserAnswers> getAllUserTests() {
 		Iterable<UserAnswers> userTestList = userAnswerDao.findAll();
 		return userTestList;
 	}
-	
+
 	public Iterable<Tests> selectAllTests() {
 		Iterable<Tests> testList = testsDao.findAll();
 		return testList;
 	}
-	
+
 	public Iterable<User> selectAllUsers() {
 		Iterable<User> userList = userDao.findAll();
 		return userList;
 	}
-	
+
 	public Iterable<UserAnswers> selectCurrentUserTest(Long userID, Long testID) {
-		Iterable<UserAnswers> questionList =userAnswerDao.getCurrentUserTestAnswers(testID, userID);
+		Iterable<UserAnswers> questionList = userAnswerDao.getCurrentUserTestAnswers(testID, userID);
 		return questionList;
 	}
-//	public Iterable<QuestionChoices> selectCurrentQuestionChoices(Long testID) {
-//		
-//		Iterable<QuestionChoices> choiceList = questionChoiceDao.findAll();
-//		Iterable<TestQuestions> questionList = testQuestions.getCurrentTestQuestions(testID);
-//		
-//		for (TestQuestions testQuestions : questionList) {
-//			for (QuestionChoices questionChoices : choiceList) {
-//				if(testQuestions.getId()==questionChoices.getTestQuestion().getId()){
-//					Iterable<QuestionChoices>
-//				}
-//			}
-//		}
-//		return;
-//	}
-	
+
+	public Iterable<QuestionChoices> selectCurrentQuestionChoices(Long testID) {
+		List<QuestionChoices> choices = new ArrayList<QuestionChoices>();
+		Iterable<QuestionChoices> choiceList = questionChoiceDao.findAll();
+		Iterable<TestQuestions> questionList = testQuestions.getCurrentTestQuestions(testID);
+		for (TestQuestions testQuestions : questionList) {
+			for (QuestionChoices questionChoices : choiceList) {
+				if (testQuestions.getId() == questionChoices.getTestQuestion().getId()) {
+					choices.add(questionChoices);
+				}
+			}
+		}
+		return (Iterable<QuestionChoices>) choices;
+	}
+
 	@Autowired
 	UserAnswersDao userAnswerDao;
 	@Autowired
