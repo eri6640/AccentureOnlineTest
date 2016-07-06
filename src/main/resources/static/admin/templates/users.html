@@ -4,30 +4,20 @@
 <div class="row">
     <form ng-submit="addUser()">
 
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
             <h4>Add user</h4>
-            <hr>
-            <div class="input-group">
-                <span class="input-group-addon">E-mail</span>
-                <input type="text" class="form-control" ng-model="email" />
-            </div>
+            <hr>        
+            <input type="text" class="form-control" ng-model="email" placeholder="E-mail"/>            
+            <br /> 
+            <input type="text" class="form-control" ng-model="name" placeholder="Name" />
             <br />
-            <div class="input-group">
-                <span class="input-group-addon">Name</span>
-                <input type="text" class="form-control" ng-model="name" />
-            </div>
-            <br />
-            <div class="input-group">
-                <span class="input-group-addon">Surname</span>
-                <input type="text" class="form-control" ng-model="surname" />
-            </div>
-
-            <div class="col-lg-6 col-md-6">
-                <div class="add_button">
-                    <input type="submit" value="Add user">
-                </div>
-            </div>
-        </div>
+                            
+            <input type="text" class="form-control" ng-model="surname" placeholder="Surname"/>
+            <input type="submit" value="Add user" class="btn btn-success  btn-block" style="margin:20px 0px 0px;">
+              
+                
+         </div>
+        
     </form>
 </div>
 
