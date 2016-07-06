@@ -35,7 +35,7 @@ public class AdminUtils{
 	}
 	
 	public Iterable<UserAnswers> selectCurrentUserTest(Long userID, Long testID) {
-		Iterable<UserAnswers> questionList =userAnswerDao.getCurrentUserTestAnswers(testID, userID);
+		Iterable<UserAnswers> questionList = userAnswerDao.getCurrentUserTestAnswers(testID, userID);
 		return questionList;
 	}
 //	public Iterable<QuestionChoices> selectCurrentQuestionChoices(Long testID) {

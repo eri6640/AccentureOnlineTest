@@ -49,6 +49,7 @@ public class UserAnswers {
 	@Column
 	private byte[] imageAnswer = null;
 
+	// 0-??? 1-started 2-pinned 3-done 4-fin
 	@Column
 	private int status;
 	

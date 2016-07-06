@@ -7,13 +7,9 @@
 		</div>
 		<div class="col-md-5" style="margin-top:4%;">
 			<h1 class="tests">All Tests</h1>
-			<form method="get">
-				<select name="select-list" id="testList" multiple class="form-control test-form"  onchange="if (this.selectedIndex>=0) description();">
-					<option value="maths">Math</option>
-					<option value="biol">Biology</option>
-					<option value="since">Science</option>
-					<option value="eng">English</option>
-					<option value="five">Social</option>
+			<form method="get" ng-submit"">
+				<select name="select-list" id="testList" multiple class="form-control test-form">
+					<option ng-repeat="test in test_list" value="asf" ng-click="testDescription()">{{test.title}}</option>
 				</select>
 				<div class="container-fluid" style="max-width:335px;">
 					<button type="submit" value="submit" class="btn btn-primary btn-lg btn-block">Start</button>

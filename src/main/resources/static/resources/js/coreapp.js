@@ -4,7 +4,7 @@ var app = angular.module( 'CoreAPP', [ 'ngRoute' ] );
 app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 	
 	$routeProvider.when('/home', {
-		controller : 'MainController',
+		controller : 'TestListController',
 		templateUrl : 'page/home.html'
 	}).when('/', {
 		redirectTo: '/home'
@@ -64,21 +64,28 @@ app.run( [ '$route', '$rootScope', '$location', function ( $route, $rootScope, $
 
 app.controller( 'MainController', function( $rootScope, $scope, $http, $location, $window ) {
 	
-	$scope.logout = function() {
-		
-		$http.get( "/data/auth/isloggedin" ).success( function ( data ) {
-			$scope.loggedIn = data;
-		});
-		
-		if( $scope.loggedIn ){
-			$http.get( "/data/auth/logout" ).success( function ( data ) {
-				$scope.loggedIn = data;
-			});
-		}
+});
 
-		$window.location.href = "/";
-		
+app.controller( 'TestListController', function( $rootScope, $scope, $http, $location, $window ) {
+	
+	if( $location.path() == '/login' ) return;
+	
+	$scope.test_list = null;
+	
+	$scope.getAvailableTests =  function( testId ) {
+		$http.get( "/data/tests/selectAvailableTests" ).success( function ( data ) {
+	
+			if( data ){
+				//$window.alert( data );
+				$scope.test_list = data;
+			}
+			else{
+				//$window.alert("false");
+			}
+		});
 	};
+	$scope.getAvailableTests();
+	
 	
 	$scope.testDescription = function( testId ) {
 		
@@ -92,11 +99,6 @@ app.controller( 'MainController', function( $rootScope, $scope, $http, $location
 		});
 		
 	};
-	
-	
-});
-
-app.controller( 'TestsController', function( $rootScope, $scope, $http, $location, $window ) {
 	
 });
 

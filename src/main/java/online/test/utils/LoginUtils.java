@@ -14,15 +14,13 @@ import online.test.models.dao.UserDao;
 public class LoginUtils {
 	
 	MainUtils utils = new MainUtils();
-
-	public String TokenName = "XSRF-TOKEN";
 	
 	public boolean isAdmin( HttpServletRequest request ){
 		
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
 		if( csrf == null ) return false;
 		
-		Cookie cookie = WebUtils.getCookie( request, TokenName );
+		Cookie cookie = WebUtils.getCookie( request, utils.TokenName );
 		String token = csrf.getToken();
 		
 		//if something is wrong with token or cookie, redirect to login page
@@ -52,7 +50,7 @@ public class LoginUtils {
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
 		if( csrf == null ) return false;
 		
-		Cookie cookie = WebUtils.getCookie( request, TokenName );
+		Cookie cookie = WebUtils.getCookie( request, utils.TokenName );
 		String token = csrf.getToken();
 		
 		//if something is wrong with token or cookie, redirect to login page
@@ -105,7 +103,7 @@ public class LoginUtils {
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
 		if( csrf == null ) return false;
 		
-		Cookie cookie = WebUtils.getCookie( request, TokenName );
+		Cookie cookie = WebUtils.getCookie( request, utils.TokenName );
 		String token = csrf.getToken();
 		
 		if ( cookie == null || token != null && ! token.equals( cookie.getValue() ) ) return false;
@@ -145,7 +143,7 @@ public class LoginUtils {
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
 		if( csrf == null ) return false;
 		
-		Cookie cookie = WebUtils.getCookie( request, TokenName );
+		Cookie cookie = WebUtils.getCookie( request, utils.TokenName );
 		String token = csrf.getToken();
 		
 		if ( cookie == null || token != null && ! token.equals( cookie.getValue() ) ) return false;
