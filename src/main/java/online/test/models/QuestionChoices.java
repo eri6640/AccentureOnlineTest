@@ -23,6 +23,8 @@ public class QuestionChoices {
 	@ManyToOne
 	@JoinColumn(name = "testQuestionID")
 	private TestQuestions testQuestion;
+	
+	public QuestionChoices(){}
 
 	public long getId() {
 		return id;
