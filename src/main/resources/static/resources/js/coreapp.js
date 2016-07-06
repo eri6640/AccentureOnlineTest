@@ -80,6 +80,19 @@ app.controller( 'MainController', function( $rootScope, $scope, $http, $location
 		
 	};
 	
+	$scope.testDescription = function( testId ) {
+		
+		$http.get( "/data/tests/getTest?testId=" + testId ).success( function ( data ) {
+			if( data ){
+				
+			}
+			else{
+				
+			}
+		});
+		
+	};
+	
 	
 });
 
@@ -138,71 +151,56 @@ app.controller( 'LoginController', function( $rootScope, $scope, $http, $locatio
 
 
 
-app.controller('ExampleController', ['$scope', '$interval',
-                                      function($scope, $interval) {
-    $scope.format = 'M/d/yy h:mm:ss a';
-    $scope.blood_1 = 100;
-    $scope.blood_2 = 120;
+app.controller( 'TimerController', [ '$scope', '$interval', '$window', function( $scope, $interval, $window ) {
+	$scope.timerTime = new Date().getTime();
+	$scope.timeleft = 0;
 
     var stop;
-    $scope.fight = function() {
-      // Don't start a new fight if we are already fighting
-      if ( angular.isDefined(stop) ) return;
+    var startTimer = function() {
 
-      stop = $interval(function() {
-        if ($scope.blood_1 > 0 && $scope.blood_2 > 0) {
-          $scope.blood_1 = $scope.blood_1 - 3;
-          $scope.blood_2 = $scope.blood_2 - 4;
-        } else {
-          $scope.stopFight();
-        }
-      }, 100);
+		if( angular.isDefined( stop ) ) return;
+	
+		stop = $interval( function() {
+			$scope.timeleft = ( new Date().getTime() - $scope.timerTime ) / 1000;
+			
+			if( $scope.timeleft >= 10 ) {
+				$scope.stopTimer();
+				
+				var confirmThis = $window.confirm("Press a button!");
+				if( confirmThis == true ) {
+					$window.alert("yes");
+				}
+				else {
+					$window.alert("false");
+				}
+			}
+		}, 1000);
     };
 
-    $scope.stopFight = function() {
-      if (angular.isDefined(stop)) {
-        $interval.cancel(stop);
-        stop = undefined;
-      }
+    $scope.stopTimer = function() {
+    	if( angular.isDefined( stop ) ) {
+    		$interval.cancel( stop );
+    		stop = undefined;
+    	}
     };
 
-    $scope.resetFight = function() {
-      $scope.blood_1 = 100;
-      $scope.blood_2 = 120;
+    $scope.resetTimer = function() {
+    	$scope.timerTime = new Date().getTime();
+    	$scope.stopTimer();
     };
 
     $scope.$on('$destroy', function() {
-      // Make sure that the interval is destroyed too
-      $scope.stopFight();
-    });
-  }])
-// Register the 'myCurrentTime' directive factory method.
-// We inject $interval and dateFilter service since the factory method is DI.
-.directive('myCurrentTime', ['$interval', 'dateFilter',
-  function($interval, dateFilter) {
-    // return the directive link function. (compile function not needed)
-    return function(scope, element, attrs) {
-      var format,  // date format
-          stopTime; // so that we can cancel the time updates
+    	$scope.stopTimer();
+	});
+    
+    startTimer();
+}]);
 
-      // used to update the UI
-      function updateTime() {
-        element.text(dateFilter(new Date(), format));
-      }
-
-      // watch the expression, and update the UI on change.
-      scope.$watch(attrs.myCurrentTime, function(value) {
-        format = value;
-        updateTime();
-      });
-
-      stopTime = $interval(updateTime, 1000);
-
-      // listen on DOM destroy (removal) event, and cancel the next UI update
-      // to prevent updating time after the DOM element was removed.
-      element.on('$destroy', function() {
-        $interval.cancel(stopTime);
-      });
-    }
-  }]);
+app.filter('secondsToDateTime', function() {
+    return function(seconds) {
+        var d = new Date(0,0,0,0,0,0,0);
+        d.setSeconds(seconds);
+        return d;
+    };
+});
 
