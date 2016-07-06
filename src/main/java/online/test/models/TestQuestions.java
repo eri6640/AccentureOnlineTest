@@ -12,6 +12,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "testQuestions")
 public class TestQuestions {
+	
+	
+	public TestQuestions() {
+		
+	}
 
 	public TestQuestions() {}
 	

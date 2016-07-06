@@ -8,7 +8,7 @@ app
 			}).when('/', {
 				redirectTo : '/home'
 			}).when('/users', {
-				controller : 'MainController',
+				controller : 'UserController',
 				templateUrl : '/admin/page/users.html'
 			}).when('/create-test', {
 				controller : 'MainController',
@@ -143,8 +143,7 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 	});
 });
 
-app
-		.controller(
+app.controller(
 				'UserTestController',
 				function($rootScope, $scope, $http, $location, $window) {
 					var urlBase = "";
@@ -177,7 +176,7 @@ app
 						
 
 						$http.get( "/data/tests/userAnswers?userID="+userId+"&testID="+testId ).success( function ( data ){
-							$scope.currentUserAnswers = data;s
+							$scope.currentUserAnswers = data;
 							$scope.success = { "message" : "Success" };
 						});
 						
@@ -186,32 +185,35 @@ app
 
 				});
 
-app.controller('UserController', function($rootScope, $scope, $http, $location,
-		$window) {
-	var urlBase = "";
-	$scope.toggle = true;
-	$scope.selection = [];
-	$scope.statuses = [ 'ACTIVE', 'COMPLETED' ];
-	$scope.priorities = [ 'HIGH', 'LOW', 'MEDIUM' ];
-	$http.defaults.headers.post["Content-Type"] = "application/json";
-	$http.get(urlBase + '/data/tests/getUsers').success(function(data) {
+app.controller( 'UserController', function( $rootScope, $scope, $http, $location, $window ) {
+	
+	$scope.loadUsers = function() { 
+		var urlBase = "";
+		$scope.toggle = true;
+		$scope.selection = [];
+		$scope.statuses = [ 'ACTIVE', 'COMPLETED' ];
+		$scope.priorities = [ 'HIGH', 'LOW', 'MEDIUM' ];
+		$http.defaults.headers.post["Content-Type"] = "application/json";
+		$http.get(urlBase + '/data/tests/getUsers').success( function(data) {
 
-		if (data != undefined) {
-			$scope.users = data;
-		} else {
-			$scope.users = [];
-		}
-	});
-
-	// //add a new task
-	// $scope.addTask = function addTask() {
-	// //Data from html page
-	// var data = $.param({
-	// name: $scope.name,
-	// surname: $scope.surname,
-	// email: $scope.email
-	// });
-	// alert(data);
-	// };
-
+			if (data != undefined) {
+				$scope.users = data;
+			} else {
+				$scope.users = [];
+			}
+		});
+	   };
+	
+	$scope.addUser = function() {
+		
+		$http.get( "/data/user/create?email="+$scope.email+"&name="+$scope.name+"&surname="+$scope.surname+"&admin_status=false" ).success( function(data) {
+		
+			$scope.loadUsers();
+			
+		});
+	};
+	
+	$scope.loadUsers();
+	
 });
+

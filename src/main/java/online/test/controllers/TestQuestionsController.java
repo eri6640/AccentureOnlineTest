@@ -23,7 +23,7 @@ public class TestQuestionsController {
 	
 	@RequestMapping("/data/testquestions/create")
 	@ResponseBody
-	public String addQuestion(TYPE type, String question, String date, Tests tests, User user, String answer,
+	public Boolean addQuestion(TYPE type, String question, String date, Tests tests, User user, String answer,
 				String multipleChoice, byte[] imageAnswer, String textAnswer){
 		 TestQuestions testQuestion = null;
 			try {
@@ -31,14 +31,15 @@ public class TestQuestionsController {
 				testQuestionsDao.save(testQuestion);
 			}
 			catch (Exception ex) {
-				return "Error adding answer: " + ex.toString();
+				return false;
+				//return "Error adding answer: " + ex.toString();
 			}
-			return "Answer succesfully added!";
+				return true;
 	 }
 	 
 	@RequestMapping("/data/testquestions/delete")
 	@ResponseBody
-	 public String removeQuestion(TYPE type, String question, String date, Tests tests, User user, String answer,
+	 public Boolean removeQuestion(TYPE type, String question, String date, Tests tests, User user, String answer,
 				String multipleChoice, byte[] imageAnswer, String textAnswer){
 		 TestQuestions testQuestion = null;
 			try {
@@ -46,9 +47,10 @@ public class TestQuestionsController {
 				testQuestionsDao.delete(testQuestion);
 			}
 			catch (Exception ex) {
-				return "Error deleting answer: " + ex.toString();
+				return false;
+				//return "Error deleting answer: " + ex.toString();
 			}
-			return "Answer succesfully deleted!";
+				return true;
 	 }
 	
 	  @Autowired

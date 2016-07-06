@@ -1,38 +1,42 @@
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs/jqc-1.12.3,dt-1.10.12/datatables.min.css"/>
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs/jqc-1.12.3,dt-1.10.12/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/u/bs/jqc-1.12.3,dt-1.10.12/datatables.min.js"></script>
 
 <div class="row">
+					<form ng-submit="addUser()">
+					
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <h4>Add user</h4>
                               <hr>
                        <div class="input-group">
   <span class="input-group-addon">E-mail</span>
-  <input type="text" class="form-control" placeholder="E-mail" />
+  <input type="text" class="form-control" ng-model="email" />
 </div>
 <br />
 <div class="input-group">
   <span class="input-group-addon">Name</span>
-  <input type="text" class="form-control" placeholder="Name"  />
+  <input type="text" class="form-control" ng-model="name"  />
 </div>
 <br />
 <div class="input-group">
   <span class="input-group-addon">Surname</span>
-  <input type="text" class="form-control"  placeholder="Surname"  />
-  
+  <input type="text" class="form-control"  ng-model="surname"  />
 </div>
+  
+	 <div class="col-lg-6 col-md-6">
+                        <div class="add_button">
+                         <input type="submit" value="Add user">
+                        </div>
+     </div>
+                   </div>
+                   </form>
                     </div>
                    
-                    <div class="col-lg-6 col-md-6">
-                        <div class="add_button">
-                        <a href="#" class="btn btn-success">Add</a>
-                        </div>
-                    </div>
+                   
 
-                </div>
+                
                 <!-- /. ROW  -->
                 <hr>
              <hr>
-           <div ng-controller="UserController">
            
             
                 <div class="row">
@@ -66,7 +70,4 @@
                     </div>
         
                 </div>
-                
-                </div>
                 	<script type="text/javascript" src="/admin/resources/js/jquery-1.10.2.js" charset="utf-8"></script>
-                
