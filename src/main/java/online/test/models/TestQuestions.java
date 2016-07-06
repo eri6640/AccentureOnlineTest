@@ -13,6 +13,8 @@ import javax.persistence.Table;
 @Table(name = "testQuestions")
 public class TestQuestions {
 
+	public TestQuestions() {}
+	
 	public TestQuestions(TYPE type, String question, String date, Tests tests, User user, String answer,
 			String multipleChoice, byte[] imageAnswer, String textAnswer) {
 		this.type = type;
