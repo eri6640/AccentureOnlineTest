@@ -20,12 +20,10 @@ public class TestQuestions {
 	
 	
 
-	public TestQuestions(TYPE type, String question, String date, Tests tests, User user, String answer,
+	public TestQuestions(TYPE type, String question, Tests tests, User user, String answer,
 			String multipleChoice, byte[] imageAnswer, String textAnswer) {
-		super();
 		this.type = type;
 		this.question = question;
-		this.date = date;
 		this.tests = tests;
 		this.user = user;
 		this.answer = answer;
@@ -59,9 +57,6 @@ public class TestQuestions {
 
 	@Column
 	private String question;
-
-	@Column
-	private String date = "01/01/2000";
 
 	@ManyToOne
 	@JoinColumn(name = "testsID")
@@ -114,14 +109,6 @@ public class TestQuestions {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
 	}
 
 	public TYPE getType() {
