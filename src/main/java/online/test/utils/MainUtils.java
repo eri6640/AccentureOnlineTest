@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class MainUtils {
+	
+	public String TokenName = "XSRF-TOKEN";
 
 	/**
 	 * isAjax  --> checks request....
