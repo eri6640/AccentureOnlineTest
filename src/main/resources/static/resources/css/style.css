@@ -85,3 +85,8 @@ video {
     position: static!important;
     margin:1.3% 0 1.3% 0;
 }
+
+#sampleBoard{
+	background-color: #fff;
+	touch-action: none; //For IE10+ and future browsers supporting touch-action property
+}

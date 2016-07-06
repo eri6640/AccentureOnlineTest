@@ -1,4 +1,4 @@
-package online.test.controllers;
+﻿package online.test.controllers;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -12,7 +12,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 @Controller
 public class MailController{
 	
-	//@Autowired
+	@Autowired
 	private JavaMailSender javaMailSender;
 
 	@RequestMapping("/sendMail")
