@@ -1,6 +1,10 @@
 body {
 	background-image: url("../img/background_6.jpg")!important;
-	background-size: cover!important;
+	 background: url(images/bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
     margin: 0;
     padding: 0;
 }
@@ -39,6 +43,7 @@ video {
     text-align: center;
     font-size: 48px;
     margin-top: 5%;
+    font-family: 'Suez One', serif;
 }
 
 .form-signin {
@@ -64,6 +69,9 @@ video {
 	font-size: 20px;
 	text-align: center;
 	display: none;
+ 	font-family: 'Suez One', bold;
+	padding-left: 3%;
+	padding-right: 3%;
 
  /* Fallback for web browsers that don't support RGBa */
     background-color: rgb(0, 0, 0);
@@ -77,6 +85,12 @@ video {
 
 #descr span {
 	font-size: 50px;
+
+}
+
+#descr p {
+	font-family: 'Lato', italic;
+
 }
 
 .btn:hover {
