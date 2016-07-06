@@ -11,7 +11,7 @@ app
 				controller : 'UserController',
 				templateUrl : '/admin/page/users.html'
 			}).when('/create-test', {
-				controller : 'MainController',
+				controller : 'TestsController',
 				templateUrl : '/admin/page/create_test.html'
 			}).when('/user-tests', {
 				controller : 'MainController',
@@ -71,10 +71,7 @@ app.controller('MainController', function($rootScope, $scope, $http, $location,
 
 });
 
-app.controller('TestsController', function($rootScope, $scope, $http,
-		$location, $window) {
 
-});
 
 app.controller('LoginController', function($rootScope, $scope, $http,
 		$location, $window) {
@@ -233,22 +230,25 @@ app.controller('UserTestController', function($rootScope, $scope, $http,
 app.controller( 'UserController', function( $rootScope, $scope, $http, $location, $window ) {
 	
 		$scope.loadUsers = function() { 
-		var urlBase = "";
-		$scope.toggle = true;
-		$scope.selection = [];
-		$scope.statuses = [ 'ACTIVE', 'COMPLETED' ];
-		$scope.priorities = [ 'HIGH', 'LOW', 'MEDIUM' ];
-		$http.defaults.headers.post["Content-Type"] = "application/json";
-		$http.get(urlBase + '/data/tests/getUsers').success( function(data) {
-
-			if (data != undefined) {
-				$scope.users = data;
-			} else {
-				$scope.users = [];
-			}
-		});
+			var urlBase = "";
+			$scope.toggle = true;
+			$scope.selection = [];
+			$scope.statuses = [ 'ACTIVE', 'COMPLETED' ];
+			$scope.priorities = [ 'HIGH', 'LOW', 'MEDIUM' ];
+			$http.defaults.headers.post["Content-Type"] = "application/json";
+			$http.get(urlBase + '/data/tests/getUsers').success( function(data) {
+	
+				if (data != undefined) {
+					$scope.users = data;
+				} else {
+					$scope.users = [];
+				}
+			});
 	   };
 	
+	   $scope.loadUsers();
+	   
+	  
 	$scope.addUser = function() {
 		
 		$http.get( "/data/user/create?email="+$scope.email+"&name="+$scope.name+"&surname="+$scope.surname+"&admin_status=false" ).success( function(data) {
@@ -270,5 +270,36 @@ app.controller( 'UserController', function( $rootScope, $scope, $http, $location
 });
 	
 
+app.controller( 'TestsController', function( $rootScope, $scope, $http, $location, $window ) {
+	
+	$scope.loadTests = function() { 
+		var urlBase = "";
+		$scope.toggle = true;
+		$scope.selection = [];
+		$scope.statuses = [ 'ACTIVE', 'COMPLETED' ];
+		$scope.priorities = [ 'HIGH', 'LOW', 'MEDIUM' ];
+		$http.defaults.headers.post["Content-Type"] = "application/json";
+		$http.get(urlBase + '/data/tests/selectallTests').success(function(data) {
 
+			if (data != undefined) {
+				$scope.tests = data;
+			} else {
+				$scope.tests = [];
+			}
+		});
+   };
+
+   $scope.loadTests();
+   
+  
+$scope.addTest = function() {
+	
+	
+};
+
+$scope.del = function(id) {
+	
+};
+
+});
 
