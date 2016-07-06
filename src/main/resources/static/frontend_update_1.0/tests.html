@@ -8,59 +8,36 @@
       <meta name="author" content="">
       <link rel="icon" href="img/favicon.ico">
       <title>Accenture Tests</title>
-      <!-- Bootstrap core CSS -->
       <link href="css/bootstrap.min.css" rel="stylesheet">
-      <!-- Custom styles for this template -->
       <link href="css/style.css" rel="stylesheet">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
- 	  <link href="css/newstyle.css" rel="stylesheet">
- 	  <script src="js/descriptionLogic.js"></script>
-      <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shivs.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-       <style>
-		body {
-		background-image: url("img/background_6.jpg");
-		background-size: cover;
-		}
-		</style> 
+      <script src="js/descriptionLogic.js"></script>
    </head>
    <body>
-   <div id="leftBlock">
-	<div id="descr"></div>
-   </div>
-	<div class="rightBlock">
       <div class="container-fluid">
-         <!-- <video autoplay loop>
-            <source src="img/bg_video.mp4" type="video/mp4">
-         </video> -->
+         <div class="row">
+            <div class="col-md-7">
+               <div id="leftBlock">
+                  <div id="descr"></div>
+               </div>
+            </div>
+            <div class="col-md-5" style="margin-top:4%;">
+               <h1 class="tests">All Tests</h1>
+               <form method="get">
+                  <select name="select-list" id="testList" multiple class="form-control test-form"  onchange="if (this.selectedIndex>=0) description();">
+                     <option value="maths">Math</option>
+                     <option value="biol">Biology</option>
+                     <option value="since">Science</option>
+                     <option value="eng">English</option>
+                     <option value="five">Social</option>
+                  </select>
+                  <div class="container-fluid" style="max-width:335px;">
+                     <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block">Start</button>
+                  </div>
+               </form>
+            </div>
+         </div>
       </div>
-	
-      <div class="container-fluid">
-            <h1 class="tests">All Tests</h1>
-            <form method="get">
-
-                <select name="select-list" id="testList" multiple class="form-control test-form"  onchange="if (this.selectedIndex>=0) description();">
-                    <option value="maths">Math</option>
-                    <option value="biol">Biology</option>
-                    <option value="since">Science</option>
-                    <option value="eng">English</option>
-                    <option value="five">Social</option>
-                </select>
-
-                <div class="container-fluid" style="max-width:335px;">
-                    <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block">Start</button>
-                </div>
-            </form>
-      </div>
-</div>
-
-
-
-
-
    </body>
-   
 </html>

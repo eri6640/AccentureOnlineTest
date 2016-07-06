@@ -1,8 +1,10 @@
 body {
+	background-image: url("../img/background_6.jpg")!important;
+	background-size: cover!important;
     margin: 0;
     padding: 0;
-
 }
+
 video {
     top: 50%;
     left: 50%;
@@ -54,61 +56,17 @@ video {
 	position: unset;
 }
 
-/* -------------- */
-
-
-
-.container-fluid {
-	margin-top: 8%;
-	
-	
-	
-}
-.rightBlock {
-	width: 50%; 
-	height: 100vh;
-	margin: 0 50%;
-	
-	/*border: 2px solid black;*/
-	
-	}
-	
-	body {
-	      background-image: url("img/pattern_1.png");
-	      /*border: 2px solid red;*/
-	}
-#leftBlock {
-	position: absolute;
-	/*border: 2px solid green;*/
-	width: 50%; 
-	height: 100vh;
-	margin: 0 0;
-	
-	
-	
-}
-
 #descr {
-	width: 80%;
-	height: 405px;;
-	Position: relative;
 	background-color: white;
-	margin: 20% auto;
+	margin: 15% 0;
+	padding-bottom: 4%;
 	color: black;
 	font-size: 20px;
 	text-align: center;
-	opacity: 0.5;
-	/* visibility: hidden; */
+	opacity: 0.6;
 	display: none;
 }
+
 #descr span {
 	font-size: 50px;
-}
-#descr ul {
-    width: 10%;
-    margin: 0;
-}
-
-h1.tests {
-	
 }
