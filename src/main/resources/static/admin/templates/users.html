@@ -14,7 +14,8 @@
                             
             <input type="text" class="form-control" ng-model="surname" placeholder="Surname"/>
             <input type="submit" value="Add user" class="btn btn-success  btn-block" style="margin:20px 0px 0px;">
-              
+            
+            <div ng-show="showInfoUsers" class="alert alert-info">{{userInfo}}</div>  
                 
          </div>
         

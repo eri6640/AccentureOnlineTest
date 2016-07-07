@@ -17,7 +17,8 @@
            </textarea>          
            <br />               
            <input type="submit" value="Add test" class="btn btn-success  btn-block" ng-click="addTest()" style="margin:20px 0px 0px;">
-                              
+           
+           <div ng-show="showInfoTests" class="alert alert-info">{{testInfo}}</div>        
          </div>
         
     </form>
@@ -54,8 +55,20 @@
 <!-- /. ROW  -->
 <hr>
 
-
+  
 <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7">
+	<div ng-show="showAlertChoices" class="alert alert-info">{{choiceWarning}}
+ 	</div>
+	<h4>Question Type</h4>
+	<select ng-model="type" ng-change="changedValue(type)" >
+		<option value="P">Picture</option>
+		<option value="T">Plain Text</option>
+		<option value="M">Multiple Choices</option>
+		<option value="S">Single Choices</option>
+	</select>
+	
+	<hr>
+	
 	<input type="text" class="form-control" ng-model="Question"
 		placeholder="Question" /> 
 		<select name="select-list" id="testList"
@@ -69,13 +82,8 @@
 </div>
 <!-- /. ROW  -->
 <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
-<h4>Question Type</h4>
-<select ng-model="type" ng-change="changedValue(type)" >
-	<option value="P">Picture</option>
-	<option value="T">Plain Text</option>
-	<option value="M">Multiple Choices</option>
-	<option value="S">Single Choices</option>
-</select> 
+		<div ng-show="showOption">
+		
 		<input style="margin-top:40px;" type="text" class="form-control" ng-model="option1" placeholder="Option" />
 		<input type="text" class="form-control" ng-model="option2" placeholder="Option" />
 		<input type="text" class="form-control" ng-model="option3"placeholder="Option" />
@@ -84,7 +92,7 @@
 		<button type="button" class="btn btn-primary"
 		style="margin-top: 20px;margin-bottom: 20px; margin-right: 350px; text-decoration: none; color: white;"
 		ng-click="AddChoice()">Add Choices</button>
-
-</div>>
+	</div>	
+</div>
 <script type="text/javascript"src="/admin/resources/js/jquery-1.10.2.js" charset="utf-8"></script>
 
