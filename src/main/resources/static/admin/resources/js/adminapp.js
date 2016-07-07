@@ -278,10 +278,12 @@ app.controller( 'UserController', function( $rootScope, $scope, $http, $location
 
 app.controller( 'TestsController', function( $rootScope, $scope, $http, $location, $window ) {
 	
+	var thisTestID;
+	var thisUserID;
+	var thisQuestionID;
+	
 	$scope.loadTests = function() { 
-		var thisTestID;
-		var thisUserID;
-		var thisQuestionID;
+		
 		var urlBase = "";
 		$scope.toggle = true;
 		$scope.selection = [];
@@ -325,7 +327,7 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
 		
 	};
 	
-$scope.Add = function(test) {
+$scope.AddTestQuestion = function(test) {
 		thisTestID=test.id;
 		thisUserID=test.user.id;
 		var testId =test.id;
@@ -355,7 +357,6 @@ $scope.Add = function(test) {
 	};
 	
 	$scope.getQuestionID = function(question){thisQuestionID=question.id;
-	alert(thisQuestionID);
 	}
 	
 	$scope.AddChoice = function() {
@@ -370,6 +371,21 @@ $scope.Add = function(test) {
 			alert("CAN'T ");
 		});
 	};
-
+	
+	$scope.changedValue = function(item){ 
+		
+	    var questionType = item;
+	 
+	    $http.get("/data/tests/setQuestionType?questionType=" + questionType +"&questionID=" + thisQuestionID).success(function(data) 
+				{
+					if(data){
+					}else{
+						alert("CANT Create!");
+					}
+				}).error(function() {
+					alert("CANT Create!");	
+		});
+	    
+	  };
 });
 

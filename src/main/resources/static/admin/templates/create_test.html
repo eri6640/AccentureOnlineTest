@@ -45,7 +45,7 @@
 					<td>{{test.id}}</td>
 					<td>{{test.title}}</td>
 					<td>{{test.date}}</td>
-					<td><button type="button" ng-click="Add(test)"
+					<td><button type="button" ng-click="AddTestQuestion(test)"
 							style="text-decoration: none; color: white; background-color: #428bca; padding: 4px; border-radius: 28px;">Add</button></td>
 					<td><button type="button" class="btn btn-danger"
 							ng-click="del(test.id)">Delete</button></td>
@@ -69,7 +69,7 @@
 <!-- /. ROW  -->
 <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
 <h4>Question Type</h4>
-<select  name="select-list" id="testList" multipleclass="form-control test-form">
+<select ng-model="type" ng-change="changedValue(type)" >
 	<option value="P">Picture</option>
 	<option value="T">Plain Text</option>
 	<option value="M">Multiple Choices</option>
