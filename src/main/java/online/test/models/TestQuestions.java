@@ -114,6 +114,7 @@ public class TestQuestions {
 		this.type = type;
 	}
 
+
 	public String getAnswer() {
 		return answer;
 	}
