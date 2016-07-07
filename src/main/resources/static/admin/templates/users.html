@@ -14,7 +14,8 @@
                             
             <input type="text" class="form-control" ng-model="surname" placeholder="Surname"/>
             <input type="submit" value="Add user" class="btn btn-success  btn-block" style="margin:20px 0px 0px;">
-              
+            
+            <div ng-show="showInfoUsers" class="alert alert-info">{{userInfo}}</div>  
                 
          </div>
         
@@ -46,7 +47,7 @@
                   <td>{{user.name}}</td>
                   <td>{{user.surname}}</td>
                   <td>{{user.email}}</td>
-                  <td><button type="button" ng-click="del(user.id)" class="btn btn-danger">Delete</button></td>
+                  <td><button type="button" ng-click="delUser(user.id)" class="btn btn-danger">Delete</button></td>
                </tr>
             </tbody>
          </table>
