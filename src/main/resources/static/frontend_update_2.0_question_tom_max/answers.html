@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="plunker" ng-controller='headController' >
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="img/favicon.ico">
+      <title>Accenture Tests</title>
+      <!-- Bootstrap core CSS -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Custom styles for this template -->
+      <link id="pagestyle" href="css/style.css" rel="stylesheet">
+	  
+	  
+      <!-- Jquery library and core -->
+      <script src="http://code.jquery.com/jquery.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+      <!-- Users javascripts&CSS plugins -->
+	  <script type="application/javascript" src="js/styleChange.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/userPlugins.js"></script>
+      <link rel="stylesheet" type="text/css" href="css/rocanvas.css">
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Suez One">
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+<!--<link rel="stylesheet" type="text/css" href="css/style3.css">-->
+ <script>document.write('<base href="' + document.location + '" />');</script>
+  <link rel="stylesheet" ng-href="{{stylePath}}">
+
+  <script src="http://code.angularjs.org/1.3.6/angular.js"></script>
+  <script src="app.js"></script>
+
+
+
+   </head>
+   <body ng-controller="MainCtrl">
+  <button id="stylesheet2" ng-click="changePath()">Whyte style</button>
+  <button id="stylesheet1" ng-click="changePath2()">Transparent style</button>
+      <div class="container-fluid">
+
+      </div>
+
+      <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <h1 style="font-size:60px">Test Name</h1>
+            </div>
+
+            <div class="col-md-12">
+                <div id="timerPlace"></div>
+            </div>
+
+            <div class="col-md-12">
+            <!-- width: <value> %. Will be dynamic. -->
+                <div id="myProgressbar" class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                    <span class="sr-only"<value>% Complete</span>
+                  </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-12">
+              <h1 class="question">Where is your dog?</h1>
+                <form action="" method="GET" class="question-form">
+
+                  <fieldset class="form-group">
+                      <h4>Single Select</h4>
+                     <div class="radio">
+                        <label><input type="radio" name="radio">Option 1</label>
+                      </div>
+                      <div class="radio">
+                        <label><input type="radio" name="radio">Option 2</label>
+                      </div>
+                      <div class="radio">
+                        <label><input type="radio" name="radio">Option 3</label>
+                      </div>
+                      <div class="radio">
+                        <label><input type="radio" name="radio">Option 4</label>
+                      </div>
+                      <div class="radio">
+                        <label><input type="radio" name="radio">Option 5</label>
+                      </div>
+                  </fieldset>
+-------------------
+                  <fieldset class="form-group">
+                      <h4>Multi Select</h4>
+                 <div class="checkbox">
+                        <label><input type="checkbox" name="checkbox">Option 1</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" name="checkbox">Option 2</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" name="checkbox">Option 3</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" name="checkbox">Option 4</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" name="checkbox">Option 5</label>
+                      </div>
+                  </fieldset>
+
+                  <fieldset class="form-group">
+                    <label for="exampleTextarea"><h4>Text select</h4></label>
+                    <textarea name="text_choice" class="form-control" id="exampleTextarea" rows="10" placeholder="Your answer"></textarea>
+                  </fieldset>
+
+
+                  <fieldset class="form-group">
+                      <h4>Drawing table</h4>
+                      
+                      <canvas height="214" width="570" id="sampleBoard"></canvas> 
+                      <script type="text/javascript">
+                          var r = new RoCanvas;            
+                          r.RO('sampleBoard');
+                      </script>
+                      <button type="button" style="float:right" class="btn btn-success" onclick="SaveImageAsURL();">Get Link</button>
+                  </fieldset>
+
+                    <button type="button" class="btn btn-primary">Next</button>
+                </form>
+
+            </div>
+
+        </div>
+      </div>
+   </body>
+   <script> /*
+function swapStyleSheet(sheet) {
+    document.getElementById("pagestyle").setAttribute("href", sheet);  
+}
+
+function initate() {
+    var style1 = document.getElementById("stylesheet1");
+    var style2 = document.getElementById("stylesheet2");
+
+    style1.onclick = function () { swapStyleSheet("css/style.css") };
+style2.onclick = function () { swapStyleSheet("css/style2.css"); };
+}
+
+window.onload = initate;*/
+</script>
+</html>
+

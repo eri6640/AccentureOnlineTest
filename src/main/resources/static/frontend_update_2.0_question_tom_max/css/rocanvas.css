@@ -1,0 +1,4 @@
+#sampleBoard{
+	background-color: #fff;
+	touch-action: none; //For IE10+ and future browsers supporting touch-action property
+}
