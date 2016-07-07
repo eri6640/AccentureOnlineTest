@@ -371,16 +371,25 @@ $scope.AddTestQuestion = function(test) {
 			alert("CAN'T ");
 		});
 	};
+
+	$scope.showOption = false;
 	
 	$scope.changedValue = function(item){ 
 		
 	    var questionType = item;
 	 
+	    if( item == 'M' || item == 'S' ){
+	    	$scope.showOption = true;
+	    }
+	    else{
+	    	$scope.showOption = false;
+	    }
+	    
+	    
 	    $http.get("/data/tests/setQuestionType?questionType=" + questionType +"&questionID=" + thisQuestionID).success(function(data) 
 				{
 					if(data){
 					}else{
-						alert("CANT Create!");
 					}
 				}).error(function() {
 					alert("CANT Create!");	

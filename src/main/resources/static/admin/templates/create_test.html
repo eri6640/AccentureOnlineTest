@@ -74,15 +74,16 @@
 	<option value="T">Plain Text</option>
 	<option value="M">Multiple Choices</option>
 	<option value="S">Single Choices</option>
-</select> 
+</select>
+	<div ng-show="showOption">
 		<input style="margin-top:40px;" type="text" class="form-control" ng-model="option1" placeholder="Option" />
 		<input type="text" class="form-control" ng-model="option2" placeholder="Option" />
 		<input type="text" class="form-control" ng-model="option3"placeholder="Option" />
 		<input type="text" class="form-control" ng-model="option4"placeholder="Option" />
-		
+	</div>	
 		<button type="button" class="btn btn-primary"
 		style="margin-top: 20px;margin-bottom: 20px; margin-right: 350px; text-decoration: none; color: white;"
 		ng-click="AddChoice()">Add Choices</button>
-
+	
 </div>>
 <script type="text/javascript"src="/admin/resources/js/jquery-1.10.2.js" charset="utf-8"></script>
