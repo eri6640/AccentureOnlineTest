@@ -349,32 +349,56 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
 
 
 	
-
+	$scope.showTestQuestions=false;
+	$scope.activeTest;
+	
 	$scope.AddTestQuestion = function(test) {
+		activeTest=test;
 		thisTestID=test.id;
 		thisUserID=test.user.id;
 		var testId =test.id;
 		$http.get("/data/tests/getTestsQuestions?testID=" + testId).success(
 				function(data) {
 					$scope.questions= data;
+					$scope.showTestQuestions=true;
 				}).error(function() {
 		});
 		
+	};
+	$scope.showOption = false;
+	
+	var questionType;	
+	
+	$scope.changedValue = function(item){ 
+		questionType=item;	
+		
+	       
+	    if( item == 1 || item == 2 ){
+	    	$scope.showOption = true;
+	    }
+	    else{
+	    	$scope.showOption = false;
+	    }
 	};
 	
 	$scope.AddQuestion = function() {
 		$scope.Question;
 		
+		
+		
 		if($scope.Question==null || $scope.Question=="")
 		{$scope.showAlertChoices=true;
 		$scope.choiceWarning="No question written!";
 		}else{
-		$http.get("/data/tests/addQuestion?testID=" + thisTestID +"&userID="+thisUserID+"&question="+$scope.Question )
+		$http.get("/data/tests/addQuestion?type="+questionType+"&testID=" + thisTestID +"&userID="+thisUserID+"&question="+$scope.Question )
 		.success(function(data) {
 			if(data){
-				alert("Created!");
+				$scope.showAlertChoices=true;
+				$scope.choiceWarning="Question created!";
+				$scope.AddTestQuestion(activeTest);
 			}else{
-				alert("CANT Create!");
+				$scope.showAlertChoices=true;
+				$scope.choiceWarning="Can't create question!";
 			};
 		}).error(function() {
 			$scope.showAlertChoices=true;
@@ -403,29 +427,5 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
 		});
 	};
 	
-	$scope.showOption = false;
 	
-	$scope.changedValue = function(item){ 
-		
-		
-	    var questionType = item;
-	    
-	    if( item == 1 || item == 2 ){
-    	$scope.showOption = true;
-	    }
-	    else{
-	    	$scope.showOption = false;
-	    }
-	 
-	    $http.get("/data/tests/setQuestionType?questionType=" + questionType +"&questionID=" + thisQuestionID).success(function(data) 
-				{
-					if(data){
-					}else{
-						//something
-					}
-				}).error(function() {
-					alert("CANT Create!");	
-		});
-	    
-	  };
 });
