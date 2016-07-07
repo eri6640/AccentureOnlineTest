@@ -42,6 +42,7 @@ public class TestsController {
 	
 	@RequestMapping("/data/tests/create")
 	@ResponseBody
+
 	public Boolean addTest(String title, long userID, String description){
 		Tests test = null;
 		try {
@@ -57,6 +58,7 @@ public class TestsController {
 	
 	@RequestMapping("/data/tests/remove")
 	@ResponseBody
+
 	public Boolean removeTest(long id){
 		Tests test = null;
 		try {
