@@ -264,7 +264,7 @@ app.controller( 'UserController', function( $rootScope, $scope, $http, $location
 		});
 	};
 	
-	$scope.del = function(id) {
+	$scope.delUser = function(id) {
 		
 		$http.get( "/data/user/delete?id=" + id).success( function(data) {
 		
@@ -326,8 +326,16 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
 	};
    
 
-	$scope.del = function(id) {
-		
+	$scope.delTest = function(id) {
+		var urlBase = "";
+		$scope.toggle = true;
+		$scope.selection = [];
+		$scope.statuses = [ 'ACTIVE', 'COMPLETED' ];
+		$scope.priorities = [ 'HIGH', 'LOW', 'MEDIUM' ];
+		$http.defaults.headers.post["Content-Type"] = "application/json";
+		$http.get(urlBase + '/data/tests/remove?id='+id).success(function(data) {
+			$scope.loadTests();
+		});
 	};
 
 
