@@ -1,17 +1,5 @@
 <fieldset class="form-group">
-	<div class="radio">
-		<label><input type="radio" name="radio">Option 1</label>
-	</div>
-	<div class="radio">
-		<label><input type="radio" name="radio">Option 2</label>
-	</div>
-	<div class="radio">
-		<label><input type="radio" name="radio">Option 3</label>
-	</div>
-	<div class="radio">
-		<label><input type="radio" name="radio">Option 4</label>
-	</div>
-	<div class="radio">
-		<label><input type="radio" name="radio">Option 5</label>
+	<div class="radio" ng-repeat="answer in answers">
+		<label><input type="radio" name="radio" data-ng-click="selectRatio(answer.id)" ng-model="questionAnswer">{{answer.questionOption}}</label>
 	</div>
 </fieldset>

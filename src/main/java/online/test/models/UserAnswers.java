@@ -17,13 +17,13 @@ public class UserAnswers {
 
 	public UserAnswers() {}
 
-	public UserAnswers(TestQuestions testsQuestions, Tests tests, User user, String answer, byte[] imageAnswer) {
+	public UserAnswers( TestQuestions testsQuestions, Tests tests, User user, String answer, byte[] imageAnswer, int status ) {
 		this.testsQuestions = testsQuestions;
 		this.tests = tests;
 		this.user = user;
 		this.answer = answer;
 		this.imageAnswer = imageAnswer;
-		this.status = 0;
+		this.status = status;
 		this.posted = System.currentTimeMillis();
 	}
 

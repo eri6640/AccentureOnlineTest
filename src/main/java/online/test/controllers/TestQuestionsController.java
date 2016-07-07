@@ -1,9 +1,11 @@
 package online.test.controllers;
 
 
+import online.test.models.QuestionChoices;
 import online.test.models.TestQuestions;
 import online.test.models.Tests;
 import online.test.models.User;
+import online.test.models.dao.QuestionChoicesDao;
 import online.test.models.dao.TestQuestionsDao;
 import online.test.models.dao.TestsDao;
 import online.test.models.dao.UserAnswersDao;
@@ -35,6 +37,8 @@ public class TestQuestionsController {
 	private UserAnswersDao userAnswersDao;
 	@Autowired
 	private TestQuestionsDao testQuestionsDao;
+	@Autowired
+	private QuestionChoicesDao questionChoicesDao;
 	
 	MainUtils mainUtils = new MainUtils();
 	
@@ -130,7 +134,28 @@ public class TestQuestionsController {
 		model.put( "question", question);
 		
 		return model;
-	}	  
+	}
+	
+	
+	@RequestMapping("/data/tests/getQuestionChoices")
+	@ResponseBody
+	public Iterable<QuestionChoices> getQuestionChoices( @RequestParam("questionId") String questionId_string, HttpServletRequest request ) {
+		
+		int question_id = 0;
+		
+		try{
+			question_id = Integer.parseInt( questionId_string );
+		}
+		catch ( Exception error ){
+			question_id = 0;
+		}
+		
+		if( question_id <= 0 ) return null;
+		
+		Iterable<QuestionChoices> list = questionChoicesDao.getCurrentTestQuestions( (long) question_id );
+		return list;
+		
+	}
 	 
 	 
 } //TestsQuestionsController end

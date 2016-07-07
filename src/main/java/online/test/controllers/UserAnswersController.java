@@ -22,35 +22,6 @@ public class UserAnswersController {
 	public Iterable<UserAnswers> selectAll() {
 		Iterable<UserAnswers> list = userAnswersDao.findAll();
 		return list;
-	} 
-	
-	@RequestMapping("/data/useranswers/create")
-	@ResponseBody
-	public Boolean addAnswer(TestQuestions testsQuestions, Tests tests, User user, String answer, byte[] imageAnswer) {
-		UserAnswers questionAnswer = null;
-		try {
-			questionAnswer = new UserAnswers(testsQuestions, tests, user, answer, imageAnswer);
-			userAnswersDao.save(questionAnswer);
-		}
-		catch (Exception ex) {
-			return false;
-			//return "Error adding answer: " + ex.toString();
-		}
-		return false;
-	}
-	
-	@RequestMapping("/data/useranswers/delete")
-	@ResponseBody
-	public Boolean removeAnswer(TestQuestions testsQuestions, Tests tests, User user, String answer, byte[] imageAnswer) {
-		try {
-			UserAnswers questionAnswer = new UserAnswers(testsQuestions, tests, user, answer, imageAnswer);
-			userAnswersDao.delete(questionAnswer);
-		}
-		catch (Exception ex) {
-			return false;
-			//return "Error deleting the answer: " + ex.toString();
-		}
-		return true;
 	}
 	
 	@Autowired  
