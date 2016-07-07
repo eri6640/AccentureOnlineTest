@@ -32,10 +32,17 @@ public class Tests {
 	
 	public Tests() {}
 
-	public Tests(String title, User user ) {
+	public Tests(String title, User user, String description) {
 		this.title = title;
 		this.user = user;
-		this.created = System.currentTimeMillis();
+		this.description = description;
+		created=System.currentTimeMillis();
+	}
+	
+	
+
+	public Tests(long id) {
+		this.id = id;
 	}
 
 	public long getId() {
