@@ -56,9 +56,15 @@
 <hr>
 
   
-<div class="col-lg-6 col-md-6 col-sm-7 col-xs-7">
+<div ng-show="showTestQuestions" class="col-lg-6 col-md-6 col-sm-7 col-xs-7">
 	<div ng-show="showAlertChoices" class="alert alert-info">{{choiceWarning}}
  	</div>
+ 	
+ 	<input type="text" class="form-control" ng-model="Question"
+		placeholder="Question" /> 
+		
+	<hr>
+	
 	<h4>Question Type</h4>
 	<select ng-model="type" ng-change="changedValue(type)" >
 		<option value="4">Picture</option>
@@ -69,8 +75,7 @@
 	
 	<hr>
 	
-	<input type="text" class="form-control" ng-model="Question"
-		placeholder="Question" /> 
+	
 		<select name="select-list" id="testList"
 		multiple class="form-control test-form">
 		<option  ng-repeat="question in questions" value="{{question.id}}" ng-click="getQuestionID( question )">{{question.question}}</option>

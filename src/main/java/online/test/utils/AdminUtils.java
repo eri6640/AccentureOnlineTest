@@ -50,12 +50,7 @@ public class AdminUtils{
 		questionChoiceDao.delete(choiceID);
 	}
 	
-	public void updateQuestion(int questionType, Long questionID) {
-		TestQuestions testQuestion = testQuestionsDao.findOne(questionID);
-		testQuestion.setType(questionType);
-		testQuestionsDao.save(testQuestion);
-	}
-
+	
 	public void deleteQuestion(Long questionID) {
 		testQuestionsDao.delete(questionID);
 	}
@@ -65,9 +60,9 @@ public class AdminUtils{
 		return userTestList;
 	}
 
-	public void addQuestion(Long testID, Long userID, String question) {
+	public void addQuestion(int type, Long testID, Long userID, String question) {
 
-		TestQuestions testQuestions = new TestQuestions(0, question, testsDao.findById(testID),
+		TestQuestions testQuestions = new TestQuestions(type, question, testsDao.findById(testID),
 				userDao.findById(userID), null, null, null, null);
 		testQuestionsDao.save(testQuestions);
 	}
