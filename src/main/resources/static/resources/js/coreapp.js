@@ -83,20 +83,39 @@ app.controller( 'TestListController', function( $rootScope, $scope, $http, $loca
 		
 	};
 	
-	$scope.startTest = function( testId ) {
+	$scope.startTest = function() {
 		
-		$http.get( "/data/tests/startTest?testId=" + testId ).success( function ( data ) {
+		if( $scope.selectedTest ) {
 			
-			if( data ){
-				//parmetam uz atbilzu lapu
-			}
-			else{
-				//atjaunojam esosho + izvadam zinju, ka ir jau sakts vai izpildits attiecigais tests
-			}
-			
-		});
+			$http.get( "/data/tests/getTestInProgress" ).success( function ( data ) {
+				
+				if( ! data ){
+					$http.get( "/data/tests/startTest?testId=" + $scope.selectedTest ).success( function ( data ) {
+						
+						if( data ){
+							$window.location.href = "/#/question";
+						}
+						else{
+							$window.alert("izveletais tekts jau izpildits");
+						}
+						
+					});
+				}
+				else{
+					//jau ir tests progressa
+					$window.alert("tests jau progressaa");
+					$window.location.href = "/#/question";
+				}
+				
+			});
+		}
+		else{
+			//nav izveletes neviens tests
+			$window.alert("nav nekas izveletes");
+		}
 		
 	};
+	
 	
 });
 
@@ -108,6 +127,19 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 			
 			if( data ){
 				$scope.question = data.question;
+
+				$http.get( "/data/tests/getQuestionChoices?questionId=" + $scope.question.id ).success( function ( data ) {
+					
+					if( data ){
+						$scope.answers = data;
+					}
+					else{
+						//metam atpakalj uz izvelni
+						$window.location.href = "/";
+					}
+					
+				});
+				
 			}
 			else{
 				//paradam, ka visi jautajumi ir izpilditi
@@ -129,6 +161,36 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 		}
 		
 	});
+	
+	$scope.selectRatio =  function( value ) {
+		$scope.selectedData = value;
+	}
+	
+	
+	$scope.submitQuestion = function( question_type ) {
+		
+		if( question_type == 1 ){
+			if( $scope.selectedData ){
+				$window.alert( $scope.selectedData );
+			}
+			else{
+				$window.alert("nav sniegta atbilde!");
+			}
+		}
+		else if( question_type == 2 ){
+			
+		}
+		else if( question_type == 3 ){
+			
+		}
+		else if( question_type == 4 ){
+			
+		}
+		else{
+			
+		}
+		$window.alert("submitQuestion");
+	}
 	
 	
 });

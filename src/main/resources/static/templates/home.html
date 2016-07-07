@@ -12,12 +12,12 @@ body { background-image: none; }
 		</div>
 		<div class="col-md-5" style="margin-top:4%;">
 			<h1 class="tests">Available Tests</h1>
-			<form method="get" ng-submit"">
-				<select name="select-list" id="testList" multiple class="form-control test-form">
+			<form method="get" ng-submit="startTest()">
+				<select name="select-list" id="testList" multiple class="form-control test-form" ng-model="selectedTest">
 					<option ng-repeat="test in test_list" value="{{test.id}}" ng-click="testDescription( test.id )">{{test.title}}</option>
 				</select>
 				<div class="container-fluid" style="max-width:335px;">
-					<button type="submit" value="submit" class="btn btn-primary btn-lg btn-block">Start</button>
+					<button type="submit" value="submit" id="submit" class="btn btn-primary btn-lg btn-block">Start</button>
 				</div>
 			</form>
 		</div>

@@ -87,5 +87,26 @@ public class TestsController {
 	public Map<String,Object> getTest( @RequestParam("testId") String testId_string ) {
 		return testsUtils.getTest( testId_string );
 	}
+	
+	@RequestMapping("/data/tests/startTest")
+	@ResponseBody
+	public boolean startTest( @RequestParam("testId") String testId_string, HttpServletRequest request ) {
+		
+		User user_user = null;
+		if( ( user_user = userUtils.getUserFromRequest( request ) ) == null ){
+			mainUtils.showThis( "User null" );
+			return false;
+		}
+		
+		if( testsUtils.getStartedTest( user_user ) != null ) return false;
+		
+		Tests test_test = testsUtils.getTestObject( testId_string );
+		if( test_test == null ){
+			mainUtils.showThis( "Test null" );
+			return false;
+		}
+		
+		return testsUtils.startTest( user_user, test_test );
+	}
 	  
 } //TestsController end
