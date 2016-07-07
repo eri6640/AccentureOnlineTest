@@ -2,6 +2,9 @@ package online.test.controllers;
 
 import online.test.models.User;
 import online.test.models.dao.UserDao;
+import online.test.utils.AdminUtils;
+import online.test.utils.LoginUtils;
+import online.test.utils.MainUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,16 +31,20 @@ public class UserController {
 	 * */
 	@RequestMapping("/data/user/create")
 	@ResponseBody
-	public String create(String email, String password_hash, String name, String surname, Boolean admin_status) {
-		User user = null;
+	public Boolean create(String email,  String name, String surname, Boolean admin_status) {
+		//User user = null;
 		try {
-			user = new User(email,password_hash,name,surname,admin_status);
+			String password_string=adminUtils.randomString(10);
+			String password_hash=mainUtils.MD5(password_string);
+			User user = new User(email,password_hash,name,surname,admin_status);
 			userDao.save(user);
+			adminUtils.send(email, password_string);
 		}
 		catch (Exception ex) {
-			return "Error creating the user: " + ex.toString();
+			System.out.println("Error creating the user: " + ex.toString());
+			return false;
 		}
-		return "User succesfully created! (id = " + user.getId() + ")";
+		return true;
 	}
 	
 	
@@ -52,15 +59,16 @@ public class UserController {
 	*/
 	@RequestMapping("/data/user/delete")
 	@ResponseBody
-	public String delete(long id) {
+	public Boolean delete(long id) {
 		try {
 			User user = new User(id);
 			userDao.delete(user);
 		}
 		catch (Exception ex) {
-			return "Error deleting the user: " + ex.toString();
+			return false;
+			//return "Error deleting the user: " + ex.toString();
 		}
-		return "User succesfully deleted!";
+			return true;
 	}
   
 	/**
@@ -78,9 +86,9 @@ public class UserController {
 	    	userId = String.valueOf(user.getId());
 	    }
 	    catch ( Exception ex ) {
-	    	return "User not found";
+	    	return "";
 	    }
-	    return "The user id is: " + userId;
+	    	return userId;
 	}
   
 	/**
@@ -112,5 +120,11 @@ public class UserController {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	AdminUtils adminUtils = new AdminUtils();
+	
+	//@Autowired
+	MainUtils mainUtils = new MainUtils();
   
 } // class UserController

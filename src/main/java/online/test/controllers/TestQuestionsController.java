@@ -23,32 +23,34 @@ public class TestQuestionsController {
 	
 	@RequestMapping("/data/testquestions/create")
 	@ResponseBody
-	public String addQuestion(TYPE type, String question, String date, Tests tests, User user, String answer,
+	public boolean addQuestion(TYPE type, String question, Tests tests, User user, String answer,
 				String multipleChoice, byte[] imageAnswer, String textAnswer){
 		 TestQuestions testQuestion = null;
 			try {
-				testQuestion = new TestQuestions(type, question, date, tests, user, answer, multipleChoice, imageAnswer, textAnswer);
+				testQuestion = new TestQuestions(type, question, tests, user, answer, multipleChoice, imageAnswer, textAnswer);
 				testQuestionsDao.save(testQuestion);
 			}
 			catch (Exception ex) {
-				return "Error adding answer: " + ex.toString();
+				return false;
+				//return "Error adding answer: " + ex.toString();
 			}
-			return "Answer succesfully added!";
+				return true;
 	 }
 	 
 	@RequestMapping("/data/testquestions/delete")
 	@ResponseBody
-	 public String removeQuestion(TYPE type, String question, String date, Tests tests, User user, String answer,
+	 public boolean removeQuestion(TYPE type, String question, Tests tests, User user, String answer,
 				String multipleChoice, byte[] imageAnswer, String textAnswer){
 		 TestQuestions testQuestion = null;
 			try {
-				testQuestion = new TestQuestions(type, question, date, tests, user, answer, multipleChoice, imageAnswer, textAnswer);
+				testQuestion = new TestQuestions(type, question, tests, user, answer, multipleChoice, imageAnswer, textAnswer);
 				testQuestionsDao.delete(testQuestion);
 			}
 			catch (Exception ex) {
-				return "Error deleting answer: " + ex.toString();
+				return false;
+				//return "Error deleting answer: " + ex.toString();
 			}
-			return "Answer succesfully deleted!";
+				return true;
 	 }
 	
 	  @Autowired

@@ -27,10 +27,10 @@ public class CsrfHeaderFilter extends OncePerRequestFilter {
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
 		if( csrf != null ){
 			
-			Cookie cookie = WebUtils.getCookie( request, loginUtils.TokenName );
+			Cookie cookie = WebUtils.getCookie( request, utils.TokenName );
 			String token = csrf.getToken();
 			if ( cookie == null || token != null && ! token.equals( cookie.getValue() )) {
-				cookie = new Cookie( loginUtils.TokenName, token );
+				cookie = new Cookie( utils.TokenName, token );
 				cookie.setPath("/");
 				response.addCookie(cookie);				
 			}

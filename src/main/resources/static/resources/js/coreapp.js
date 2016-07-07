@@ -1,10 +1,10 @@
 
-var app = angular.module( 'CoreAPP', [ 'ngRoute' ] );
+var app = angular.module( 'CoreAPP', [ 'ngRoute', 'ngAnimate' ] );
 
 app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 	
 	$routeProvider.when('/home', {
-		controller : 'MainController',
+		controller : 'TestListController',
 		templateUrl : 'page/home.html'
 	}).when('/', {
 		redirectTo: '/home'
@@ -26,26 +26,6 @@ app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 
 });
 
-app.controller('lister', function($scope, $http) {
-    var urlBase="";
-    $scope.toggle=true;
-    $scope.selection = [];
-    $scope.statuses=['ACTIVE','COMPLETED'];
-    $scope.priorities=['HIGH','LOW','MEDIUM'];
-    $http.defaults.headers.post["Content-Type"] = "application/json";
-	$http.get(urlBase + '/data/tests/selectallTests').success(function (data) {
-
- 	
-    	if (data != undefined) {
-        	$scope.tests = data;
-    	} else {
-        	$scope.tests = [];
-    	}
-   	 
-    	
-	});
-});
-
 app.run( [ '$route', '$rootScope', '$location', function ( $route, $rootScope, $location ) {
     var original = $location.path;
     $location.path = function (path, reload) {
@@ -64,39 +44,44 @@ app.run( [ '$route', '$rootScope', '$location', function ( $route, $rootScope, $
 
 app.controller( 'MainController', function( $rootScope, $scope, $http, $location, $window ) {
 	
-	$scope.logout = function() {
-		
-		$http.get( "/data/auth/isloggedin" ).success( function ( data ) {
-			$scope.loggedIn = data;
-		});
-		
-		if( $scope.loggedIn ){
-			$http.get( "/data/auth/logout" ).success( function ( data ) {
-				$scope.loggedIn = data;
-			});
-		}
+});
 
-		$window.location.href = "/";
-		
+app.controller( 'TestListController', function( $rootScope, $scope, $http, $location, $window ) {
+	
+	if( $location.path() == '/login' ) return;
+	
+	$scope.test_list = null;
+	$scope.show_desc = false;
+	
+	$scope.getAvailableTests =  function( testId ) {
+		$http.get( "/data/tests/selectAvailableTests" ).success( function ( data ) {
+	
+			if( data ){
+				//$window.alert( data );
+				$scope.test_list = data;
+			}
+			else{
+				//$window.alert("false");
+			}
+		});
 	};
+	$scope.getAvailableTests();
+	
 	
 	$scope.testDescription = function( testId ) {
 		
 		$http.get( "/data/tests/getTest?testId=" + testId ).success( function ( data ) {
 			if( data ){
-				
+				$scope.test_title = data.test.title;
+				$scope.test_description = data.test.description;
+				$scope.show_desc = true;
 			}
 			else{
-				
+				$scope.show_desc = false;
 			}
 		});
 		
 	};
-	
-	
-});
-
-app.controller( 'TestsController', function( $rootScope, $scope, $http, $location, $window ) {
 	
 });
 
@@ -155,15 +140,15 @@ app.controller( 'TimerController', [ '$scope', '$interval', '$window', function(
 	$scope.timerTime = new Date().getTime();
 	$scope.timeleft = 0;
 
-    var stop;
+    var timer;
     var startTimer = function() {
 
-		if( angular.isDefined( stop ) ) return;
+		if( angular.isDefined( timer ) ) return;
 	
-		stop = $interval( function() {
+		timer = $interval( function() {
 			$scope.timeleft = ( new Date().getTime() - $scope.timerTime ) / 1000;
 			
-			if( $scope.timeleft >= 10 ) {
+			if( $scope.timeleft >= 60 ) {
 				$scope.stopTimer();
 				
 				var confirmThis = $window.confirm("Press a button!");
@@ -178,9 +163,9 @@ app.controller( 'TimerController', [ '$scope', '$interval', '$window', function(
     };
 
     $scope.stopTimer = function() {
-    	if( angular.isDefined( stop ) ) {
-    		$interval.cancel( stop );
-    		stop = undefined;
+    	if( angular.isDefined( timer ) ) {
+    		$interval.cancel( timer );
+    		timer = undefined;
     	}
     };
 

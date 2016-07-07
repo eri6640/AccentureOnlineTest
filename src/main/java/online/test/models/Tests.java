@@ -25,14 +25,17 @@ public class Tests {
 	private User user;
 
 	@NotNull
-	private String date;
+	private String description;
+
+	@NotNull
+	private long created;
 	
 	public Tests() {}
 
-	public Tests(String title, User user, String date) {
+	public Tests(String title, User user ) {
 		this.title = title;
 		this.user = user;
-		this.date = date;
+		this.created = System.currentTimeMillis();
 	}
 
 	public long getId() {
@@ -58,13 +61,21 @@ public class Tests {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	public String getDate() {
-		return date;
+	
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public long getCreated() {
+		return created;
+	}
+
+	public void updateCrated() {
+		this.created = System.currentTimeMillis();
 	}
 
 	
