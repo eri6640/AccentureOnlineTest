@@ -23,9 +23,3 @@
     </div>
 
 </div>
-
-<div ng-controller="TimerController" class="progress">
-	<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ 100 - ( 100 / ( 60 * 60 ) * timeleft ) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ 100 - ( 100 / ( 60 * 60 ) * timeleft ) }}%;">
-		{{ 60 * 60 - timeleft | secondsToDateTime | date:'mm:ss' }}
-	</div>
-</div>

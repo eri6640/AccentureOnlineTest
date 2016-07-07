@@ -11,9 +11,9 @@ app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 	}).when('/login', {
 		controller : 'LoginController',
 		templateUrl : 'page/login.html'
-	}).when('/answers', {
-		controller : 'MainController',
-		templateUrl : 'page/answers.html'
+	}).when('/question', {
+		controller : 'QuestionController',
+		templateUrl : 'page/question.html'
 	}).otherwise({ redirectTo: '/home' });
 
 	//$locationProvider.html5Mode({
@@ -83,7 +83,56 @@ app.controller( 'TestListController', function( $rootScope, $scope, $http, $loca
 		
 	};
 	
+	$scope.startTest = function( testId ) {
+		
+		$http.get( "/data/tests/startTest?testId=" + testId ).success( function ( data ) {
+			
+			if( data ){
+				//parmetam uz atbilzu lapu
+			}
+			else{
+				//atjaunojam esosho + izvadam zinju, ka ir jau sakts vai izpildits attiecigais tests
+			}
+			
+		});
+		
+	};
+	
 });
+
+app.controller( 'QuestionController', function( $rootScope, $scope, $http, $location, $window ) {
+	
+	$scope.nextQuestion = function( testId ) {
+		
+		$http.get( "/data/tests/getNextQuestion?testId=" + testId ).success( function ( data ) {
+			
+			if( data ){
+				$scope.question = data.question;
+			}
+			else{
+				//paradam, ka visi jautajumi ir izpilditi
+			}
+			
+		});
+		
+	};
+	
+	
+	$http.get( "/data/tests/getTestInProgress" ).success( function ( data ) {
+		
+		if( data ){
+			$scope.nextQuestion( data.test.id );
+		}
+		else{
+			//metam atpakalj uz izvelni
+			$window.location.href = "/";
+		}
+		
+	});
+	
+	
+});
+
 
 
 app.controller( 'LoginController', function( $rootScope, $scope, $http, $location, $window ) {
@@ -148,7 +197,7 @@ app.controller( 'TimerController', [ '$scope', '$interval', '$window', function(
 		timer = $interval( function() {
 			$scope.timeleft = ( new Date().getTime() - $scope.timerTime ) / 1000;
 			
-			if( $scope.timeleft >= 60 ) {
+			if( $scope.timeleft >= 60 * 60 ) {
 				$scope.stopTimer();
 				
 				var confirmThis = $window.confirm("Press a button!");

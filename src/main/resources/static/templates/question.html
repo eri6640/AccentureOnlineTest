@@ -1,0 +1,48 @@
+
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Suez One">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato">
+	  
+	  
+	<button id="stylesheet1" > Style 1 </button>
+	<button id="stylesheet2" > Style 2 </button>
+	<div class="container-fluid"></div>
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-12">
+				<h1 style="font-size:60px">Test Name</h1>
+			</div>
+
+
+			<div ng-controller="TimerController" class="progress">
+				<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ 100 - ( 100 / ( 60 * 60 ) * timeleft ) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ 100 - ( 100 / ( 60 * 60 ) * timeleft ) }}%;color:#4b4b4b;">
+					{{ 60 * 60 - timeleft | secondsToDateTime | date:'mm:ss' }}
+				</div>
+			</div>
+			
+
+			<div class="col-md-12">
+            <!-- width: <value> %. Will be dynamic. -->
+				<div id="myProgressbar" class="progress">
+					<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+						<span class="sr-only"> <value>% Complete</span>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-12">
+				<h1 class="question">Where is your dog?{{question.id}}</h1>
+					<form action="" method="GET" class="question-form">
+
+						<div ng-include="'page/answer_types/single.html'"></div>
+						
+						<button type="button" class="btn btn-primary">Pin</button>
+						<button type="button" class="btn btn-primary">Next</button>
+						<button type="button" class="btn btn-danger">Force End</button>
+					</form>
+
+				</div>
+			</div>
+		</div>

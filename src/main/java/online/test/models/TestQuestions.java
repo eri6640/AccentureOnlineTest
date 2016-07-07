@@ -17,7 +17,7 @@ public class TestQuestions {
 	public TestQuestions() {}
 
 	
-	public TestQuestions(String type, String question, Tests tests, User user, String answer,
+	public TestQuestions(int type, String question, Tests tests, User user, String answer,
 			String multipleChoice, byte[] imageAnswer, String textAnswer) {
 		this.type = type;
 		this.question = question;
@@ -29,26 +29,26 @@ public class TestQuestions {
 		this.textAnswer = textAnswer;
 	}
 
-	public static enum TYPE {
-		PICTURE('P'), MULTIPLE_CHOCE('M'), SINGLE_CHOICE('S'), TEXT('T');
+	/*public static enum TYPE {
+		PICTURE("P"), MULTIPLE_CHOCE("M"), SINGLE_CHOICE("S"), TEXT("T");
 
-		private Character c;
+		private String c;
 
-		TYPE(Character c) {
+		TYPE(String c) {
 			this.c = c;
 		}
 
-		public Character getValue() {
+		public String getValue() {
 			return c;
 		}
-	}
+	}*/
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@Column
-	private String type;
+	private int type;
 
 	@Column
 	private String question;
@@ -106,13 +106,11 @@ public class TestQuestions {
 		this.user = user;
 	}
 
-
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
-
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 
