@@ -477,22 +477,3 @@ function SaveImageAsURL() {
     window.open(img);
 }
 /* *** SAVE CANVAS IMAGE AS URL *** */
-
-
-/* *** ChANGE STYLE SHEET *** */
-function swapStyleSheet(sheet) {
-    document.getElementById("pagestyle").setAttribute("href", sheet);  
-}
-
-function initate() {
-    var style1 = document.getElementById("stylesheet1");
-    var style2 = document.getElementById("stylesheet2");
-
-    style1.onclick = function () { swapStyleSheet("resources/css/style.css") };
-    style2.onclick = function () { swapStyleSheet("resources/css/style2.css"); };
-}
-
-window.onload = initate;
-/* *** ChANGE STYLE SHEET *** */
-
-

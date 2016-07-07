@@ -66,6 +66,40 @@ public class TestsUtils {
 		
 		return test_test != null ? model : null;
 	}
+
+	
+	public Tests getTestObject( String testId_string ){
+		
+		if( testId_string.isEmpty() ) return null;
+		int testId = 0;
+		try{
+			testId = Integer.parseInt( testId_string );
+		}
+		catch( Exception error ){
+			return null;
+		}
+		
+		return this.getTestObject( testId );
+	}
+	
+	public Tests getTestObject( int testId ){
+		
+		if( testId <= 0 ) return null;
+		
+		Map<String,Object> model = new HashMap<String,Object>();
+		
+		Tests test_test = null;
+		
+		try{
+			test_test = testsDao.findById( (long)testId );
+		}
+		catch( Exception error ){
+			utils.showThis( "Tests null, id:" + testId );
+			return null;
+		}
+		
+		return test_test;
+	}
 	
 	public ArrayList<Tests> getAvailableTests( HttpServletRequest request ){
 		

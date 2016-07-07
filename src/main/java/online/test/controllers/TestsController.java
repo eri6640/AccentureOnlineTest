@@ -1,5 +1,6 @@
 package online.test.controllers;
 
+import online.test.models.TestQuestions;
 import online.test.models.Tests;
 import online.test.models.User;
 import online.test.models.UserAnswers;
@@ -7,9 +8,13 @@ import online.test.models.dao.TestsDao;
 import online.test.models.dao.UserAnswersDao;
 import online.test.models.dao.UserDao;
 import online.test.utils.LoginUtils;
+import online.test.utils.MainUtils;
+import online.test.utils.TestQuestionsUtils;
 import online.test.utils.TestsUtils;
+import online.test.utils.UserUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,8 +35,14 @@ public class TestsController {
 	@Autowired
 	private UserAnswersDao userAnswersDao;
 	
+	MainUtils mainUtils = new MainUtils();
+	
 	@Autowired
 	TestsUtils testsUtils = new TestsUtils();
+	@Autowired
+	UserUtils userUtils = new UserUtils();
+	@Autowired
+	TestQuestionsUtils testQuestionsUtils = new TestQuestionsUtils();
 	
 	@RequestMapping("/data/tests/selectallTests")
 	@ResponseBody
@@ -79,6 +90,34 @@ public class TestsController {
 	@ResponseBody
 	public Map<String,Object> getTest( @RequestParam("testId") String testId_string ) {
 		return testsUtils.getTest( testId_string );
+	}
+	
+	
+	@RequestMapping("/data/tests/getTestQuestion")
+	@ResponseBody
+	public Map<String,Object> getTestQuestion( @RequestParam("testId") String testId_string, HttpServletRequest request ) {
+
+		Tests test_test = testsUtils.getTestObject( testId_string );
+		if( test_test == null ){
+			mainUtils.showThis( "111111" );
+			return null;
+		}
+		
+		User user_user = null;
+		if( ( user_user = userUtils.getUserFromRequest( request ) ) == null ){
+			mainUtils.showThis( "2222222" );
+			return null;
+		}
+		
+		TestQuestions quest = testQuestionsUtils.getUserNextQuestion( user_user, test_test );
+		
+		if( quest == null ) return null;
+		
+		Map<String,Object> model = new HashMap<String,Object>();
+		
+		model.put( "question", quest);
+		
+		return model;
 	}
 	  
 } //TestsController end

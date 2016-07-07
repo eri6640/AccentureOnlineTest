@@ -6,9 +6,15 @@ import online.test.models.TestQuestions.TYPE;
 import online.test.models.Tests;
 import online.test.models.User;
 import online.test.models.dao.TestQuestionsDao;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -39,9 +45,9 @@ public class TestQuestionsController {
 	 
 	@RequestMapping("/data/testquestions/delete")
 	@ResponseBody
-	 public boolean removeQuestion(TYPE type, String question, Tests tests, User user, String answer,
+	public boolean removeQuestion(TYPE type, String question, Tests tests, User user, String answer,
 				String multipleChoice, byte[] imageAnswer, String textAnswer){
-		 TestQuestions testQuestion = null;
+		TestQuestions testQuestion = null;
 			try {
 				testQuestion = new TestQuestions(type, question, tests, user, answer, multipleChoice, imageAnswer, textAnswer);
 				testQuestionsDao.delete(testQuestion);
@@ -50,11 +56,11 @@ public class TestQuestionsController {
 				return false;
 				//return "Error deleting answer: " + ex.toString();
 			}
-				return true;
-	 }
+			return true;
+	}	
 	
-	  @Autowired
-	  private TestQuestionsDao testQuestionsDao;
+	@Autowired
+	private TestQuestionsDao testQuestionsDao;
 	  
 	 
 	 
