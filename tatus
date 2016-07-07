@@ -1,0 +1,293 @@
+[33mcommit b38e86f50aa10e3411070bf43e357da551f652d9[m
+Author: Max <maximvelichkin@gmail.com>
+Date:   Wed Jul 6 15:26:40 2016 +0100
+
+    design update: 1.Background positioning fixed 2.New fonts
+
+[33mcommit ebaba918e75a8f0786974487a5233e0cb42443f2[m
+Author: Max <maximvelichkin@gmail.com>
+Date:   Wed Jul 6 11:52:06 2016 +0100
+
+    Css update: 1.Text is not transparent 2.Button on hover = pink (accenture style pink)
+
+[33mcommit 2f62a38e50133e694ab34f63e53970d0a5ee5bac[m
+Author: Tom <Name@gmail.com>
+Date:   Wed Jul 6 10:21:10 2016 +0300
+
+    Tests Page Update
+
+[33mcommit 827d65cd9455ebba8c22d27da8478c5195427272[m
+Author: Max <maximvelichkin@gmail.com>
+Date:   Wed Jul 6 07:26:40 2016 +0100
+
+    new design with description
+
+[33mcommit 6ac25cabb7632fb39e32be08f1664f7fd7697ee8[m
+Author: Max <maximvelichkin@gmail.com>
+Date:   Mon Jul 4 09:18:49 2016 +0100
+
+    Test
+
+[33mcommit c2bdd112ba222e384dc4bb05f885f021f54c6cb8[m
+Author: Max <maximvelichkin@gmail.com>
+Date:   Mon Jul 4 09:14:28 2016 +0100
+
+    Parallax
+
+[33mcommit 6ca9e4075cd45b620b743c93e8f24934f992b5ba[m
+Author: Tom <Name@gmail.com>
+Date:   Mon Jul 4 09:55:22 2016 +0300
+
+    FrontEnd Update 1.0
+
+[33mcommit 7cabd2c6d9b50d0b16419fd78a3dcdce1b6a0c91[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 17:48:27 2016 +0300
+
+    replace user.class lbranch
+
+[33mcommit f7f3d2dbcb295f65bc29026c69406c94229c5716[m
+Merge: 9db0f86 03ebe4a
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 17:47:18 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/lbranch'
+    
+    # Conflicts:
+    #	src/main/java/online/test/models/User.java
+
+[33mcommit 9db0f867b268bf55fe322e65991b2bc504289526[m
+Merge: 949ed76 3147464
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 17:32:54 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/erii'
+
+[33mcommit 31474642cf31facfb6147411388cadcb67b489a6[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 17:31:41 2016 +0300
+
+    + utils
+
+[33mcommit 03ebe4afa8739fced0c1a37a678611da5545da00[m
+Author: Lind_sy <Serenetija91@inbox.lv>
+Date:   Fri Jul 1 17:18:46 2016 +0300
+
+    Fixed models and database
+
+[33mcommit 73b507854c9a699fb393d63651be7c4ba05966ad[m
+Merge: 27a637b 949ed76
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 16:19:32 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into erii
+
+[33mcommit 949ed76dfc2191b4d987be71fbc4f5aa21e3cca2[m
+Merge: 752b5a3 4633da5
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 16:18:54 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/lbranch'
+
+[33mcommit 4633da5a5dc67d58653e84ca651f892b3ceb2ef2[m
+Merge: a20dbb8 752b5a3
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 16:18:20 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into lbranch
+
+[33mcommit 752b5a30ec69bfb673bcf391c94af4cc231330df[m
+Merge: b9d9f5c 27a637b
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 16:03:48 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/erii'
+
+[33mcommit 27a637bca210a886ca27a3170276db5979725cb0[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 16:03:04 2016 +0300
+
+    befor marge
+
+[33mcommit a20dbb82bb5e7f9823b4f28c8d90f82a45bfd551[m
+Author: Lind_sy <Serenetija91@inbox.lv>
+Date:   Fri Jul 1 15:32:04 2016 +0300
+
+    Deleted unneded things
+
+[33mcommit 5556e6fabcee3286b1bc961e9c38dbf680fc07ef[m
+Author: Lind_sy <Serenetija91@inbox.lv>
+Date:   Fri Jul 1 15:26:08 2016 +0300
+
+    Added Dao interfaces
+
+[33mcommit 8934e0d7da75a62bf746cae89a1df385c6a41456[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 11:53:03 2016 +0300
+
+    refresh
+
+[33mcommit b9d9f5cc3b04a189179b5e04aa34940b8e2f6a72[m
+Merge: 6d93f60 16d9ba4
+Author: Kalns <matthias.kalnins@gmail.com>
+Date:   Fri Jul 1 11:42:45 2016 +0300
+
+    Merge pull request #2 from eri6640/mk2
+    
+    User model & controler edit
+
+[33mcommit 16d9ba4622cc7055fa2a8bb3397ec788ad1a4596[m
+Author: Matiss <matthias.kalnins@gmail.com>
+Date:   Fri Jul 1 11:37:09 2016 +0300
+
+    User model & controler edit
+    
+    To match new DB structure
+
+[33mcommit d1df8c993cae7998864e6d37d23b9b777bafa412[m
+Merge: 517731b 6d93f60
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 10:08:46 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into lbranch
+
+[33mcommit 7c9891aed977a2aa353a2b2c5900d1dcea6c70be[m
+Merge: 13f7051 6d93f60
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 10:07:46 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into erii
+
+[33mcommit 6d93f603020b02d1a80425c3d96103c88b1550ce[m
+Merge: 6b370c9 13f7051
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 10:06:53 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/erii'
+
+[33mcommit 6b370c9044fb3df41ee7a79b51f35d7e767f3ac0[m
+Merge: 2c8e407 517731b
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 10:04:09 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/lbranch'
+
+[33mcommit 13f7051049911013b9e0d1154e3dd2e6a7f87967[m
+Merge: 6afaebd 2c8e407
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 10:00:52 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into erii
+
+[33mcommit 6afaebdd1e1a63d8798c4374464cebfa85726ab5[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 10:00:11 2016 +0300
+
+    auth fix
+
+[33mcommit 517731b7dba29a7ab475839a0f670584bbe394a1[m
+Author: Lind_sy <Serenetija91@inbox.lv>
+Date:   Fri Jul 1 09:56:12 2016 +0300
+
+    made changes to models
+
+[33mcommit 0268f49419c3239ddee805d2bcdf46baa9542e66[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 08:51:23 2016 +0300
+
+    turpinam chakareties ar get/post..
+
+[33mcommit 2c8e40786b4d40bb28d29ec380070706ff1be190[m
+Merge: 54e019c d3c4523
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 08:02:37 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/erii'
+
+[33mcommit d3c45235f99ade7e5f8cb5a7ae4ea096693756c1[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Fri Jul 1 00:33:33 2016 +0300
+
+    sdfghjk
+
+[33mcommit 958a9d962cb0c0d97b8a6a5b34cae2d9a951a1a1[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Thu Jun 30 22:52:21 2016 +0300
+
+    asdf
+
+[33mcommit db2eb561f23bed207228c1c77d2b47afc11a2bec[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Thu Jun 30 22:23:18 2016 +0300
+
+    byebye usertype
+
+[33mcommit 8e6d40c15ce00cdea741b7f0afe52e3199f04c4a[m
+Merge: 2883dfa 54e019c
+Author: eri6640 <eri6640@gmail.com>
+Date:   Thu Jun 30 21:55:06 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into erii
+
+[33mcommit 54e019c692889a6bb622da55ccf8fe518bc9a2a1[m
+Merge: 7a0724a 2883dfa
+Author: eri6640 <eri6640@gmail.com>
+Date:   Thu Jun 30 21:54:06 2016 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/erii'
+
+[33mcommit 2883dfa2a31a705c3bc9526bab7b34168543a874[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Thu Jun 30 21:53:15 2016 +0300
+
+    boo
+
+[33mcommit 7a0724aca51e6c1a1487a8391a430ccbd1aa860b[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Thu Jun 30 21:19:04 2016 +0300
+
+    asdf
+
+[33mcommit 8638eae42e58b4fbbf5a7d42b8efade412451b0f[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Thu Jun 30 21:18:52 2016 +0300
+
+    adfggg
+
+[33mcommit c412493b712b9a21573031e29d7503670b8210a1[m
+Merge: 7b07992 6561a0a
+Author: eri6640 <eri6640@gmail.com>
+Date:   Thu Jun 30 21:17:51 2016 +0300
+
+    asd
+
+[33mcommit 75253c79c99438e8c71ceef3d6d9042953ecf377[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Thu Jun 30 21:12:28 2016 +0300
+
+    rem target
+
+[33mcommit 49bd2f8a31f5b3a9b528c92f39c9121066f16976[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Thu Jun 30 21:11:21 2016 +0300
+
+    gitignore
+
+[33mcommit 6561a0aae6e87e98df44199726c5655126445c72[m
+Merge: a17f432 3617057
+Author: Kalns <matthias.kalnins@gmail.com>
+Date:   Thu Jun 30 21:04:41 2016 +0300
+
+    Merge pull request #1 from eri6640/mkbranch
+    
+    ayyy
+
+[33mcommit 3617057c5dcf36e8c72c310b226b9281c9a1adfe[m
+Author: Matiss <matthias.kalnins@gmail.com>
+Date:   Thu Jun 30 21:03:21 2016 +0300
+
+    Jaunumi
+
+[33mcommit 7b079924551cf8ef69c41dcd84e03ee7563ded01[m
+Author: eri6640 <eri6640@gmail.com>
+Date:   Thu Jun 30 20:50:12 2016 
