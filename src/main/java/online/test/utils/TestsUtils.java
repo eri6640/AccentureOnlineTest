@@ -148,7 +148,7 @@ public class TestsUtils {
 	
 	public boolean testAlreadyStarted( User user, Tests test ){
 		
-		List<UserAnswers> userAnswers = userAnswersDao.getUserStartedTests( user.getId() );
+		List<UserAnswers> userAnswers = userAnswersDao.getCurrentUserStartedTests( user.getId() );
 		
 		if( userAnswers == null ) return false;
 		
@@ -159,6 +159,46 @@ public class TestsUtils {
 		}
 		
 		return false;
+	}
+	
+	/*
+	 * 
+	 * 
+	 * 
+	 */
+	
+	public Map<String,Object> getStartedTest( User user_user ){
+		
+		Map<String, Object> model = new HashMap<String,Object>();
+		List<UserAnswers> tests_started = userAnswersDao.getCurrentUserStartedTests( user_user.getId() );
+		List<UserAnswers> tests_stoped = userAnswersDao.getCurrentUserStopedTests( user_user.getId() );
+				
+		if( tests_started.isEmpty() ){
+			utils.showThis( "! have started test" );
+			return null;
+		}
+		
+		if( tests_started.size() == 1 && tests_stoped.isEmpty() ){
+			model.put( "test", tests_started.get( 0 ).getTests() );
+			utils.showThis( "tests_started.size() == 1 && tests_stoped.isEmpty()" );
+			return model;
+		}
+		
+		List<Long> test_startedIds = new ArrayList<Long>();
+				
+		for( UserAnswers answerStop : tests_stoped ){
+			test_startedIds.add( answerStop.getTests().getId() );
+		}
+		
+		for( UserAnswers answerStart : tests_started ){
+			if( ! test_startedIds.contains( answerStart.getTests().getId() ) ){
+				utils.showThis( "have started test" );
+				model.put( "test", answerStart.getTests() );
+				return model;
+			}
+		}
+				
+		return null;
 	}
 	
 }

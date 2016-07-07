@@ -13,10 +13,29 @@ import online.test.models.UserAnswers;
 @Transactional
 public interface UserAnswersDao extends CrudRepository<UserAnswers, Long> {
 	
-	@Query("select a from UserAnswers a inner join a.tests as t inner join a.user as u where t.id= :testID and u.id= :userID and a.status > 1 and a.status < 4")
+	/**
+	 * 
+	 * @param testID
+	 * @param userID
+	 * @return user tests where status = 4(answered)
+	 */
+	@Query("select a from UserAnswers a inner join a.tests as t inner join a.user as u where t.id= :testID and u.id= :userID and a.status = 3")
 	public List<UserAnswers> getCurrentUserTestAnswers(@Param("testID") Long testID, @Param("userID")Long userID);
 	
-	@Query("select a from UserAnswers a inner join a.tests as t inner join a.user as u where u.id= :userID and status=1")
-	public List<UserAnswers> getUserStartedTests( @Param("userID")Long userID );
+	/**
+	 * 
+	 * @param testID
+	 * @param userID
+	 * @return user tests where status = 3(pinpointed)
+	 */
+	@Query("select a from UserAnswers a inner join a.tests as t inner join a.user as u where t.id= :testID and u.id= :userID and a.status = 2")
+	public List<UserAnswers> getCurrentUserTestAnswersPinPointed(@Param("testID") Long testID, @Param("userID")Long userID);
+	
+
+	@Query("select a from UserAnswers a inner join a.user as u where u.id= :userID and a.status = 1")
+	public List<UserAnswers> getCurrentUserStartedTests( @Param("userID")Long userID );
+	
+	@Query("select a from UserAnswers a inner join a.user as u where u.id= :userID and a.status = 4")
+	public List<UserAnswers> getCurrentUserStopedTests( @Param("userID")Long userID );
 	
 }

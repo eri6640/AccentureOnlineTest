@@ -102,20 +102,33 @@ app.controller( 'TestListController', function( $rootScope, $scope, $http, $loca
 
 app.controller( 'QuestionController', function( $rootScope, $scope, $http, $location, $window ) {
 	
-	$scope.testDescription = function( testId ) {
+	$scope.nextQuestion = function( testId ) {
 		
-		$http.get( "/data/tests/getQuestion?testId=" + testId ).success( function ( data ) {
+		$http.get( "/data/tests/getNextQuestion?testId=" + testId ).success( function ( data ) {
 			
 			if( data ){
-				
+				$scope.question = data.question;
 			}
 			else{
-				//metam atpakalj uz izvelni
+				//paradam, ka visi jautajumi ir izpilditi
 			}
 			
 		});
 		
 	};
+	
+	
+	$http.get( "/data/tests/getTestInProgress" ).success( function ( data ) {
+		
+		if( data ){
+			$scope.nextQuestion( data.test.id );
+		}
+		else{
+			//metam atpakalj uz izvelni
+			$window.location.href = "/";
+		}
+		
+	});
 	
 	
 });

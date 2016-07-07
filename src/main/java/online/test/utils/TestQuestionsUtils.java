@@ -34,6 +34,15 @@ public class TestQuestionsUtils {
 			
 		}
 		
+		//kad it ka ir izpilditi visi jautajumi
+		for( TestQuestions question : question_list ){
+			
+			if( isPinPointed( user_user, question ) ){
+				return question;
+			}
+			
+		}
+		
 		return null;
 	}
 	
@@ -51,5 +60,22 @@ public class TestQuestionsUtils {
 		
 		return false;
 	}
+	
+	public boolean isPinPointed( User user_user, TestQuestions quest_quest ){
+		
+		List<UserAnswers> answer_list = userAnswersDao.getCurrentUserTestAnswersPinPointed( quest_quest.getTests().getId(), user_user.getId() );
+		
+		if( answer_list.isEmpty() ) return false;
+		
+		for( UserAnswers answer : answer_list ){
+			if( answer.getTestsQuestions().getId() == quest_quest.getId() ){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	
 	
 }
