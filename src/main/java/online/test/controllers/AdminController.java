@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -83,9 +84,22 @@ public class AdminController {
 		}
 	}
 
+	@RequestMapping("/data/tests/getActiveUser")
+	@ResponseBody
+	public long getUser(){
+		User newuser=adminUtils.getActiveUser(context);
+		return newuser.getId();
+		
+	}
+	
+	@Autowired
+	private HttpServletRequest context;
+	
 	@Autowired
 	LoginUtils loginUtils = new LoginUtils();
+	
 	@Autowired
 	AdminUtils adminUtils = new AdminUtils();
+	
 	MainUtils utils = new MainUtils();
 }
