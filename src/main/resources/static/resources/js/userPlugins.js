@@ -1,3 +1,95 @@
+  /* *** TIMER *** */
+  window.onload = function() {
+      myFunction();
+	  
+
+  };
+
+  function myFunction() {
+
+      timer('timerPlace', 3600);
+  }
+
+  function timer(tag, sec) {
+      document.getElementById(tag).innerHTML = "<div id= 'inTime'>" +
+          (sec / 60 >> 0) + 'min ' + sec % 60 + 'sec' + '<br>' + "</div>";
+
+
+
+      if ((sec / 60 >> 0) != 0 || (sec % 60) != 0) {
+          setTimeout(function() {
+              timer(tag, sec);
+          }, 1000);
+          sec -= 1;
+      } else {
+          document.getElementById(tag).innerHTML = "Time is over!";
+      }
+  }
+  /* *** TIMER *** */
+
+
+
+  /* *** PROGRESS BAR *** */
+  ! function($) {
+
+      "use strict";
+
+      // PROGRESSBAR CLASS DEFINITION
+      // ============================
+
+      var Progressbar = function(element) {
+          this.$element = $(element);
+      }
+
+      Progressbar.prototype.update = function(value) {
+          var $div = this.$element.find('div');
+          var $span = $div.find('span');
+          $div.attr('aria-valuenow', value);
+          $div.css('width', value + '%');
+          $span.text(value + '% Complete');
+      }
+
+      Progressbar.prototype.finish = function() {
+          this.update(100);
+      }
+
+      Progressbar.prototype.reset = function() {
+          this.update(0);
+      }
+
+      // PROGRESSBAR PLUGIN DEFINITION
+      // =============================
+
+      $.fn.progressbar = function(option) {
+          return this.each(function() {
+              var $this = $(this),
+                  data = $this.data('jbl.progressbar');
+
+              if (!data) $this.data('jbl.progressbar', (data = new Progressbar(this)));
+              if (typeof option == 'string') data[option]();
+              if (typeof option == 'number') data.update(option);
+          })
+      };
+
+      // PROGRESSBAR DATA-API
+      // ====================
+
+      $(document).on('click', '[data-toggle="progressbar"]', function(e) {
+          var $this = $(this);
+          var $target = $($this.data('target'));
+          var value = $this.data('value');
+
+          e.preventDefault();
+
+          $target.progressbar(value);
+      });
+
+  }(window.jQuery);
+  /* *** PROGRESS BAR *** */
+
+
+
+
   /* *** DRAWING TABLE *** */
   var RoCanvasInstances = {};
 
@@ -385,3 +477,22 @@ function SaveImageAsURL() {
     window.open(img);
 }
 /* *** SAVE CANVAS IMAGE AS URL *** */
+
+
+/* *** ChANGE STYLE SHEET *** */
+function swapStyleSheet(sheet) {
+    document.getElementById("pagestyle").setAttribute("href", sheet);  
+}
+
+function initate() {
+    var style1 = document.getElementById("stylesheet1");
+    var style2 = document.getElementById("stylesheet2");
+
+    style1.onclick = function () { swapStyleSheet("resources/css/style.css") };
+    style2.onclick = function () { swapStyleSheet("resources/css/style2.css"); };
+}
+
+window.onload = initate;
+/* *** ChANGE STYLE SHEET *** */
+
+
