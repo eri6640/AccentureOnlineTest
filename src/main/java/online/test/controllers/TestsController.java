@@ -42,10 +42,11 @@ public class TestsController {
 	
 	@RequestMapping("/data/tests/create")
 	@ResponseBody
-	public Boolean addTest(String title, User user, String date){
+	public Boolean addTest(String title, long userID, String description){
 		Tests test = null;
 		try {
-			test = new Tests(title, user);
+			User user=userDao.findById(userID);
+			test = new Tests(title, user, description);
 			testsDao.save(test);
 		}
 		catch (Exception ex) {
@@ -56,10 +57,10 @@ public class TestsController {
 	
 	@RequestMapping("/data/tests/remove")
 	@ResponseBody
-	public Boolean removeTest(String title, User user, String date){
+	public Boolean removeTest(long id){
 		Tests test = null;
 		try {
-			test = new Tests(title, user);
+			test = new Tests(id);
 			testsDao.delete(test);
 		}
 		catch (Exception ex) {

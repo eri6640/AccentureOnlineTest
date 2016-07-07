@@ -10,7 +10,7 @@
            <hr>        
            <input type="text" class="form-control" ng-model="testName" placeholder="Test name"/>            
            <br /> 
-           <textarea class="form-control" ng-model="name" placeholder="Test description" rows="8" cols="50">
+           <textarea class="form-control" ng-model="testDescription" placeholder="Test description" rows="8" cols="50">
            </textarea>          
            <br />               
            <input type="submit" value="Add test" class="btn btn-success  btn-block" ng-click="addTest()" style="margin:20px 0px 0px;">
@@ -38,7 +38,7 @@
                                 <tr ng-repeat="test in tests">
                                     <td>{{test.id}}</td>
                                     <td>{{test.title}}</td>
-                                    <td>{{test.date}}</td>
+                                    <td>{{test.created | date:'dd-MM-yyyy HH:mm:ss'}}</td>
                                     <td><a href="#" id="" class="viewBtn" style="text-decoration:none; color:white; background-color:#428bca; padding:4px; border-radius: 28px;" role="button">Add</a></td>
                                     <td><button type="button" class="btn btn-danger" ng-click="del(test.id)">Delete</button></td>
                                 </tr>

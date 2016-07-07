@@ -289,6 +289,7 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
 
 			if (data != undefined) {
 				$scope.tests = data;
+				
 			} else {
 				$scope.tests = [];
 			}
@@ -308,12 +309,17 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
 			$http.defaults.headers.post["Content-Type"] = "application/json";
 			$http.get(urlBase + '/data/tests/getActiveUser').success(function(data) {
 
-				alert(data);
+				$http.get( "/data/tests/create?title="+$scope.testName+"&userID="+data+"&description="+$scope.testDescription ).success( function(data) {
+					
+					$scope.loadTests();
+					
+				});
 			});
 			
 		};
 	
 		$scope.getUser();
+		
 	};
 
 	$scope.del = function(id) {
