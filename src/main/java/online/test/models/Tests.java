@@ -32,6 +32,7 @@ public class Tests {
 	
 	public Tests() {}
 
+
 	public Tests(String title, User user, String description) {
 		this.title = title;
 		this.user = user;

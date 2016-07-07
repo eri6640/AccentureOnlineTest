@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import online.test.models.QuestionChoices;
+import online.test.models.TestQuestions;
 import online.test.models.Tests;
 import online.test.models.User;
 import online.test.models.UserAnswers;
@@ -32,6 +33,27 @@ public class AdminController {
 		return adminUtils.getAllUserTests();
 	}
 
+	
+	@RequestMapping("/data/tests/addQuestion")
+	@ResponseBody
+	public Boolean addQuestions(@RequestParam("testID") Long testID,@RequestParam("userID") Long userID,@RequestParam("question") String question) {
+		adminUtils.addQuestion(testID, userID, question);
+		return true;
+	}
+	
+	@RequestMapping("/data/tests/addChoices")
+	@ResponseBody
+	public Boolean addChoices(@RequestParam("questionID") Long questionID,@RequestParam("choice1") String choice1,@RequestParam("choice2") String choice2,@RequestParam("choice3") String choice3,@RequestParam("choice4") String choice4) {
+		adminUtils.addChoices(questionID, choice1, choice2, choice3, choice4);
+		return true;
+	}
+	
+	@RequestMapping("/data/tests/getTestsQuestions")
+	@ResponseBody
+	public Iterable<TestQuestions> selectTestsQuestions(@RequestParam("testID") Long testID) {
+		return adminUtils.getAllTestsQuestions(testID);
+	}
+	
 	@RequestMapping("/data/tests/getUsers")
 	@ResponseBody
 	public Iterable<User> getUsers() {

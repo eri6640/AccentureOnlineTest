@@ -278,6 +278,10 @@ app.controller( 'UserController', function( $rootScope, $scope, $http, $location
 
 app.controller( 'TestsController', function( $rootScope, $scope, $http, $location, $window ) {
 	
+	var thisTestID;
+	var thisUserID;
+	var thisQuestionID;
+	
 	$scope.loadTests = function() { 
 		var urlBase = "";
 		$scope.toggle = true;
@@ -289,7 +293,6 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
 
 			if (data != undefined) {
 				$scope.tests = data;
-				
 			} else {
 				$scope.tests = [];
 			}
@@ -298,7 +301,7 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
 
    $scope.loadTests();
    
-  
+
    $scope.addTest = function() {
 		$scope.getUser = function() {
 			var urlBase = "";
@@ -321,10 +324,59 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
 		$scope.getUser();
 		
 	};
+   
 
 	$scope.del = function(id) {
 		
 	};
 
-});
 
+	
+	$scope.AddTestQuestion = function(test) {
+		thisTestID=test.id;
+		thisUserID=test.user.id;
+		var testId =test.id;
+		$http.get("/data/tests/getTestsQuestions?testID=" + testId).success(
+				function(data) {
+					$scope.questions= data;
+				}).error(function() {
+		});
+		
+	};
+	
+	$scope.AddQuestion = function() {
+		$scope.Question;
+		
+		if($scope.Question==null || $scope.Question==""){alert("No question written!");}else{
+		$http.get("/data/tests/addQuestion?testID=" + thisTestID +"&userID="+thisUserID+"&question="+$scope.Question )
+		.success(function(data) {
+			if(data){
+				alert("Created!");
+			}else{
+				alert("CANT Create!");
+			};
+		}).error(function() {
+			alert("CAN'T DELETE THIS Choice");
+		});
+		};
+	};
+	
+	$scope.getQuestionID = function(question){
+		thisQuestionID=question.id;
+		alert(thisQuestionID);
+	};
+	
+	$scope.AddChoice = function() {
+		$http.get("/data/tests/addChoices?questionID=" + thisQuestionID +"&choice1="+$scope.option1+"&choice2="+$scope.option2+"&choice3="+$scope.option3+"&choice4="+$scope.option4 )
+		.success(function(data) {
+			if(data){
+				alert("Created!");
+			}else{
+				alert("CANT Create!");
+			}
+		}).error(function() {
+			alert("CAN'T ");
+		});
+	};
+
+});

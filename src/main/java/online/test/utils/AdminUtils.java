@@ -37,6 +37,7 @@ import online.test.models.dao.UserDao;
 
 @Component
 
+
 public class AdminUtils{
 	
 	MainUtils utils = new MainUtils();	
@@ -45,16 +46,61 @@ public class AdminUtils{
 
 	
 	public void deleteChoice(Long choiceID){
+
 		questionChoiceDao.delete(choiceID);
 	}
 
-	public void deleteQuestion(Long questionID){
-		testQuestions.delete(questionID);
+	public void deleteQuestion(Long questionID) {
+		testQuestionsDao.delete(questionID);
 	}
-	
+
 	public Iterable<UserAnswers> getAllUserTests() {
 		Iterable<UserAnswers> userTestList = userAnswerDao.findAll();
 		return userTestList;
+	}
+
+	public void addQuestion(Long testID, Long userID, String question) {
+
+		TestQuestions testQuestions = new TestQuestions(null, question, testsDao.findById(testID),
+				userDao.findById(userID), null, null, null, null);
+		testQuestionsDao.save(testQuestions);
+	}
+
+	public void addChoices(Long questionID, String choice1, String choice2, String choice3, String choice4) {
+		TestQuestions testQuestions = testQuestionsDao.findOne(questionID);
+
+		if (!(choice1.equals("")) || !(choice1.equals(null))) {
+			QuestionChoices choice = new QuestionChoices();
+			choice.setTestQuestion(testQuestions);
+			choice.setQuestionOption(choice1);
+			questionChoiceDao.save(choice);
+		}
+
+		if (!(choice2.equals("")) || !(choice2.equals(null))) {
+			QuestionChoices choice = new QuestionChoices();
+			choice.setTestQuestion(testQuestions);
+			choice.setQuestionOption(choice2);
+			questionChoiceDao.save(choice);
+		}
+
+		if (!(choice3.equals("")) || !(choice3.equals(null))) {
+			QuestionChoices choice = new QuestionChoices();
+			choice.setTestQuestion(testQuestions);
+			choice.setQuestionOption(choice3);
+			questionChoiceDao.save(choice);
+		}
+
+		if (!(choice4.equals("")) || !(choice4.equals(null))) {
+			QuestionChoices choice = new QuestionChoices();
+			choice.setTestQuestion(testQuestions);
+			choice.setQuestionOption(choice4);
+			questionChoiceDao.save(choice);
+		}
+	}
+
+	public Iterable<TestQuestions> getAllTestsQuestions(Long testID) {
+		Iterable<TestQuestions> testQuestions = testQuestionsDao.getCurrentTestQuestions(testID);
+		return testQuestions;
 	}
 
 	public Iterable<Tests> selectAllTests() {
@@ -72,38 +118,39 @@ public class AdminUtils{
 		return questionList;
 	}
 	
-	public String randomString( int len ){
-		   StringBuilder sb = new StringBuilder( len );
-		   for( int i = 0; i < len; i++ ) 
-		      sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
-		   return sb.toString();
-		   
+	
+
+	public String randomString(int len) {
+		StringBuilder sb = new StringBuilder(len);
+		for (int i = 0; i < len; i++)
+			sb.append(AB.charAt(rnd.nextInt(AB.length())));
+		return sb.toString();
+
+	}
+
+	public boolean send(String email, String password) {
+
+		MimeMessage mail = javaMailSender.createMimeMessage();
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(mail, true);
+			helper.setTo(email);
+			helper.setReplyTo("accbootcamp2016@gmail.com");
+			helper.setFrom("accbootcamp2016@gmail.com");
+			helper.setSubject("Jūsu piekļuve Accenture testam");
+			helper.setText("Jūsu piekļuves dati ir: \n\nLietotājvārds: " + email + "\nParole: " + password
+					+ "\n\nVeiksmi testā!");
+		} catch (MessagingException e) {
+			e.printStackTrace();
+			return false;
 		}
-
-	public boolean send( String email, String password ) {
-			
-			
-	        MimeMessage mail = javaMailSender.createMimeMessage();
-	        try {
-	            MimeMessageHelper helper = new MimeMessageHelper(mail, true);
-	            helper.setTo(email);
-	            helper.setReplyTo("accbootcamp2016@gmail.com");
-	            helper.setFrom("accbootcamp2016@gmail.com");
-	            helper.setSubject("Jūsu piekļuve Accenture testam");
-	            helper.setText("Jūsu piekļuves dati ir: \n\nLietotājvārds: "+email+"\nParole: "+password+"\n\nVeiksmi testā!");
-	        } catch (MessagingException e) {
-	        	e.printStackTrace();
-	            return false;
-	        }
-	        javaMailSender.send(mail);
-	        return true;
-	  }
-
+		javaMailSender.send(mail);
+		return true;
+	}
 
 	public Iterable<QuestionChoices> selectCurrentQuestionChoices(Long testID) {
 		List<QuestionChoices> choices = new ArrayList<QuestionChoices>();
 		Iterable<QuestionChoices> choiceList = questionChoiceDao.findAll();
-		Iterable<TestQuestions> questionList = testQuestions.getCurrentTestQuestions(testID);
+		Iterable<TestQuestions> questionList = testQuestionsDao.getCurrentTestQuestions(testID);
 		for (TestQuestions testQuestions : questionList) {
 			for (QuestionChoices questionChoices : choiceList) {
 				if (testQuestions.getId() == questionChoices.getTestQuestion().getId()) {
@@ -114,27 +161,25 @@ public class AdminUtils{
 		return (Iterable<QuestionChoices>) choices;
 	}
 
-	public User getActiveUser(HttpServletRequest request){
-		
-		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
-		
+
+	public User getActiveUser(HttpServletRequest request) {
+
+		CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+
 		String token = csrf.getToken();
-					
-		String token_hash = utils.MD5( token );				
+
+		String token_hash = utils.MD5(token);
 		User token_user = null;
-		
-		try{
-			token_user = userDao.findByToken( token_hash );
-		}
-		catch ( Exception error ){
+
+		try {
+			token_user = userDao.findByToken(token_hash);
+		} catch (Exception error) {
 			token_user = null;
-			utils.showThis( "user null" );
+			utils.showThis("user null");
 		}
-		
+
 		return token_user;
-		
-		
-		
+
 	}
 
 	@Autowired
@@ -144,7 +189,7 @@ public class AdminUtils{
 	@Autowired
 	UserDao userDao;
 	@Autowired
-	TestQuestionsDao testQuestions;
+	TestQuestionsDao testQuestionsDao;
 	@Autowired
 	QuestionChoicesDao questionChoiceDao;
 	@Autowired
