@@ -26,6 +26,7 @@ import org.springframework.security.web.csrf.CsrfToken;
 
 import online.test.models.QuestionChoices;
 import online.test.models.TestQuestions;
+import online.test.models.TestQuestions.TYPE;
 import online.test.models.Tests;
 import online.test.models.User;
 import online.test.models.UserAnswers;
@@ -48,6 +49,12 @@ public class AdminUtils{
 	public void deleteChoice(Long choiceID){
 
 		questionChoiceDao.delete(choiceID);
+	}
+	
+	public void updateQuestion(String questionType, Long questionID) {
+		TestQuestions testQuestion = testQuestionsDao.findOne(questionID);
+		testQuestion.setType(questionType);
+		testQuestionsDao.save(testQuestion);
 	}
 
 	public void deleteQuestion(Long questionID) {
@@ -181,6 +188,7 @@ public class AdminUtils{
 		return token_user;
 
 	}
+	
 
 	@Autowired
 	UserAnswersDao userAnswerDao;

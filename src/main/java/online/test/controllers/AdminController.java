@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import online.test.models.QuestionChoices;
 import online.test.models.TestQuestions;
+import online.test.models.TestQuestions.TYPE;
 import online.test.models.Tests;
 import online.test.models.User;
 import online.test.models.UserAnswers;
@@ -60,6 +61,14 @@ public class AdminController {
 		return adminUtils.selectAllUsers();
 	}
 
+	@RequestMapping("/data/tests/setQuestionType")
+	@ResponseBody
+	public Boolean setCurrentQuestionType(@RequestParam("questionType") String questionType,@RequestParam("questionID")Long questionID) {
+		adminUtils.updateQuestion(questionType, questionID);
+	return true;
+	}
+	
+	
 	@RequestMapping("/data/tests/userAnswers")
 	@ResponseBody
 	public Iterable<UserAnswers> getSelectedUserAnswers(@RequestParam("userID") Long userID,

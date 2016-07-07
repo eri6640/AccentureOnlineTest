@@ -1,6 +1,6 @@
 var app = angular.module('AdminAPP', [ 'ngRoute' ]);
-app
-		.config(function($routeProvider, $httpProvider, $locationProvider) {
+
+	app.config(function($routeProvider, $httpProvider, $locationProvider) {
 
 			$routeProvider.when('/home', {
 				controller : 'MainController',
@@ -332,7 +332,8 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
 
 
 	
-	$scope.AddTestQuestion = function(test) {
+
+$scope.AddTestQuestion = function(test) {
 		thisTestID=test.id;
 		thisUserID=test.user.id;
 		var testId =test.id;
@@ -361,10 +362,11 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
 		};
 	};
 	
+
 	$scope.getQuestionID = function(question){
 		thisQuestionID=question.id;
-		alert(thisQuestionID);
 	};
+
 	
 	$scope.AddChoice = function() {
 		$http.get("/data/tests/addChoices?questionID=" + thisQuestionID +"&choice1="+$scope.option1+"&choice2="+$scope.option2+"&choice3="+$scope.option3+"&choice4="+$scope.option4 )
@@ -379,4 +381,20 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
 		});
 	};
 
+	
+	$scope.changedValue = function(item){ 
+		
+	    var questionType = item;
+	 
+	    $http.get("/data/tests/setQuestionType?questionType=" + questionType +"&questionID=" + thisQuestionID).success(function(data) 
+				{
+					if(data){
+					}else{
+						alert("CANT Create!");
+					}
+				}).error(function() {
+					alert("CANT Create!");	
+		});
+	    
+	  };
 });
