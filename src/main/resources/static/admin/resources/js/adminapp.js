@@ -292,14 +292,27 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
    $scope.loadTests();
    
   
-$scope.addTest = function() {
-	
-	
-};
+   $scope.addTest = function() {
+		$scope.getUser = function() {
+			var urlBase = "";
+			$scope.toggle = true;
+			$scope.selection = [];
+			$scope.statuses = [ 'ACTIVE', 'COMPLETED' ];
+			$scope.priorities = [ 'HIGH', 'LOW', 'MEDIUM' ];
+			$http.defaults.headers.post["Content-Type"] = "application/json";
+			$http.get(urlBase + '/data/tests/getActiveUser').success(function(data) {
 
-$scope.del = function(id) {
+				alert(data);
+			});
+			
+		};
 	
-};
+		$scope.getUser();
+	};
+
+	$scope.del = function(id) {
+		
+	};
 
 });
 

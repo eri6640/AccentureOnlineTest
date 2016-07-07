@@ -12,12 +12,17 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.web.csrf.CsrfToken;
 
 import online.test.models.QuestionChoices;
 import online.test.models.TestQuestions;
@@ -34,6 +39,7 @@ import online.test.models.dao.UserDao;
 
 public class AdminUtils{
 	
+	MainUtils utils = new MainUtils();	
 	static final String AB = "0147SUfikyz";
 	static SecureRandom rnd = new SecureRandom();
 
@@ -108,7 +114,28 @@ public class AdminUtils{
 		return (Iterable<QuestionChoices>) choices;
 	}
 
-
+	public User getActiveUser(HttpServletRequest request){
+		
+		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
+		
+		String token = csrf.getToken();
+					
+		String token_hash = utils.MD5( token );				
+		User token_user = null;
+		
+		try{
+			token_user = userDao.findByToken( token_hash );
+		}
+		catch ( Exception error ){
+			token_user = null;
+			utils.showThis( "user null" );
+		}
+		
+		return token_user;
+		
+		
+		
+	}
 
 	@Autowired
 	UserAnswersDao userAnswerDao;
