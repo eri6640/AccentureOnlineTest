@@ -17,7 +17,7 @@ public class TestQuestions {
 	public TestQuestions() {}
 
 	
-	public TestQuestions(TYPE type, String question, Tests tests, User user, String answer,
+	public TestQuestions(String type, String question, Tests tests, User user, String answer,
 			String multipleChoice, byte[] imageAnswer, String textAnswer) {
 		this.type = type;
 		this.question = question;
@@ -48,7 +48,7 @@ public class TestQuestions {
 	private long id;
 
 	@Column
-	private TYPE type = TYPE.SINGLE_CHOICE;
+	private String type;
 
 	@Column
 	private String question;
@@ -106,13 +106,16 @@ public class TestQuestions {
 		this.user = user;
 	}
 
-	public TYPE getType() {
+
+	public String getType() {
 		return type;
 	}
 
-	public void setType(TYPE type) {
+
+	public void setType(String type) {
 		this.type = type;
 	}
+
 
 	public String getAnswer() {
 		return answer;
