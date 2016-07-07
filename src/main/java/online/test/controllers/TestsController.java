@@ -2,14 +2,12 @@ package online.test.controllers;
 
 import online.test.models.Tests;
 import online.test.models.User;
-import online.test.models.UserAnswers;
 import online.test.models.dao.TestsDao;
-import online.test.models.dao.UserAnswersDao;
-import online.test.models.dao.UserDao;
-import online.test.utils.LoginUtils;
+import online.test.utils.MainUtils;
+import online.test.utils.TestQuestionsUtils;
 import online.test.utils.TestsUtils;
+import online.test.utils.UserUtils;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,13 +23,16 @@ public class TestsController {
 	
 	@Autowired
 	private TestsDao testsDao;
-	@Autowired
-	private UserDao userDao;
-	@Autowired
-	private UserAnswersDao userAnswersDao;
+
+	
+	MainUtils mainUtils = new MainUtils();
 	
 	@Autowired
 	TestsUtils testsUtils = new TestsUtils();
+	@Autowired
+	UserUtils userUtils = new UserUtils();
+	@Autowired
+	TestQuestionsUtils testQuestionsUtils = new TestQuestionsUtils();
 	
 	@RequestMapping("/data/tests/selectallTests")
 	@ResponseBody
