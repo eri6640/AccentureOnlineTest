@@ -149,13 +149,20 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 	}
 
 	$scope.DeleteQuestion = function(questionChoice) {
-		var questionID = questionChoice.testQuestion.id;
+		var questionID = questionChoice.testQuestion.tests.id;
+		var testsID = questionChoice.testQuestion.id;
 		var data = $.param({
+			testsID : testsID,
 			questionID : questionID
+			
 		})
-		$http.get("/data/tests/deleteQuestion?questionID=" + questionID)
-				.success(function() {
-					alert("DELETED");
+		$http.get("/data/tests/deleteQuestion?testsID="+testsID+"&questionID="+questionID)
+				.success(function(data) {
+					if(data){
+						alert("CANT DELETE!");
+					}else{
+						alert("DELETED!");
+					}
 				}).error(function() {
 					alert("CAN'T DELETE THIS QUESTION");
 				});
@@ -168,14 +175,19 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 		})
 
 		$http.get("/data/tests/deleteQuestionChoices?choiceID=" + choiceID)
-				.success(function() {
-					alert("DELETED");
+				.success(function(data) {
+					if(data){
+						alert("DELETED!");
+					}else{
+						alert("CANT DELETE!");
+					}
+				}).error(function() {
+					alert("CAN'T DELETE THIS Choice");
 				});
 
 	}
 
 });
-
 
 
 app.controller('UserTestController', function($rootScope, $scope, $http,
@@ -212,17 +224,11 @@ app.controller('UserTestController', function($rootScope, $scope, $http,
 			$scope.currentUserAnswers = data;
 		});
 
-
 						$http.get( "/data/tests/userAnswers?userID="+userId+"&testID="+testId ).success( function ( data ){
 							$scope.currentUserAnswers = data;
 							$scope.success = { "message" : "Success" };
 						});
-						
-						
 					};
-
-	
-
 
 });
 

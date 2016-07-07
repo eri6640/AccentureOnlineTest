@@ -36,40 +36,53 @@ public class AdminController {
 	public Iterable<User> getUsers() {
 		return adminUtils.selectAllUsers();
 	}
-	
+
 	@RequestMapping("/data/tests/userAnswers")
 	@ResponseBody
-	public Iterable<UserAnswers> getSelectedUserAnswers(@RequestParam("userID") Long userID, @RequestParam("testID") Long testID, HttpServletRequest request) {
-	return adminUtils.selectCurrentUserTest(userID, testID);
+	public Iterable<UserAnswers> getSelectedUserAnswers(@RequestParam("userID") Long userID,
+			@RequestParam("testID") Long testID, HttpServletRequest request) {
+		return adminUtils.selectCurrentUserTest(userID, testID);
 	}
-	
 
 	@RequestMapping("/data/tests/questionChoices")
 	@ResponseBody
-	public Iterable<QuestionChoices> getQuestionChoices(@RequestParam("testID") Long testID, HttpServletRequest request) {
+	public Iterable<QuestionChoices> getQuestionChoices(@RequestParam("testID") Long testID,
+			HttpServletRequest request) {
 		return adminUtils.selectCurrentQuestionChoices(testID);
 	}
 
-
 	@RequestMapping("/data/tests/deleteQuestionChoices")
 	@ResponseBody
-	public void deleteQuestionChoice(@RequestParam("choiceID") Long choiceID, HttpServletRequest request) {
-		
+	public Boolean deleteQuestionChoice(@RequestParam("choiceID") Long choiceID, HttpServletRequest request) {
 		adminUtils.deleteChoice(choiceID);
+		return true;
 	}
-	
+
 	@RequestMapping("/data/tests/deleteQuestion")
 	@ResponseBody
-	public void deleteQuestion(@RequestParam("questionID") Long questionID, HttpServletRequest request) {
-		Iterable<QuestionChoices> choices = adminUtils.selectCurrentQuestionChoices(questionID);
-		for (QuestionChoices questionChoices : choices) {
-			if(questionChoices.getTestQuestion().getId()==questionID){
-			adminUtils.deleteChoice(questionChoices.getId());
+	public Boolean deleteQuestion(@RequestParam("testsID") Long questionID, @RequestParam("questionID") Long testsID,
+			HttpServletRequest request) {
+		boolean questionExists = false;
+		Iterable<UserAnswers> userAnswers = adminUtils.getAllUserTests();
+		for (UserAnswers userAnswers2 : userAnswers) {
+			if (userAnswers2.getTestsQuestions().getId() == questionID) {
+				questionExists = true;
 			}
 		}
-		adminUtils.deleteQuestion(questionID);
+		if (questionExists == false) {
+			Iterable<QuestionChoices> choices = adminUtils.selectCurrentQuestionChoices(testsID);
+			for (QuestionChoices questionChoices : choices) {
+				if (questionChoices.getTestQuestion().getId() == questionID) {
+					adminUtils.deleteChoice(questionChoices.getId());
+				}
+			}
+			adminUtils.deleteQuestion(questionID);
+			return false;
+		} else {
+			return true;
+		}
 	}
-	
+
 	@Autowired
 	LoginUtils loginUtils = new LoginUtils();
 	@Autowired

@@ -120,7 +120,6 @@ public class AdminUtils{
 	TestQuestionsDao testQuestions;
 	@Autowired
 	QuestionChoicesDao questionChoiceDao;
-	
 	@Autowired
 	private JavaMailSender javaMailSender;
 }
