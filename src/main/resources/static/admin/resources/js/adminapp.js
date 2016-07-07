@@ -410,7 +410,7 @@ app.controller( 'TestsController', function( $rootScope, $scope, $http, $locatio
 		
 	    var questionType = item;
 	    
-	    if( item == 'M' || item == 'S' ){
+	    if( item == 1 || item == 2 ){
     	$scope.showOption = true;
 	    }
 	    else{

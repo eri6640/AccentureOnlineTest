@@ -3,6 +3,7 @@ package online.test.controllers;
 import online.test.models.Tests;
 import online.test.models.User;
 import online.test.models.dao.TestsDao;
+import online.test.models.dao.UserDao;
 import online.test.utils.MainUtils;
 import online.test.utils.TestQuestionsUtils;
 import online.test.utils.TestsUtils;
@@ -23,6 +24,8 @@ public class TestsController {
 	
 	@Autowired
 	private TestsDao testsDao;
+	@Autowired
+	private UserDao userDao;
 
 	
 	MainUtils mainUtils = new MainUtils();
