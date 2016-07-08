@@ -14,6 +14,9 @@ app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 	}).when('/question', {
 		controller : 'QuestionController',
 		templateUrl : 'page/question.html'
+	}).when('/question-end', {
+		controller : 'MainController',
+		templateUrl : 'page/question_end.html'
 	}).otherwise({ redirectTo: '/home' });
 
 	//$locationProvider.html5Mode({
@@ -43,7 +46,7 @@ app.run( [ '$route', '$rootScope', '$location', function ( $route, $rootScope, $
 
 
 app.controller( 'MainController', function( $rootScope, $scope, $http, $location, $window ) {
-	
+	$('#myModal').focus();
 });
 
 app.controller( 'TestListController', function( $rootScope, $scope, $http, $location, $window ) {
@@ -121,6 +124,8 @@ app.controller( 'TestListController', function( $rootScope, $scope, $http, $loca
 
 app.controller( 'QuestionController', function( $rootScope, $scope, $http, $location, $window ) {
 	
+	$scope.answer_testfield = null;
+	
 	$scope.nextQuestion = function( testId ) {
 		
 		$http.get( "/data/tests/getNextQuestion?testId=" + testId ).success( function ( data ) {
@@ -152,7 +157,7 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 					}
 					else{
 						//metam atpakalj uz izvelni
-						$window.location.href = "/";
+						$scope.forceStopTest( testId );
 					}
 					
 				});
@@ -160,6 +165,8 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 			}
 			else{
 				//paradam, ka visi jautajumi ir izpilditi
+				$scope.forceStopTest( testId );
+				$window.location.href = "/#/question-end";
 			}
 			
 		});
@@ -178,12 +185,16 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 			}
 			
 		});
-	}
+	};
 	$scope.loadTestInProgress();
 	
 	$scope.selectRatio = function( value ) {
 		$scope.selectedData = value;
-	}
+	};
+	
+	$scope.testareaContent = function( value ) {
+		$scope.answer_testfield = value;
+	};
 	
 	
 	$scope.submitQuestion = function( question_type ) {
@@ -195,14 +206,14 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 					$scope.saveAnswer( $scope.selectedData, question_type );
 				}
 				else{
-					$window.alert("nav sniegta atbilde!");
+					$window.alert("nav sniegta atbilde! - 1");
 				}
 				break;
 			case 2:
 			    $scope.albumNameArray = [];
 			    angular.forEach($scope.answers, function(answer, question_type){
 			      if(answer.selected){
-			    	  $scope.albumNameArray.push(answer.id);
+			    	  $scope.albumNameArray.push( answer.id );
 			      }
 			    });
 			    //$window.alert( JSON.stringify( $scope.albumNameArray ) );
@@ -213,33 +224,34 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 					$scope.saveAnswer( $scope.answer_testfield, question_type );
 				}
 				else{
-					$window.alert("nav sniegta atbilde!");
+					$window.alert("nav sniegta atbilde! - 3" );
 				}
 				break;
 			case 4:
 				var id = document.getElementById("sampleBoard");
 			    var img = id.toDataURL("image/png");
-			    $scope.saveAnswer( img );
+			    //$scope.saveAnswer( img );
+			    $scope.saveAnswer( "image" );
 				break;
 			default:
 				//dsfg
 		}
-		$window.alert("submitQuestion");
-	}
+		//$window.alert("submitQuestion");
+	};
 	
 	$scope.saveAnswer = function( user_answers, question_type ) {
 		
 		if( $scope.question ){
 			
 
-			$http.get( "/data/tests/saveAnswer?questionId=" + $scope.question.id + "&answer='" + user_answers + "'" ).success( function ( data ) {
+			$http.get( "/data/tests/saveAnswer?questionId=" + $scope.question.id + "&answer=" + user_answers ).success( function ( data ) {
 			
 				if( data ){
-					$window.alert( "saved" );
+					//$window.alert( "saved" );
 					$scope.loadTestInProgress();
 				}
 				else{
-					$window.alert( "save error" );
+					//$window.alert( "save error" );
 				}
 				
 			});
@@ -248,7 +260,18 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 			$window.alert( "nevar piekljut jautajumam" );
 		}
 		
-	}
+	};
+	
+	$scope.forceStopTest = function( test_id ) {
+		
+		$http.get( "/data/tests/forceStopTest?testId=" + test_id ).success( function ( data ) {
+			
+			//
+			
+		});
+		
+		
+	};
 	
 	
 });
