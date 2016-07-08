@@ -70,35 +70,41 @@ public class AdminUtils{
 	public void addChoices(Long questionID, String choice1, String choice2, String choice3, String choice4) {
 		TestQuestions testQuestions = testQuestionsDao.findOne(questionID);
 
-		if (!(choice1.equals("")) || !(choice1.equals(null))) {
+		if (!(choice1.equals("")) || !(choice1.equals(null)) || !(choice1.equals("undefined")) ) {
 			QuestionChoices choice = new QuestionChoices();
 			choice.setTestQuestion(testQuestions);
 			choice.setQuestionOption(choice1);
 			questionChoiceDao.save(choice);
 		}
 
-		if (!(choice2.equals("")) || !(choice2.equals(null))) {
+		if (!(choice2.equals("")) || !(choice2.equals(null)) || !(choice2.equals("undefined")) ) {
 			QuestionChoices choice = new QuestionChoices();
 			choice.setTestQuestion(testQuestions);
 			choice.setQuestionOption(choice2);
 			questionChoiceDao.save(choice);
 		}
 
-		if (!(choice3.equals("")) || !(choice3.equals(null))) {
+		if (!(choice3.equals("")) || !(choice3.equals(null)) || !(choice3.equals("undefined")) ) {
 			QuestionChoices choice = new QuestionChoices();
 			choice.setTestQuestion(testQuestions);
 			choice.setQuestionOption(choice3);
 			questionChoiceDao.save(choice);
 		}
 
-		if (!(choice4.equals("")) || !(choice4.equals(null))) {
+		if (!(choice4.equals("")) || !(choice4.equals(null)) || !(choice4.equals("undefined")) ) {
 			QuestionChoices choice = new QuestionChoices();
 			choice.setTestQuestion(testQuestions);
 			choice.setQuestionOption(choice4);
 			questionChoiceDao.save(choice);
 		}
 	}
-
+	
+	public void updateQuestion(int questionType, Long questionID) {
+				TestQuestions testQuestion = testQuestionsDao.findOne(questionID);
+				testQuestion.setType(questionType);
+				testQuestionsDao.save(testQuestion);
+		}
+	
 	public Iterable<TestQuestions> getAllTestsQuestions(Long testID) {
 		Iterable<TestQuestions> testQuestions = testQuestionsDao.getCurrentTestQuestions(testID);
 		return testQuestions;

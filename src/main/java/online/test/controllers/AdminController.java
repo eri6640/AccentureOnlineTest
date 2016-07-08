@@ -83,7 +83,14 @@ public class AdminController {
 		adminUtils.deleteChoice(choiceID);
 		return true;
 	}
-
+	
+	@RequestMapping("/data/tests/setQuestionType")
+		@ResponseBody
+		public Boolean setCurrentQuestionType(@RequestParam("questionType") int questionType,@RequestParam("questionID")Long questionID) {
+			adminUtils.updateQuestion(questionType, questionID);
+		return true;
+	}
+	
 	@RequestMapping("/data/tests/deleteQuestion")
 	@ResponseBody
 	public Boolean deleteQuestion(@RequestParam("testsID") Long questionID, @RequestParam("questionID") Long testsID,
