@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Simple Responsive Admin</title>
+		<link href="../admin/resources/css/admin_bootstrap.css" rel="stylesheet" />
+		<link href="../admin/resources/css/font_admin.css" rel="stylesheet" />
+		<link href="../admin/resources/css/custom.css" rel="stylesheet" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs/jqc-1.12.3,dt-1.10.12/datatables.min.css"/>
+		<link rel="stylesheet" type="text/css" href="/resources/css/angular-bootstrap.css" />
+		
+    	
+		<style type="text/css">
+			[ng\:cloak], [ng-cloak], .ng-cloak {
+				display: none !important;
+			}
+		</style>
+		
+	</head>
+	<body ng-app="AdminAPP" ng-cloak class="ng-cloak">
+     
+
+    <div id="wrapper">
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="adjust-nav" ng-controller="LoginController">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#"><img src="../admin/resources/img/admin_logo.png" /></a>
+				</div>
+              
+				<span class="logout-spn"><a ng-click="LogOut()"  >LOGOUT</a></span>
+			</div>
+		</div>
+
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+                 
+					<li class="active-link"><a href="/acp/#/admin_main" ><i class="fa fa-desktop "></i>Main Page</a></li>
+ 					<li><a href="/acp/#/users"><i class="fa fa-qrcode  "></i>Users</a></li>
+                    <li><a href="/acp/#/create-test"><i class="fa fa-edit "></i>Tests</a></li>
+                    <li><a href="/acp/#/user-tests"><i class="fa fa-table "></i>Completed tests</a></li>
+                    <li><a href="/acp/#/test-list"><i class="fa fa-edit "></i>Test questions</a></li>
+
+				</ul>
+			</div>
+		</nav>
+
+		<div id="page-wrapper" >
+			<div id="page-inner">
+				<div class="row">
+					<div class="col-lg-12"><h2>ADMIN DASHBOARD</h2></div>
+                </div>              
+
+				<hr />
+				<div class="row">
+ 					<div class="col-lg-12 ">
+						<div class="alert alert-info">
+ 							<strong>Welcome Administrator ! </strong>
+						</div>
+                       
+					</div>
+				</div>
+				
+
+				<div ng-view class="row text-center pad-top" style="padding: 0 40px;"></div>
+                 
+				<div class="row">
+					<div class="col-lg-12 ">
+					<br/>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="footer">
+		<div class="row">
+			<div class="col-lg-12" >&copy;  2014 yourdomain.com | Design by: <a href="http://binarytheme.com" style="color:#fff;" target="_blank">www.binarytheme.com</a></div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="/resources/js/angular-bootstrap.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/admin/resources/js/adminapp.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/admin/resources/js/jquery-1.10.2.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/admin/resources/js/bootstrap.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/admin/resources/js/custom.js" charset="utf-8"></script>
+	
+
+
+</body>
+</html>

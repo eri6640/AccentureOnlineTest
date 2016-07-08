@@ -1,0 +1,5 @@
+<fieldset class="form-group">
+	<div class="radio" ng-repeat="answer in answers">
+		<label><input type="radio" name="radio" data-ng-click="selectRatio(answer.id)" ng-model="questionAnswer">{{answer.questionOption}}</label>
+	</div>
+</fieldset>

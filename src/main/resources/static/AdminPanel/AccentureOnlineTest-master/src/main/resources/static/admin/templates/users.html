@@ -1,0 +1,59 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs/jqc-1.12.3,dt-1.10.12/datatables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/u/bs/jqc-1.12.3,dt-1.10.12/datatables.min.js"></script>
+
+<div class="row">
+    <form ng-submit="addUser()">
+
+        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
+            <h4>Add user</h4>
+            <hr>        
+            <input type="email" class="form-control" ng-model="email" placeholder="E-mail"/>            
+            <br /> 
+            <input type="text" class="form-control" ng-model="name" placeholder="Name" />
+            <br />
+                            
+            <input type="text" class="form-control" ng-model="surname" placeholder="Surname"/>
+            <input type="submit" value="Add user" class="btn btn-success  btn-block" style="margin:20px 0px 0px;">
+            
+            <div ng-show="showInfoUsers" class="alert alert-info">{{userInfo}}</div>  
+                
+         </div>
+        
+    </form>
+</div>
+
+<!-- /. ROW  -->
+<hr>
+<hr>
+
+
+   <div class="row">
+      <div class = "add_user_row" >
+         <h4>All added users</h4>
+         <hr>
+         <table id="user_table" class="table table-striped table-bordered table-hover">
+            <thead>
+               <tr>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Username</th>
+                  <th>Delete User</th>
+                  <th>Reset password</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="user in users">
+                  <td>{{user.id}}</td>
+                  <td>{{user.name}}</td>
+                  <td>{{user.surname}}</td>
+                  <td>{{user.email}}</td>
+                  <td><button type="button" ng-click="delUser(user.id)" class="btn btn-danger">Delete</button></td>
+                  <td><button type="button" ng-click="resetPassword(user.id)" class="btn btn-warning">Reset password</button></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+
+<script type="text/javascript" src="/admin/resources/js/jquery-1.10.2.js" charset="utf-8"></script>

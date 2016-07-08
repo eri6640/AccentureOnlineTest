@@ -1,0 +1,25 @@
+
+
+
+<div ng-controller="LoginController" ng-show="showLogin">
+	<div class="container-fluid">
+		<video autoplay loop muted><source src="resources/img/bg_video.mp4" type="video/mp4"></video>
+	</div>
+
+	<div class="container">		
+		<form class="form-signin" ng-submit="loginSubmit()">
+	        <h2 class="form-signin-heading">Please sign in</h2>
+
+	        <label for="inputEmail" class="sr-only">Email address</label>
+	        <input name="email" type="email" id="inputEmail" ng-model="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+
+	        <label for="inputPassword" class="sr-only">Password</label>
+	        <input name="password" type="password" id="inputPassword" ng-model="password" name="password" class="form-control" placeholder="Password" required style="margin-top:-15px;">
+
+	        <button class="btn btn-sm btn-primary btn-block" type="submit" id="submit" style="margin-top:25px;">Sign in</button>
+	        <button class="btn btn-sm btn-primary btn-block" type="button">Register</button>
+      </form>
+
+    </div>
+
+</div>
