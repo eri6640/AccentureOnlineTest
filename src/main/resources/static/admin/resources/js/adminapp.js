@@ -451,4 +451,11 @@ app.controller('TestsController', function($rootScope, $scope, $http,
 		});
 	};
 
+	$scope.edit = function(id, title, desc) {
+		$http.get( "/data/tests/edit?id=" + id + "&title=" + title + "&description=" + desc).success( function(data) {
+			$scope.loadTests();
+							
+		});				
+	};	
+
 });
