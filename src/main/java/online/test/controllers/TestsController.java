@@ -74,6 +74,23 @@ public class TestsController {
 		}
 		return true;
 	}
+
+	@RequestMapping("/data/tests/edit")
+	@ResponseBody
+	public String editTest(long id, String title, String description){
+		Tests test = null;	
+		
+		try {			
+			test = new Tests(id);
+			test.setTitle(title);
+			test.setDescription(description);
+			testsDao.save(test);						
+		}
+	    catch (Exception ex) {
+	    	return "Error updating the test: " + ex.toString();
+	    }
+	    return "Test succesfully updated!";
+	}
 	
 	@RequestMapping("/data/tests/selectAvailableTests")
 	@ResponseBody
@@ -86,6 +103,27 @@ public class TestsController {
 	@ResponseBody
 	public Map<String,Object> getTest( @RequestParam("testId") String testId_string ) {
 		return testsUtils.getTest( testId_string );
+	}
+	
+	@RequestMapping("/data/tests/startTest")
+	@ResponseBody
+	public boolean startTest( @RequestParam("testId") String testId_string, HttpServletRequest request ) {
+		
+		User user_user = null;
+		if( ( user_user = userUtils.getUserFromRequest( request ) ) == null ){
+			mainUtils.showThis( "User null" );
+			return false;
+		}
+		
+		if( testsUtils.getStartedTest( user_user ) != null ) return false;
+		
+		Tests test_test = testsUtils.getTestObject( testId_string );
+		if( test_test == null ){
+			mainUtils.showThis( "Test null" );
+			return false;
+		}
+		
+		return testsUtils.startTest( user_user, test_test );
 	}
 	  
 } //TestsController end

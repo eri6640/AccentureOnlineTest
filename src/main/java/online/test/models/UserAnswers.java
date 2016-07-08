@@ -17,13 +17,13 @@ public class UserAnswers {
 
 	public UserAnswers() {}
 
-	public UserAnswers(TestQuestions testsQuestions, Tests tests, User user, String answer, byte[] imageAnswer) {
+	public UserAnswers( TestQuestions testsQuestions, Tests tests, User user, String answer, String imageAnswer, int status ) {
 		this.testsQuestions = testsQuestions;
 		this.tests = tests;
 		this.user = user;
 		this.answer = answer;
 		this.imageAnswer = imageAnswer;
-		this.status = 0;
+		this.status = status;
 		this.posted = System.currentTimeMillis();
 	}
 
@@ -47,7 +47,7 @@ public class UserAnswers {
 	private String answer;
 
 	@Column
-	private byte[] imageAnswer = null;
+	private String imageAnswer = null;
 
 	// 0-??? 1-started 2-pinned 3-done 4-fin
 	@Column
@@ -96,11 +96,11 @@ public class UserAnswers {
 		this.answer = answer;
 	}
 
-	public byte[] getImageAnswer() {
+	public String getImageAnswer() {
 		return imageAnswer;
 	}
 
-	public void setImageAnswer(byte[] imageAnswer) {
+	public void setImageAnswer(String imageAnswer) {
 		this.imageAnswer = imageAnswer;
 	}
 

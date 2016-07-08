@@ -33,13 +33,13 @@
 
 
 			<div class="col-md-12">
-				<h1 class="question">Where is your dog?{{question.id}}</h1>
-					<form action="" method="GET" class="question-form">
+				<h1 class="question">{{question.question}}</h1>
+					<form class="question-form" data-ng-submit="submitQuestion( question.type )">
 
-						<div ng-include="'page/answer_types/single.html'"></div>
+						<div ng-include="loadQuestionHTML"></div>
 						
 						<button type="button" class="btn btn-primary">Pin</button>
-						<button type="button" class="btn btn-primary">Next</button>
+						<button class="btn btn-primary" type="submit" id="submit">Next</button>
 						<button type="button" class="btn btn-danger">Force End</button>
 					</form>
 

@@ -13,9 +13,11 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
+import online.test.models.TestQuestions;
 import online.test.models.Tests;
 import online.test.models.User;
 import online.test.models.UserAnswers;
+import online.test.models.dao.TestQuestionsDao;
 import online.test.models.dao.TestsDao;
 import online.test.models.dao.UserAnswersDao;
 import online.test.models.dao.UserDao;
@@ -29,6 +31,9 @@ public class TestsUtils {
 	private UserDao userDao;
 	@Autowired
 	private UserAnswersDao userAnswersDao;
+
+	@Autowired
+	TestQuestionsUtils testQuestionsUtils = new TestQuestionsUtils();
 	
 	MainUtils utils = new MainUtils();
 	
@@ -199,6 +204,17 @@ public class TestsUtils {
 		}
 				
 		return null;
+	}
+	
+	public boolean startTest( User user_user, Tests test_test ){
+		
+		TestQuestions question = testQuestionsUtils.getUserNextQuestion( user_user, test_test );
+		if( question == null ) return false;
+		
+		UserAnswers user_answer = new UserAnswers( question, test_test, user_user, null, null, 1 );
+		
+		userAnswersDao.save( user_answer );
+		return true;
 	}
 	
 }

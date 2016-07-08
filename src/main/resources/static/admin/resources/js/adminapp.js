@@ -1,7 +1,6 @@
 var app = angular.module('AdminAPP', [ 'ngRoute' ]);
 
-app
-		.config(function($routeProvider, $httpProvider, $locationProvider) {
+app.config(function($routeProvider, $httpProvider, $locationProvider) {
 
 			$routeProvider.when('/home', {
 				controller : 'MainController',
@@ -82,7 +81,7 @@ app.controller('LoginController', function($rootScope, $scope, $http,
 	$http.get("/data/auth/isloggedin").success(function(data) {
 		$scope.showLogin = !data;
 		if (data) {
-			$window.location.href = "/";
+			//$window.location.href = "/";
 		}
 	});
 
@@ -101,7 +100,6 @@ app.controller('LoginController', function($rootScope, $scope, $http,
 							+ password).success(function(data) {
 				$scope.success = data;
 				$window.location.href = "/";
-				// $location.path( '/' );
 			});
 
 		} else {
@@ -109,14 +107,19 @@ app.controller('LoginController', function($rootScope, $scope, $http,
 				"message" : "Nav aizpilditi visi lauki!"
 			};
 		}
-
+	};
+	$scope.LogOut = function() {
+		$http.get("/data/auth/logout").success(function(data) {
+			$window.location.href = "/#/login";
+		});
 	};
 
 });
 
 app.controller('AdminController', function($rootScope, $scope, $http,
 		$location, $window) {
-
+	
+	var searchinput='';
 	var urlBase = "";
 	$scope.toggle = true;
 	$scope.selection = [];
@@ -191,6 +194,7 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 
 app.controller('UserTestController', function($rootScope, $scope, $http,
 		$location, $window) {
+	var searchInput='';
 	var urlBase = "";
 	$scope.toggle = true;
 	$scope.selection = [];
@@ -236,7 +240,8 @@ app.controller('UserTestController', function($rootScope, $scope, $http,
 
 app.controller('UserController', function($rootScope, $scope, $http, $location,
 		$window) {
-
+	
+	var searchinput='';
 	$scope.showInfoUsers = false;
 	$scope.userInfo = "";
 
@@ -258,7 +263,7 @@ app.controller('UserController', function($rootScope, $scope, $http, $location,
 	};
 
 	$scope.loadUsers();
-
+	
 	$scope.addUser = function() {
 
 		$http.get(
@@ -272,7 +277,15 @@ app.controller('UserController', function($rootScope, $scope, $http, $location,
 
 		});
 	};
-
+	
+	$scope.resetPassword=function(id){
+		
+		$http.get("/data/user/reset?id=" + id).success(function(data) {
+			$scope.showInfoUsers = true;
+			$scope.userInfo = "Password reset!";
+		});
+	};
+	
 	$scope.delUser = function(id) {
 
 		$http.get("/data/user/delete?id=" + id).success(function(data) {
@@ -286,7 +299,8 @@ app.controller('UserController', function($rootScope, $scope, $http, $location,
 
 app.controller('TestsController', function($rootScope, $scope, $http,
 		$location, $window) {
-
+	
+	var searchinput='';
 	var thisTestID;
 	var thisUserID;
 	var thisQuestionID;
@@ -377,9 +391,10 @@ app.controller('TestsController', function($rootScope, $scope, $http,
 	var questionType;
 
 	$scope.changedValue = function(item) {
-		
+
 		questionType = item;
-		$http.get("/data/tests/setQuestionType?questionType=" + questionType
+		$http.get(
+				"/data/tests/setQuestionType?questionType=" + questionType
 						+ "&questionID=" + thisQuestionID).success(
 				function(data) {
 					if (data) {
@@ -389,8 +404,8 @@ app.controller('TestsController', function($rootScope, $scope, $http,
 						$scope.choiceWarning = "No question selected!";
 					}
 				}).error(function() {
-					//$scope.showAlertChoices = true;
-					//$scope.choiceWarning = "No question created!";
+			// $scope.showAlertChoices = true;
+			// $scope.choiceWarning = "No question created!";
 		});
 
 		if (item == 1 || item == 2) {
@@ -448,6 +463,15 @@ app.controller('TestsController', function($rootScope, $scope, $http,
 		}).error(function() {
 			$scope.showAlertChoices = true;
 			$scope.choiceWarning = "Can't create choices!";
+		});
+	};
+
+	$scope.edit = function(id, title, desc) {
+		$http.get(
+				"/data/tests/edit?id=" + id + "&title=" + title
+						+ "&description=" + desc).success(function(data) {
+			$scope.loadTests();
+
 		});
 	};
 

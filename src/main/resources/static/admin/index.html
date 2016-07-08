@@ -24,7 +24,7 @@
 
     <div id="wrapper">
 		<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="adjust-nav">
+			<div class="adjust-nav" ng-controller="LoginController">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
 						<span class="icon-bar"></span>
@@ -34,7 +34,7 @@
 					<a class="navbar-brand" href="#"><img src="../admin/resources/img/admin_logo.png" /></a>
 				</div>
               
-				<span class="logout-spn" ><a href="#" style="color:#fff;">LOGOUT</a></span>
+				<span class="logout-spn"><a style="color:#fff;" ng-click="LogOut()"  >LOGOUT</a></span>
 			</div>
 		</div>
 

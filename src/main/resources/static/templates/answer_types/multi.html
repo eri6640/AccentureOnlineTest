@@ -1,17 +1,5 @@
 <fieldset class="form-group">
-	<div class="checkbox">
-		<label><input type="checkbox" name="checkbox">Option 1</label>
-	</div>
-	<div class="checkbox">
-		<label><input type="checkbox" name="checkbox">Option 2</label>
-	</div>
-	<div class="checkbox">
-		<label><input type="checkbox" name="checkbox">Option 3</label>
-	</div>
-	<div class="checkbox">
-		<label><input type="checkbox" name="checkbox">Option 4</label>
-	</div>
-	<div class="checkbox">
-		<label><input type="checkbox" name="checkbox">Option 5</label>
+	<div class="checkbox" ng-repeat="answer in answers">
+		<label><input type="checkbox" name="checkbox" ng-model="answer.selected" value="answer.id">{{answer.questionOption}}</label>
 	</div>
 </fieldset>
