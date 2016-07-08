@@ -47,7 +47,26 @@ public class UserController {
 		return true;
 	}
 	
-	
+	@RequestMapping("/data/user/reset")
+	@ResponseBody
+	public Boolean resetMail(long id) {
+		//User user = null;
+		try {
+			String password_string=adminUtils.randomString(10);
+			String password_hash=mainUtils.MD5(password_string);
+			User newUser = userDao.findById(id);
+			newUser.setPasswordHash(password_hash);
+			
+			adminUtils.send((String)newUser.getEmail(), password_string);
+			
+			userDao.save(newUser);
+		}
+		catch (Exception ex) {
+			System.out.println("Error resetting the mail: " + ex.toString());
+			return false;
+		}
+		return true;
+	}
 	 
 /***************/
   

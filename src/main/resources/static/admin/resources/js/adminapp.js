@@ -1,4 +1,4 @@
-var app = angular.module('AdminAPP', [ 'ngRoute' ]);
+ar app = angular.module('AdminAPP', [ 'ngRoute' ]);
 
 app
 		.config(function($routeProvider, $httpProvider, $locationProvider) {
@@ -261,7 +261,7 @@ app.controller('UserController', function($rootScope, $scope, $http, $location,
 	};
 
 	$scope.loadUsers();
-
+	
 	$scope.addUser = function() {
 
 		$http.get(
@@ -275,7 +275,15 @@ app.controller('UserController', function($rootScope, $scope, $http, $location,
 
 		});
 	};
-
+	
+	$scope.resetPassword=function(id){
+		
+		$http.get("/data/user/reset?id=" + id).success(function(data) {
+			$scope.showInfoUsers = true;
+			$scope.userInfo = "Password reset!";
+		});
+	};
+	
 	$scope.delUser = function(id) {
 
 		$http.get("/data/user/delete?id=" + id).success(function(data) {
