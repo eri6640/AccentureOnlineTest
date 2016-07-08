@@ -9,7 +9,6 @@ app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 	}).when('/', {
 		redirectTo: '/home'
 	}).when('/login', {
-		controller : 'LoginController',
 		templateUrl : 'page/login.html'
 	}).when('/question', {
 		controller : 'QuestionController',
@@ -46,7 +45,7 @@ app.run( [ '$route', '$rootScope', '$location', function ( $route, $rootScope, $
 
 
 app.controller( 'MainController', function( $rootScope, $scope, $http, $location, $window ) {
-	$('#myModal').focus();
+
 });
 
 app.controller( 'TestListController', function( $rootScope, $scope, $http, $location, $window ) {
@@ -125,6 +124,7 @@ app.controller( 'TestListController', function( $rootScope, $scope, $http, $loca
 app.controller( 'QuestionController', function( $rootScope, $scope, $http, $location, $window ) {
 	
 	$scope.answer_testfield = null;
+	$scope.timerTime = new Date().getTime();
 	
 	$scope.nextQuestion = function( testId ) {
 		
@@ -162,11 +162,22 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 					
 				});
 				
+				$http.get( "/data/tests/getTimerTime?testId=" + testId ).success( function ( data ) {
+					
+					if( data ){
+						$scope.timerTime = data;
+					}
+					else{
+						//metam atpakalj uz izvelni
+						$scope.forceStopTest( testId );
+					}
+					
+				});
+				
 			}
 			else{
 				//paradam, ka visi jautajumi ir izpilditi
 				$scope.forceStopTest( testId );
-				$window.location.href = "/#/question-end";
 			}
 			
 		});
@@ -266,12 +277,54 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 		
 		$http.get( "/data/tests/forceStopTest?testId=" + test_id ).success( function ( data ) {
 			
-			//
+			$window.location.href = "/#/question-end";
 			
 		});
 		
 		
 	};
+	
+	$scope.forceStopTestAlert = function( test_id ) {
+		
+		var confirmThis = $window.confirm("forceStopTestAlert()");
+		if( confirmThis == true ) {
+			$scope.forceStopTest( test_id );
+		}		
+		
+	};
+	
+
+	
+	$scope.pinPoint = function( question_id ) {
+		
+		$http.get( "/data/tests/pinPoint?questionId=" + question_id ).success( function ( data ) {
+			
+			if(data){
+				$scope.loadTestInProgress();
+				$window.alert( "pinPoint success" );
+			}
+			else{
+				$window.alert( "pinPoint error" );
+			}
+			
+		});
+		
+	};
+	
+	
+	/*$scope.stylePath = 'css/style.css';
+
+	$scope.changePath = function() {
+		$scope.stylePath = 'css/style.css';
+	};
+
+	$scope.changePath2 = function() {
+		$scope.stylePath = 'css/style2.css';
+	};
+
+	$scope.changePath3 = function() {
+		$scope.stylePath = 'css/style4.css';
+	};*/
 	
 	
 });
@@ -286,9 +339,9 @@ app.controller( 'LoginController', function( $rootScope, $scope, $http, $locatio
 	
 	$http.get( "/data/auth/isloggedin" ).success( function ( data ) {
 		$scope.showLogin = ! data;
-		if( data ){
+		/*if( data ){
 			$window.location.href = "/";
-		}
+		}*/
 	});
 	
 
@@ -329,7 +382,6 @@ app.controller( 'LoginController', function( $rootScope, $scope, $http, $locatio
 
 
 app.controller( 'TimerController', [ '$scope', '$interval', '$window', function( $scope, $interval, $window ) {
-	$scope.timerTime = new Date().getTime();
 	$scope.timeleft = 0;
 
     var timer;
@@ -343,13 +395,8 @@ app.controller( 'TimerController', [ '$scope', '$interval', '$window', function(
 			if( $scope.timeleft >= 60 * 60 ) {
 				$scope.stopTimer();
 				
-				var confirmThis = $window.confirm("Press a button!");
-				if( confirmThis == true ) {
-					$window.alert("yes");
-				}
-				else {
-					$window.alert("false");
-				}
+				
+				//
 			}
 		}, 1000);
     };
@@ -358,12 +405,8 @@ app.controller( 'TimerController', [ '$scope', '$interval', '$window', function(
     	if( angular.isDefined( timer ) ) {
     		$interval.cancel( timer );
     		timer = undefined;
+    		$scope.forceStopTest( testId );
     	}
-    };
-
-    $scope.resetTimer = function() {
-    	$scope.timerTime = new Date().getTime();
-    	$scope.stopTimer();
     };
 
     $scope.$on('$destroy', function() {

@@ -5,6 +5,7 @@ import online.test.models.QuestionChoices;
 import online.test.models.TestQuestions;
 import online.test.models.Tests;
 import online.test.models.User;
+import online.test.models.UserAnswers;
 import online.test.models.dao.QuestionChoicesDao;
 import online.test.models.dao.TestQuestionsDao;
 import online.test.models.dao.TestsDao;
@@ -16,6 +17,7 @@ import online.test.utils.TestsUtils;
 import online.test.utils.UserUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -155,6 +157,65 @@ public class TestQuestionsController {
 		return list;
 		
 	}
+	
+	
+	@RequestMapping("/data/tests/pinPoint")
+	@ResponseBody
+	public boolean pinPoint( @RequestParam("questionId") String questionId_string, HttpServletRequest request ) {
+		
+		User user_user = null;
+		if( ( user_user = userUtils.getUserFromRequest( request ) ) == null ){
+			mainUtils.showThis( "User null" );
+			mainUtils.showThis( "User null" );
+			mainUtils.showThis( "User null" );
+			mainUtils.showThis( "User null" );
+			mainUtils.showThis( "User null" );
+			mainUtils.showThis( "User null" );
+			return false;
+		}
+		
+		//if( testsUtils.getStartedTest( user_user ) == null ) return false;
+		
+		TestQuestions question = testQuestionsUtils.getQuestion( questionId_string );
+		if( question == null ){
+			mainUtils.showThis( "Test null" );
+			mainUtils.showThis( "Test null" );
+			mainUtils.showThis( "Test null" );
+			mainUtils.showThis( "Test null" );
+			mainUtils.showThis( "Test null" );
+			mainUtils.showThis( "Test null" );
+			mainUtils.showThis( "Test null" );
+			return false;
+		}
+		
+		return testQuestionsUtils.pinPoint( user_user, question );
+	}
+	
+	@RequestMapping("/data/tests/getTimerTime")
+	@ResponseBody
+	public long getTimerTime( @RequestParam("testId") String testId_string, HttpServletRequest request ) {
+		
+		//iegustam testu pec string id
+		Tests test_test = testsUtils.getTestObject( testId_string );
+		if( test_test == null ){
+			mainUtils.showThis( "Test null" );
+			return -7;
+		}
+				
+		//iegustam lietotaju pec request
+		User user_user = null;
+		if( ( user_user = userUtils.getUserFromRequest( request ) ) == null ){
+			mainUtils.showThis( "User null" );
+			return -7;
+		}
+		
+		List<UserAnswers> answer_list = userAnswersDao.getUserTestAllAnswers( test_test.getId(), user_user.getId() );
+		
+		if( answer_list.isEmpty() ) return -7;
+		
+		return answer_list.get( 0 ).getPosted();		
+	}
+
 	 
 	 
 } //TestsQuestionsController end

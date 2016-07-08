@@ -19,6 +19,8 @@ public class TestQuestionsUtils {
 	private TestQuestionsDao questionDao;
 	@Autowired
 	private UserAnswersDao userAnswersDao;
+	@Autowired
+	UserAnswersDao userAnswerDao;
 	
 	MainUtils utils = new MainUtils();
 	
@@ -61,7 +63,7 @@ public class TestQuestionsUtils {
 		
 		for( TestQuestions question : question_list ){
 			
-			if( ! isAlreadyAnswered( user_user, question ) ){
+			if( ! isAlreadyAnswered( user_user, question ) && ! isPinPointed( user_user, question ) ){
 				return question;
 			}
 			
@@ -123,6 +125,21 @@ public class TestQuestionsUtils {
 		return false;
 	}
 	
+	public int getPinPointedAnswerId( User user_user, TestQuestions quest_quest ){
+		
+		List<UserAnswers> answer_list = userAnswersDao.getCurrentUserTestAnswersPinPointed( quest_quest.getTests().getId(), user_user.getId() );
+		
+		if( answer_list.isEmpty() ) return 0;
+		
+		for( UserAnswers answer : answer_list ){
+			if( answer.getTestsQuestions().getId() == quest_quest.getId() ){
+				return (int) answer.getId();
+			}
+		}
+		
+		return 0;
+	}
+	
 	
 	public boolean saveAnswer( User user_user, TestQuestions question, String answer ){
 		
@@ -137,11 +154,23 @@ public class TestQuestionsUtils {
 			user_answer = new UserAnswers( question, question.getTests(), user_user, "", answer, 3 );// 3==izpildits
 		}
 		
-		if( user_answer == null ) return false;
+		int pined_answerId = 0;
+		
+		if( ( pined_answerId = getPinPointedAnswerId( user_user, question ) ) > 0  ){
+			userAnswerDao.delete( (long) pined_answerId );
+		}
 		
 		userAnswersDao.save( user_answer );
 		
 		return true;		
+	}
+	
+	public boolean pinPoint( User user_user, TestQuestions question ){
+		
+		UserAnswers user_answer = new UserAnswers( question, question.getTests(), user_user, null, null, 2 );
+		
+		userAnswersDao.save( user_answer );
+		return true;
 	}
 	
 	

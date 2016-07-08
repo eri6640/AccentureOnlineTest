@@ -38,9 +38,9 @@
 
 						<div ng-include="loadQuestionHTML"></div>
 						
-						<button type="button" class="btn btn-primary">Pin</button>
-						<button class="btn btn-primary" type="submit" id="submit">Next</button>
-						<button type="button" class="btn btn-danger">Force End</button>
+						<button type="button" class="btn btn-primary" ng-click="pinPoint( question.id )">PinPoint</button>
+						<button class="btn btn-success" type="submit" id="submit">Next Question</button>
+						<button type="button" class="btn btn-danger" ng-click="forceStopTestAlert(question.tests.id)">Force End</button>
 					</form>
 
 				</div>
