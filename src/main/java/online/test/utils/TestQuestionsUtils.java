@@ -79,6 +79,20 @@ public class TestQuestionsUtils {
 		return null;
 	}
 	
+	public TestQuestions getUserLastQuestion( User user_user, Tests test_test ){
+		
+		List<TestQuestions> question_list = questionDao.getLastTestQuestions( test_test.getId() );
+		
+		if( question_list.isEmpty() ){
+			utils.showThis( "question_list null" );
+			utils.showThis( "question_list null" );
+			utils.showThis( "question_list null" );
+			return null;
+		}
+		
+		return question_list.get( 0 );
+	}
+	
 	public boolean isAlreadyAnswered( User user_user, TestQuestions quest_quest ){
 		
 		List<UserAnswers> answer_list = userAnswersDao.getCurrentUserTestAnswers( quest_quest.getTests().getId(), user_user.getId() );

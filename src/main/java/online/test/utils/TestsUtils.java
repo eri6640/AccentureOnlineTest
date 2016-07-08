@@ -217,4 +217,21 @@ public class TestsUtils {
 		return true;
 	}
 	
+	public boolean forceStopTest( User user_user, Tests test_test ){
+		
+		TestQuestions question = testQuestionsUtils.getUserLastQuestion( user_user, test_test );
+		if( question == null ){
+
+			utils.showThis( "question null" );
+			utils.showThis( "question null" );
+			utils.showThis( "question null" );
+			return false;
+		}
+		
+		UserAnswers user_answer = new UserAnswers( question, test_test, user_user, null, null, 4 );
+		
+		userAnswersDao.save( user_answer );
+		return true;
+	}
+	
 }
