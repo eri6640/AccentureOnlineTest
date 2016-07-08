@@ -312,6 +312,21 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 	};
 	
 	
+	/*$scope.stylePath = 'css/style.css';
+
+	$scope.changePath = function() {
+		$scope.stylePath = 'css/style.css';
+	};
+
+	$scope.changePath2 = function() {
+		$scope.stylePath = 'css/style2.css';
+	};
+
+	$scope.changePath3 = function() {
+		$scope.stylePath = 'css/style4.css';
+	};*/
+	
+	
 });
 
 
