@@ -125,6 +125,7 @@ public class TestsController {
 		
 		return testsUtils.startTest( user_user, test_test );
 	}
+
 	
 	@RequestMapping("/data/tests/forceStopTest")
 	@ResponseBody
@@ -146,5 +147,6 @@ public class TestsController {
 		
 		return testsUtils.forceStopTest( user_user, test_test );
 	}
+
 	  
 } //TestsController end
