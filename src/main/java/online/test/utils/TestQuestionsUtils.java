@@ -11,10 +11,9 @@ import online.test.models.User;
 import online.test.models.UserAnswers;
 import online.test.models.dao.TestQuestionsDao;
 import online.test.models.dao.UserAnswersDao;
-import online.test.utils.interf.TestQuestionUtilsInterf;
 
 @Component
-public class TestQuestionsUtils implements TestQuestionUtilsInterf {
+public class TestQuestionsUtils {
 
 	@Autowired
 	private TestQuestionsDao questionDao;
@@ -22,10 +21,9 @@ public class TestQuestionsUtils implements TestQuestionUtilsInterf {
 	private UserAnswersDao userAnswersDao;
 	@Autowired
 	UserAnswersDao userAnswerDao;
-	@Autowired
-	MainUtils utils;
 	
-	@Override
+	MainUtils utils = new MainUtils();
+	
 	public TestQuestions getQuestion( String questionId_string ){
 		
 		if( questionId_string.isEmpty() ) return null;
@@ -40,7 +38,6 @@ public class TestQuestionsUtils implements TestQuestionUtilsInterf {
 		return getQuestion( question_id );
 	}
 	
-	@Override
 	public TestQuestions getQuestion( int question_id ){
 		
 		if( question_id <= 0 ) return null;
@@ -57,7 +54,7 @@ public class TestQuestionsUtils implements TestQuestionUtilsInterf {
 		
 		return question_question;
 	}
-	@Override
+	
 	public TestQuestions getUserNextQuestion( User user_user, Tests test_test ){
 		
 		List<TestQuestions> question_list = questionDao.getCurrentTestQuestions( test_test.getId() );
@@ -83,7 +80,7 @@ public class TestQuestionsUtils implements TestQuestionUtilsInterf {
 		
 		return null;
 	}
-	@Override
+	
 	public TestQuestions getUserLastQuestion( User user_user, Tests test_test ){
 		
 		List<TestQuestions> question_list = questionDao.getLastTestQuestions( test_test.getId() );
@@ -97,7 +94,7 @@ public class TestQuestionsUtils implements TestQuestionUtilsInterf {
 		
 		return question_list.get( 0 );
 	}
-	@Override
+	
 	public boolean isAlreadyAnswered( User user_user, TestQuestions quest_quest ){
 		
 		List<UserAnswers> answer_list = userAnswersDao.getCurrentUserTestAnswers( quest_quest.getTests().getId(), user_user.getId() );
@@ -112,7 +109,7 @@ public class TestQuestionsUtils implements TestQuestionUtilsInterf {
 		
 		return false;
 	}
-	@Override
+	
 	public boolean isPinPointed( User user_user, TestQuestions quest_quest ){
 		
 		List<UserAnswers> answer_list = userAnswersDao.getCurrentUserTestAnswersPinPointed( quest_quest.getTests().getId(), user_user.getId() );
@@ -127,7 +124,7 @@ public class TestQuestionsUtils implements TestQuestionUtilsInterf {
 		
 		return false;
 	}
-	@Override
+	
 	public int getPinPointedAnswerId( User user_user, TestQuestions quest_quest ){
 		
 		List<UserAnswers> answer_list = userAnswersDao.getCurrentUserTestAnswersPinPointed( quest_quest.getTests().getId(), user_user.getId() );
@@ -143,7 +140,7 @@ public class TestQuestionsUtils implements TestQuestionUtilsInterf {
 		return 0;
 	}
 	
-	@Override
+	
 	public boolean saveAnswer( User user_user, TestQuestions question, String answer ){
 		
 		if( question == null || answer.isEmpty() ) return false;
@@ -167,7 +164,7 @@ public class TestQuestionsUtils implements TestQuestionUtilsInterf {
 		
 		return true;		
 	}
-	@Override
+	
 	public boolean pinPoint( User user_user, TestQuestions question ){
 		
 		UserAnswers user_answer = new UserAnswers( question, question.getTests(), user_user, null, null, 2 );

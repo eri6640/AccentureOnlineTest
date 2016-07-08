@@ -9,12 +9,12 @@ import org.springframework.web.util.WebUtils;
 
 import online.test.models.User;
 import online.test.models.dao.UserDao;
-import online.test.utils.interf.LoginUtilsInterf;
 
 @Component
-public class LoginUtils implements LoginUtilsInterf {
+public class LoginUtils {
 	
-	@Override
+	MainUtils utils = new MainUtils();
+	
 	public boolean isAdmin( HttpServletRequest request ){
 		
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
@@ -45,7 +45,6 @@ public class LoginUtils implements LoginUtilsInterf {
 		
 	}
 	
-	@Override
 	public boolean isLoggedIn( HttpServletRequest request ){
 		
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
@@ -98,7 +97,7 @@ public class LoginUtils implements LoginUtilsInterf {
 		
 		return true; //is logged in
 	}
-	@Override
+	
 	public boolean doLogin( String form_email, String form_password, HttpServletRequest request ){
 		
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
@@ -139,7 +138,6 @@ public class LoginUtils implements LoginUtilsInterf {
 		
 	}
 	
-	@Override
 	public boolean logout( HttpServletRequest request ){
 		
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
@@ -178,8 +176,7 @@ public class LoginUtils implements LoginUtilsInterf {
 	 *  UserDao
 	 * 
 	 */
-	@Autowired
-	MainUtils utils;
+	
 	@Autowired
 	private UserDao userDao;
 

@@ -34,41 +34,37 @@ import online.test.models.dao.TestQuestionsDao;
 import online.test.models.dao.TestsDao;
 import online.test.models.dao.UserAnswersDao;
 import online.test.models.dao.UserDao;
-import online.test.utils.interf.AdminUtilsInterf;
 
 @Component
 
 
-public class AdminUtils implements AdminUtilsInterf{
+public class AdminUtils{
 	
 	MainUtils utils = new MainUtils();	
 	static final String AB = "0147SUfikyz";
 	static SecureRandom rnd = new SecureRandom();
 
-	@Override
+	
 	public void deleteChoice(Long choiceID){
 
 		questionChoiceDao.delete(choiceID);
 	}
 	
-	@Override
+	
 	public void deleteQuestion(Long questionID) {
 		testQuestionsDao.delete(questionID);
 	}
-	
-	@Override
+
 	public Iterable<UserAnswers> getAllUserTests() {
 		Iterable<UserAnswers> userTestList = userAnswerDao.findAll();
 		return userTestList;
 	}
 
-	@Override
 	public void addQuestion(int type, Long testID, Long userID, String question, String answer) {
 		TestQuestions testQuestions = new TestQuestions(type, question, testsDao.findById(testID), userDao.findById(userID), answer);
 		testQuestionsDao.save(testQuestions);
 	}
 
-	@Override
 	public void addChoices(Long questionID, String choice1, String choice2, String choice3, String choice4) {
 		TestQuestions testQuestions = testQuestionsDao.findOne(questionID);
 
@@ -100,35 +96,35 @@ public class AdminUtils implements AdminUtilsInterf{
 			questionChoiceDao.save(choice);
 		}
 	}
-	@Override
+	
 	public void updateQuestion(int questionType, Long questionID) {
 				TestQuestions testQuestion = testQuestionsDao.findOne(questionID);
 				testQuestion.setType(questionType);
 				testQuestionsDao.save(testQuestion);
 		}
-	@Override
+	
 	public Iterable<TestQuestions> getAllTestsQuestions(Long testID) {
 		Iterable<TestQuestions> testQuestions = testQuestionsDao.getCurrentTestQuestions(testID);
 		return testQuestions;
 	}
-	@Override
+
 	public Iterable<Tests> selectAllTests() {
 		Iterable<Tests> testList = testsDao.findAll();
 		return testList;
 	}
-	@Override
+
 	public Iterable<User> selectAllUsers() {
 		Iterable<User> userList = userDao.findAll();
 		return userList;
 	}
-	@Override
+
 	public Iterable<UserAnswers> selectCurrentUserTest(Long userID, Long testID) {
 		Iterable<UserAnswers> questionList = userAnswerDao.getCurrentUserTestAnswers(testID, userID);
 		return questionList;
 	}
 	
 	
-	@Override
+
 	public String randomString(int len) {
 		StringBuilder sb = new StringBuilder(len);
 		for (int i = 0; i < len; i++)
@@ -136,7 +132,7 @@ public class AdminUtils implements AdminUtilsInterf{
 		return sb.toString();
 
 	}
-	@Override
+
 	public boolean send(String email, String password) {
 
 		MimeMessage mail = javaMailSender.createMimeMessage();
@@ -155,7 +151,7 @@ public class AdminUtils implements AdminUtilsInterf{
 		javaMailSender.send(mail);
 		return true;
 	}
-	@Override
+
 	public Iterable<QuestionChoices> selectCurrentQuestionChoices(Long testID) {
 		List<QuestionChoices> choices = new ArrayList<QuestionChoices>();
 		Iterable<QuestionChoices> choiceList = questionChoiceDao.findAll();
@@ -170,7 +166,7 @@ public class AdminUtils implements AdminUtilsInterf{
 		return (Iterable<QuestionChoices>) choices;
 	}
 
-	@Override
+
 	public User getActiveUser(HttpServletRequest request) {
 
 		CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class.getName());

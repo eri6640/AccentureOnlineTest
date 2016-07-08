@@ -3,9 +3,7 @@ package online.test.utils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import online.test.utils.interf.MainUtilsInterf;
-
-public class MainUtils implements MainUtilsInterf {
+public class MainUtils {
 	
 	public String TokenName = "XSRF-TOKEN";
 
@@ -15,12 +13,11 @@ public class MainUtils implements MainUtilsInterf {
 	 * @param request http servlet request
 	 * @return True if is ajax, False if isnt ajax
 	 * */
-	@Override
 	public boolean isAjax( HttpServletRequest request ){
 		return "XMLHttpRequest".equals( request.getHeader("X-Requested-With")) ? true : false;
 	}
 	
-	@Override
+	
 	public String MD5( String string ){
 
 		try {
@@ -37,15 +34,15 @@ public class MainUtils implements MainUtilsInterf {
 		}
 	}
 	
-	@Override
+	
 	public void showThis( String string ){
 		System.out.println( "AccentureOnlineTest:showThis(): " + string );
 	}
-	@Override
+	
 	public String getIp( HttpServletRequest request ){
 		return request.getHeader( "X-FORWARDED-FOR" ) == null ? request.getRemoteAddr() : null;
 	}
-	@Override
+	
 	public HttpServletResponse redirect( HttpServletResponse response, String url ){
 		response.setHeader( "Location", url );
 		return response;

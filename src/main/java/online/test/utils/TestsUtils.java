@@ -21,10 +21,9 @@ import online.test.models.dao.TestQuestionsDao;
 import online.test.models.dao.TestsDao;
 import online.test.models.dao.UserAnswersDao;
 import online.test.models.dao.UserDao;
-import online.test.utils.interf.TestUtilsInterf;
 
 @Component
-public class TestsUtils implements TestUtilsInterf {
+public class TestsUtils {
 
 	@Autowired
 	private TestsDao testsDao;
@@ -34,10 +33,10 @@ public class TestsUtils implements TestUtilsInterf {
 	private UserAnswersDao userAnswersDao;
 
 	@Autowired
-	TestQuestionsUtils testQuestionsUtils;
-	@Autowired
-	MainUtils utils;
-	@Override
+	TestQuestionsUtils testQuestionsUtils = new TestQuestionsUtils();
+	
+	MainUtils utils = new MainUtils();
+	
 	public Map<String,Object> getTest( String testId_string ){
 		
 		if( testId_string.isEmpty() ) return null;
@@ -51,7 +50,7 @@ public class TestsUtils implements TestUtilsInterf {
 		
 		return this.getTest( testId );
 	}
-	@Override
+	
 	public Map<String,Object> getTest( int testId ){
 		
 		if( testId <= 0 ) return null;
@@ -73,7 +72,7 @@ public class TestsUtils implements TestUtilsInterf {
 		return test_test != null ? model : null;
 	}
 
-	@Override
+	
 	public Tests getTestObject( String testId_string ){
 		
 		if( testId_string.isEmpty() ) return null;
@@ -87,7 +86,7 @@ public class TestsUtils implements TestUtilsInterf {
 		
 		return this.getTestObject( testId );
 	}
-	@Override
+	
 	public Tests getTestObject( int testId ){
 		
 		if( testId <= 0 ) return null;
@@ -106,7 +105,7 @@ public class TestsUtils implements TestUtilsInterf {
 		
 		return test_test;
 	}
-	@Override
+	
 	public ArrayList<Tests> getAvailableTests( HttpServletRequest request ){
 		
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
@@ -151,7 +150,7 @@ public class TestsUtils implements TestUtilsInterf {
 		return availableTests.isEmpty() ? null : availableTests;
 		
 	}
-	@Override
+	
 	public boolean testAlreadyStarted( User user, Tests test ){
 		
 		List<UserAnswers> userAnswers = userAnswersDao.getCurrentUserStartedTests( user.getId() );
@@ -172,7 +171,7 @@ public class TestsUtils implements TestUtilsInterf {
 	 * 
 	 * 
 	 */
-	@Override
+	
 	public Map<String,Object> getStartedTest( User user_user ){
 		
 		Map<String, Object> model = new HashMap<String,Object>();
@@ -206,7 +205,7 @@ public class TestsUtils implements TestUtilsInterf {
 				
 		return null;
 	}
-	@Override
+	
 	public boolean startTest( User user_user, Tests test_test ){
 		
 		TestQuestions question = testQuestionsUtils.getUserNextQuestion( user_user, test_test );
@@ -217,7 +216,7 @@ public class TestsUtils implements TestUtilsInterf {
 		userAnswersDao.save( user_answer );
 		return true;
 	}
-	@Override
+	
 	public boolean forceStopTest( User user_user, Tests test_test ){
 		
 		TestQuestions question = testQuestionsUtils.getUserLastQuestion( user_user, test_test );
