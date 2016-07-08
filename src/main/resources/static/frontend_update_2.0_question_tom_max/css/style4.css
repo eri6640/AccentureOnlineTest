@@ -15,6 +15,8 @@ body {
 
     margin: 0;
     padding: 0;
+
+
 }
 /*
 video {
@@ -51,11 +53,11 @@ video {
 .question{
     margin-bottom: 20px;
 
-    color: black;
+color: black;
 /* Fallback for web browsers that don't support RGBa */
-    background-color: rgb(0, 0, 0);
+    background-color: #d6d6d6;
     /* RGBa with 0.6 opacity */
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #d6d6d6;
   
 font-family: 'Suez One', serif;
 padding: 1%;
@@ -63,7 +65,7 @@ padding: 1%;
 }
 
 .tests{
-    color: white;
+    color: black;
     text-align: center;
     font-size: 48px;
     margin-top: 5%;
@@ -71,7 +73,7 @@ padding: 1%;
 }
 
 .form-signin {
-	color: white;
+	color: black;
 	max-width: 330px;
 	margin: 15% auto;
 
@@ -94,7 +96,7 @@ border: solid green 2px;
 
 #timerPlace{
     font-size: 36px;
-    color: white;
+    color: black;
     text-align: center;
     font-weight: 400;
 
@@ -112,17 +114,12 @@ border: solid green 2px;
  padding-right: 10%;
  padding-left: 10%;
 padding-top: 2%;
-/*border: solid green 2px;*/
 color: black;
-/* Fallback for web browsers that don't support RGBa */
-    background-color: rgb(0, 0, 0);
-    /* RGBa with 0.6 opacity */
-    background-color: rgba(230, 230, 230, 0.9);
+background-color: #cccccc;
+
    
-font-family: 'Montserrat', sans-serif;
+font-family: 'Suez One', serif;
 font-size: 20px;
-
-
 }
 
 
@@ -135,13 +132,11 @@ h4 {
 	
 
 font-size: 25px;
- color: white;
-padding: 10px;
-font-family: 'Suez One', serif;
+ color: black;
 /* Fallback for web browsers that don't support RGBa */
     background-color: rgb(0, 0, 0);
     /* RGBa with 0.6 opacity */
-    background-color: rgba(28, 126, 195, 0.8);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 
@@ -151,43 +146,24 @@ textarea {
 background-color: #a4c8db !important;
 }*/
 
+canvas {
+	border: solid black 2px;
+}
+
 label[for=exampleTextarea] {
 	width: 100%;
 
 }
 
-canvas {
-	border: solid black 2px;
-}
 button#stylesheet1 {
-		background-color: #4493c9;
-color: white;
-border:solid white 1px;
+	
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
 }
-
-button#stylesheet2 {
-		background-color: #4493c9;
-color: white;
-border:solid white 1px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-}
-
-button#stylesheet3 {
-		background-color: #4493c9;
-color: white;
-border:solid white 1px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-}
-
 
 button#stylesheet1:hover {
-    background-color: white;
-    color: black;
-border:solid black 1px;
+    background-color: #347cd3;
+    color: white;
 
 }
 
@@ -195,26 +171,10 @@ button#stylesheet2 {
 	
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
-	
 }
 
 button#stylesheet2:hover {
+    background-color: #347cd3;
+    color: white;
 
-     background-color: black;
-     color: white;
-     border:solid white 1px;
-
-}
-
-button#stylesheet3:hover {
-
-     background-color: grey;
-     color: white;
-     border:solid white 1px;
-
-}
-
-.form-control {
-
-border: solid black 1px;
 }

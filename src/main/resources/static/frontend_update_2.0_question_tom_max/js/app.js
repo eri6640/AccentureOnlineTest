@@ -6,10 +6,17 @@ app.controller('MainCtrl', function($scope) {
 });
 
 app.controller('headController', function($scope) {
-  $scope.stylePath = 'style.css';
+  $scope.stylePath = 'css/style.css';
   
   $scope.changePath = function() {
-    $scope.stylePath = 'style2.css';
+    $scope.stylePath = 'css/style.css';
+  };
+
+ $scope.changePath2 = function() {
+    $scope.stylePath = 'css/style2.css';
+  };
+
+ $scope.changePath3 = function() {
+    $scope.stylePath = 'css/style4.css';
   };
 });
-
