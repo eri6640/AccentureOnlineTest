@@ -118,7 +118,8 @@ app.controller('LoginController', function($rootScope, $scope, $http,
 
 app.controller('AdminController', function($rootScope, $scope, $http,
 		$location, $window) {
-
+	
+	var searchinput='';
 	var urlBase = "";
 	$scope.toggle = true;
 	$scope.selection = [];
@@ -193,6 +194,7 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 
 app.controller('UserTestController', function($rootScope, $scope, $http,
 		$location, $window) {
+	var searchInput='';
 	var urlBase = "";
 	$scope.toggle = true;
 	$scope.selection = [];
@@ -238,7 +240,8 @@ app.controller('UserTestController', function($rootScope, $scope, $http,
 
 app.controller('UserController', function($rootScope, $scope, $http, $location,
 		$window) {
-
+	
+	var searchinput='';
 	$scope.showInfoUsers = false;
 	$scope.userInfo = "";
 
@@ -296,7 +299,8 @@ app.controller('UserController', function($rootScope, $scope, $http, $location,
 
 app.controller('TestsController', function($rootScope, $scope, $http,
 		$location, $window) {
-
+	
+	var searchinput='';
 	var thisTestID;
 	var thisUserID;
 	var thisQuestionID;

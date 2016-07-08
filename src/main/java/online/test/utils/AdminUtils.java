@@ -141,8 +141,8 @@ public class AdminUtils{
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(mail, true);
 			helper.setTo(email);
-			helper.setReplyTo("accbootcamp2016@gmail.com");
-			helper.setFrom("accbootcamp2016@gmail.com");
+			helper.setReplyTo("accbootcamp2016.2@gmail.com");
+			helper.setFrom("accbootcamp2016.2@gmail.com");
 			helper.setSubject("Jūsu piekļuve Accenture testam");
 			helper.setText("Jūsu piekļuves dati ir: \n\nLietotājvārds: " + email + "\nParole: " + password
 					+ "\n\nVeiksmi testā!");
