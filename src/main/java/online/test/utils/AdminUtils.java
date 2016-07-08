@@ -98,7 +98,13 @@ public class AdminUtils{
 			questionChoiceDao.save(choice);
 		}
 	}
-
+	
+	public void updateQuestion(int questionType, Long questionID) {
+				TestQuestions testQuestion = testQuestionsDao.findOne(questionID);
+				testQuestion.setType(questionType);
+				testQuestionsDao.save(testQuestion);
+		}
+	
 	public Iterable<TestQuestions> getAllTestsQuestions(Long testID) {
 		Iterable<TestQuestions> testQuestions = testQuestionsDao.getCurrentTestQuestions(testID);
 		return testQuestions;
