@@ -1,7 +1,6 @@
-ar app = angular.module('AdminAPP', [ 'ngRoute' ]);
+var app = angular.module('AdminAPP', [ 'ngRoute' ]);
 
-app
-		.config(function($routeProvider, $httpProvider, $locationProvider) {
+app.config(function($routeProvider, $httpProvider, $locationProvider) {
 
 			$routeProvider.when('/home', {
 				controller : 'MainController',
