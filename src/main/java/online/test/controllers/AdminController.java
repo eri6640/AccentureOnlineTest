@@ -36,8 +36,8 @@ public class AdminController {
 	
 	@RequestMapping("/data/tests/addQuestion")
 	@ResponseBody
-	public Boolean addQuestions(int type, @RequestParam("testID") Long testID,@RequestParam("userID") Long userID,@RequestParam("question") String question) {
-		adminUtils.addQuestion(type, testID, userID, question);
+	public Boolean addQuestions(int type, @RequestParam("testID") Long testID,@RequestParam("userID") Long userID,@RequestParam("question") String question,@RequestParam("answer") String answer ) {
+		adminUtils.addQuestion(type, testID, userID, question,answer);
 		return true;
 	}
 	

@@ -105,7 +105,12 @@
  	<input type="text" class="form-control" ng-model="Question"
 		placeholder="Question" /> 
 		
-	<hr>
+	
+<div class="input-group" style="margin-top: 5px;">
+  <span class="input-group-addon">Right Answer</span>
+  <input type="text" class="form-control" ng-model="Answer" placeholder="Answer" />
+</div>
+	
 	
 	<h4>Question Type</h4>
 	<select ng-model="type" ng-change="changedValue(type)" >
@@ -130,16 +135,22 @@
 <!-- /. ROW  -->
 <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
 		<div ng-show="showOption">
-		
+
 		<input style="margin-top:40px;" type="text" class="form-control" ng-model="option1" placeholder="Option" />
 		<input type="text" class="form-control" ng-model="option2" placeholder="Option" />
 		<input type="text" class="form-control" ng-model="option3"placeholder="Option" />
 		<input type="text" class="form-control" ng-model="option4"placeholder="Option" />
-		
+
 		<button type="button" class="btn btn-primary"
 		style="margin-top: 20px;margin-bottom: 20px; margin-right: 350px; text-decoration: none; color: white;"
 		ng-click="AddChoice()">Add Choices</button>
 	</div>	
+	
+
+	
 </div>
+
+
+
 <script type="text/javascript"src="/admin/resources/js/jquery-1.10.2.js" charset="utf-8"></script>
 

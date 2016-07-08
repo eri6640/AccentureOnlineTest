@@ -425,7 +425,7 @@ app.controller('TestsController', function($rootScope, $scope, $http,
 			$http.get(
 					"/data/tests/addQuestion?type=" + questionType + "&testID="
 							+ thisTestID + "&userID=" + thisUserID
-							+ "&question=" + $scope.Question).success(
+							+ "&question=" + $scope.Question +"&answer=" + $scope.Answer).success(
 					function(data) {
 						if (data) {
 							$scope.showAlertChoices = true;

@@ -148,10 +148,10 @@ public class TestQuestionsUtils {
 		UserAnswers user_answer = null;
 		
 		if( question.getType() != 4 ){
-			user_answer = new UserAnswers( question, question.getTests(), user_user, answer, null, 3 );// 3==izpildits
+			user_answer = new UserAnswers( question, question.getTests(), user_user, answer, "", 3 );// 3==izpildits
 		}
 		else{
-			user_answer = new UserAnswers( question, question.getTests(), user_user, null, answer, 3 );// 3==izpildits
+			user_answer = new UserAnswers( question, question.getTests(), user_user, "", answer, 3 );// 3==izpildits
 		}
 		
 		int pined_answerId = 0;

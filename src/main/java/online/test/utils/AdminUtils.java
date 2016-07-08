@@ -60,10 +60,8 @@ public class AdminUtils{
 		return userTestList;
 	}
 
-	public void addQuestion(int type, Long testID, Long userID, String question) {
-
-		TestQuestions testQuestions = new TestQuestions(type, question, testsDao.findById(testID), userDao.findById(userID), null);
-		
+	public void addQuestion(int type, Long testID, Long userID, String question, String answer) {
+		TestQuestions testQuestions = new TestQuestions(type, question, testsDao.findById(testID), userDao.findById(userID), answer);
 		testQuestionsDao.save(testQuestions);
 	}
 
@@ -84,14 +82,14 @@ public class AdminUtils{
 			questionChoiceDao.save(choice);
 		}
 
-		if (!(choice3.equals("")) || !(choice3.equals(null)) && !(choice3.equals("undefined")) ) {
+		if (!(choice3.equals("")) && !(choice3.equals(null)) && !(choice3.equals("undefined")) ) {
 			QuestionChoices choice = new QuestionChoices();
 			choice.setTestQuestion(testQuestions);
 			choice.setQuestionOption(choice3);
 			questionChoiceDao.save(choice);
 		}
 
-		if (!(choice4.equals("")) || !(choice4.equals(null)) && !(choice4.equals("undefined")) ) {
+		if (!(choice4.equals("")) && !(choice4.equals(null)) && !(choice4.equals("undefined")) ) {
 			QuestionChoices choice = new QuestionChoices();
 			choice.setTestQuestion(testQuestions);
 			choice.setQuestionOption(choice4);
