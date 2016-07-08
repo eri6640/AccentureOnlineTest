@@ -1,0 +1,5 @@
+<fieldset class="form-group">
+	<div class="checkbox" ng-repeat="answer in answers">
+		<label><input type="checkbox" name="checkbox" ng-model="answer.selected" value="answer.id">{{answer.questionOption}}</label>
+	</div>
+</fieldset>

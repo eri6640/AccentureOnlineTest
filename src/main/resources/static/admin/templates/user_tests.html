@@ -11,10 +11,18 @@
 <!-- /. ROW  -->
 <hr>
 <div ng-controller="UserTestController">
+
+	
+		
 	<div class="row">
 		<div class="add_user_row">
 			<h4>All user tests</h4>
 			<hr>
+			<div class="input-group">
+				<span class="input-group-addon"> <span
+					class="glyphicon glyphicon-search"></span>
+				</span> <input type="text" class="form-control" ng-model="searchInput">
+			</div>
 			<table id="user_test_table"
 				class="table table-striped table-bordered table-hover">
 				<thead>
@@ -26,7 +34,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="userAnswer in userAnswers">
+					<tr ng-repeat="userAnswer in userAnswers | filter:searchInput">
 						<td>{{userAnswer.id}}</td>
 						<td>{{userAnswer.user.email}}</td>
 						<td>{{userAnswer.tests.title}}</td>
@@ -52,7 +60,7 @@
 					<tr ng-repeat="currentUserAnswer in currentUserAnswers">
 						<td>{{currentUserAnswer.id}}</td>
 						<td>{{currentUserAnswer.answer}}</td>
-						<td>{{currentUserAnswer.imageAnswer}}</td>
+						<td style="word-break: break-all;">{{currentUserAnswer.imageAnswer}}</td>
 						<td>{{currentUserAnswer.testsQuestions.question}}</td>
 					</tr>
 				</tbody>

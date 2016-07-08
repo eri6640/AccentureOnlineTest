@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import online.test.models.QuestionChoices;
 import online.test.models.TestQuestions;
-import online.test.models.TestQuestions.TYPE;
 import online.test.models.Tests;
 import online.test.models.User;
 import online.test.models.UserAnswers;
@@ -37,8 +36,8 @@ public class AdminController {
 	
 	@RequestMapping("/data/tests/addQuestion")
 	@ResponseBody
-	public Boolean addQuestions(@RequestParam("testID") Long testID,@RequestParam("userID") Long userID,@RequestParam("question") String question) {
-		adminUtils.addQuestion(testID, userID, question);
+	public Boolean addQuestions(int type, @RequestParam("testID") Long testID,@RequestParam("userID") Long userID,@RequestParam("question") String question,@RequestParam("answer") String answer ) {
+		adminUtils.addQuestion(type, testID, userID, question,answer);
 		return true;
 	}
 	
@@ -61,12 +60,7 @@ public class AdminController {
 		return adminUtils.selectAllUsers();
 	}
 
-	@RequestMapping("/data/tests/setQuestionType")
-	@ResponseBody
-	public Boolean setCurrentQuestionType(@RequestParam("questionType") String questionType,@RequestParam("questionID")Long questionID) {
-		adminUtils.updateQuestion(questionType, questionID);
-	return true;
-	}
+	
 	
 	
 	@RequestMapping("/data/tests/userAnswers")
@@ -89,7 +83,14 @@ public class AdminController {
 		adminUtils.deleteChoice(choiceID);
 		return true;
 	}
-
+	
+	@RequestMapping("/data/tests/setQuestionType")
+		@ResponseBody
+		public Boolean setCurrentQuestionType(@RequestParam("questionType") int questionType,@RequestParam("questionID")Long questionID) {
+			adminUtils.updateQuestion(questionType, questionID);
+		return true;
+	}
+	
 	@RequestMapping("/data/tests/deleteQuestion")
 	@ResponseBody
 	public Boolean deleteQuestion(@RequestParam("testsID") Long questionID, @RequestParam("questionID") Long testsID,

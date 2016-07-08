@@ -17,38 +17,40 @@ public class TestQuestions {
 	public TestQuestions() {}
 
 	
-	public TestQuestions(String type, String question, Tests tests, User user, String answer,
-			String multipleChoice, byte[] imageAnswer, String textAnswer) {
+	
+
+	public TestQuestions(int type, String question, Tests tests, User user, String answer) {
+		super();
 		this.type = type;
 		this.question = question;
 		this.tests = tests;
 		this.user = user;
 		this.answer = answer;
-		this.multipleChoice = multipleChoice;
-		this.imageAnswer = imageAnswer;
-		this.textAnswer = textAnswer;
 	}
 
-	public static enum TYPE {
-		PICTURE('P'), MULTIPLE_CHOCE('M'), SINGLE_CHOICE('S'), TEXT('T');
 
-		private Character c;
 
-		TYPE(Character c) {
+
+	/*public static enum TYPE {
+		PICTURE("P"), MULTIPLE_CHOCE("M"), SINGLE_CHOICE("S"), TEXT("T");
+
+		private String c;
+
+		TYPE(String c) {
 			this.c = c;
 		}
 
-		public Character getValue() {
+		public String getValue() {
 			return c;
 		}
-	}
+	}*/
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@Column
-	private String type;
+	private int type;
 
 	@Column
 	private String question;
@@ -65,14 +67,6 @@ public class TestQuestions {
 	@Column
 	private String answer = "0";
 
-	@Column
-	private String multipleChoice = "0";
-
-	@Column
-	private byte[] imageAnswer = null;
-
-	@Column
-	private String textAnswer;
 
 	public long getId() {
 		return id;
@@ -106,13 +100,11 @@ public class TestQuestions {
 		this.user = user;
 	}
 
-
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
-
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 
@@ -125,28 +117,6 @@ public class TestQuestions {
 		this.answer = answer;
 	}
 
-	public String getMultipleChoice() {
-		return multipleChoice;
-	}
 
-	public void setMultipleChoice(String multipleChoice) {
-		this.multipleChoice = multipleChoice;
-	}
-
-	public byte[] getImageAnswer() {
-		return imageAnswer;
-	}
-
-	public void setImageAnswer(byte[] imageAnswer) {
-		this.imageAnswer = imageAnswer;
-	}
-
-	public String getTextAnswer() {
-		return textAnswer;
-	}
-
-	public void setTextAnswer(String textAnswer) {
-		this.textAnswer = textAnswer;
-	}
 
 }
