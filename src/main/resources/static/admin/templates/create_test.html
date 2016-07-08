@@ -35,6 +35,7 @@
                       <th>Test Title</th>
                       <th>Date</th>
                       <th>Add Question</th>
+                      <th>Edit test</th>
                       <th>Delete Test</th>
                   </tr>
               </thead>
@@ -46,6 +47,39 @@
                       <td><button type="button" ng-click="AddTestQuestion(test)"
 							style="text-decoration: none; color: white; background-color: #428bca;
 							padding: 4px; border-radius: 28px;">Add</button></td>
+					  <td>
+					  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal{{test.id}}">Edit</button>                                                       	
+                           	<div class="modal fade" id="myModal{{test.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">Edit Page</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-6" >
+                                                    <h4>Edit Title</h4>
+                                                    <textarea ng-model="title" ng-init="title = test.title" class="form-control" cols="5" rows="5" style="resize:none;"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h4>Edit Description</h4>
+                                                    <textarea ng-model="desc"  ng-init="desc = test.description" class="form-control" cols="5" rows="5" style="resize:none;"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">                                                                  
+                                            <button type="button" ng-click="edit(test.id, title, desc)" data-dismiss="modal"  class="btn btn-success">Save</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>     	
+                        </td>          
+					  	
+					  </td>
                       <td><button type="button" class="btn btn-danger" ng-click="delTest(test.id)">Delete</button></td>
                   </tr>
               </tbody>

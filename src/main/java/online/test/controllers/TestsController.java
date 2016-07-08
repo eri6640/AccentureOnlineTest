@@ -74,6 +74,23 @@ public class TestsController {
 		}
 		return true;
 	}
+
+	@RequestMapping("/data/tests/edit")
+	@ResponseBody
+	public String editTest(long id, String title, String description){
+		Tests test = null;	
+		
+		try {			
+			test = new Tests(id);
+			test.setTitle(title);
+			test.setDescription(description);
+			testsDao.save(test);						
+		}
+	    catch (Exception ex) {
+	    	return "Error updating the test: " + ex.toString();
+	    }
+	    return "Test succesfully updated!";
+	}
 	
 	@RequestMapping("/data/tests/selectAvailableTests")
 	@ResponseBody
