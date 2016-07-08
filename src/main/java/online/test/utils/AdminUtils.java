@@ -62,8 +62,8 @@ public class AdminUtils{
 
 	public void addQuestion(int type, Long testID, Long userID, String question) {
 
-		TestQuestions testQuestions = new TestQuestions(type, question, testsDao.findById(testID),
-				userDao.findById(userID), null, null, null, null);
+		TestQuestions testQuestions = new TestQuestions(type, question, testsDao.findById(testID), userDao.findById(userID), null);
+		
 		testQuestionsDao.save(testQuestions);
 	}
 

@@ -58,11 +58,10 @@ public class TestQuestionsController {
 	
 	@RequestMapping("/data/testquestions/create")
 	@ResponseBody
-	public boolean addQuestion(int type, String question, Tests tests, User user, String answer,
-				String multipleChoice, byte[] imageAnswer, String textAnswer){
+	public boolean addQuestion(int type, String question, Tests tests, User user, String answer){
 		 TestQuestions testQuestion = null;
 			try {
-				testQuestion = new TestQuestions(type, question, tests, user, answer, multipleChoice, imageAnswer, textAnswer);
+				testQuestion = new TestQuestions(type, question, tests, user, answer);
 				testQuestionsDao.save(testQuestion);
 			}
 			catch (Exception ex) {
@@ -74,11 +73,11 @@ public class TestQuestionsController {
 	 
 	@RequestMapping("/data/testquestions/delete")
 	@ResponseBody
-	public boolean removeQuestion(int type, String question, Tests tests, User user, String answer,
-				String multipleChoice, byte[] imageAnswer, String textAnswer){
+	public boolean removeQuestion(int type, String question, Tests tests, User user, String answer
+				){
 		TestQuestions testQuestion = null;
 			try {
-				testQuestion = new TestQuestions(type, question, tests, user, answer, multipleChoice, imageAnswer, textAnswer);
+				testQuestion = new TestQuestions(type, question, tests, user, answer);
 				testQuestionsDao.delete(testQuestion);
 			}
 			catch (Exception ex) {
