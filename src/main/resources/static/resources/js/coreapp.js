@@ -127,6 +127,23 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 			
 			if( data ){
 				$scope.question = data.question;
+				
+				switch( $scope.question.type ) {
+					case 1:
+						$scope.loadQuestionHTML = 'page/answer_types/single.html';
+						break;
+					case 2:
+						$scope.loadQuestionHTML = 'page/answer_types/multi.html';
+						break;
+					case 3:
+						$scope.loadQuestionHTML = 'page/answer_types/text.html';
+						break;
+					case 4:
+						$scope.loadQuestionHTML = 'page/answer_types/drawing.html';
+						break;
+					default:
+						$scope.loadQuestionHTML = 'page/answer_types/single.html';
+				}
 
 				$http.get( "/data/tests/getQuestionChoices?questionId=" + $scope.question.id ).success( function ( data ) {
 					
@@ -149,47 +166,88 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 		
 	};
 	
+	$scope.loadTestInProgress = function() {
+		$http.get( "/data/tests/getTestInProgress" ).success( function ( data ) {
+			
+			if( data ){
+				$scope.nextQuestion( data.test.id );
+			}
+			else{
+				//metam atpakalj uz izvelni
+				$window.location.href = "/";
+			}
+			
+		});
+	}
+	$scope.loadTestInProgress();
 	
-	$http.get( "/data/tests/getTestInProgress" ).success( function ( data ) {
-		
-		if( data ){
-			$scope.nextQuestion( data.test.id );
-		}
-		else{
-			//metam atpakalj uz izvelni
-			$window.location.href = "/";
-		}
-		
-	});
-	
-	$scope.selectRatio =  function( value ) {
+	$scope.selectRatio = function( value ) {
 		$scope.selectedData = value;
 	}
 	
 	
 	$scope.submitQuestion = function( question_type ) {
 		
-		if( question_type == 1 ){
-			if( $scope.selectedData ){
-				$window.alert( $scope.selectedData );
-			}
-			else{
-				$window.alert("nav sniegta atbilde!");
-			}
-		}
-		else if( question_type == 2 ){
-			
-		}
-		else if( question_type == 3 ){
-			
-		}
-		else if( question_type == 4 ){
-			
-		}
-		else{
-			
+		switch( question_type ) {
+			case 1:
+				if( $scope.selectedData ){
+					//$window.alert( $scope.selectedData );
+					$scope.saveAnswer( $scope.selectedData, question_type );
+				}
+				else{
+					$window.alert("nav sniegta atbilde!");
+				}
+				break;
+			case 2:
+			    $scope.albumNameArray = [];
+			    angular.forEach($scope.answers, function(answer, question_type){
+			      if(answer.selected){
+			    	  $scope.albumNameArray.push(answer.id);
+			      }
+			    });
+			    //$window.alert( JSON.stringify( $scope.albumNameArray ) );
+			    $scope.saveAnswer( JSON.stringify( $scope.albumNameArray ), question_type );
+				break;
+			case 3:
+				if( $scope.answer_testfield ){
+					$scope.saveAnswer( $scope.answer_testfield, question_type );
+				}
+				else{
+					$window.alert("nav sniegta atbilde!");
+				}
+				break;
+			case 4:
+				var id = document.getElementById("sampleBoard");
+			    var img = id.toDataURL("image/png");
+			    $scope.saveAnswer( img );
+				break;
+			default:
+				//dsfg
 		}
 		$window.alert("submitQuestion");
+	}
+	
+	$scope.saveAnswer = function( user_answers, question_type ) {
+		
+		if( $scope.question ){
+			
+
+			$http.get( "/data/tests/saveAnswer?questionId=" + $scope.question.id + "&answer='" + user_answers + "'" ).success( function ( data ) {
+			
+				if( data ){
+					$window.alert( "saved" );
+					$scope.loadTestInProgress();
+				}
+				else{
+					$window.alert( "save error" );
+				}
+				
+			});
+		}
+		else{
+			$window.alert( "nevar piekljut jautajumam" );
+		}
+		
 	}
 	
 	
