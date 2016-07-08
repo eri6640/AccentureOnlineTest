@@ -131,7 +131,7 @@ public class AdminController {
 	LoginUtils loginUtils = new LoginUtils();
 	
 	@Autowired
-	AdminUtils adminUtils = new AdminUtils();
+	AdminUtils adminUtils;
 	
 	MainUtils utils = new MainUtils();
 }

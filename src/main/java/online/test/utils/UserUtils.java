@@ -10,15 +10,16 @@ import org.springframework.web.util.WebUtils;
 
 import online.test.models.User;
 import online.test.models.dao.UserDao;
+import online.test.utils.interf.UserUtilsInterf;
 
 @Component
-public class UserUtils {
-	
-	MainUtils utils = new MainUtils();
-	
+public class UserUtils implements UserUtilsInterf {
+	@Autowired
+	MainUtils utils;
 	@Autowired
 	private UserDao userDao;
 	
+	@Override
 	public User getUserFromRequest( HttpServletRequest request ){
 		
 		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
