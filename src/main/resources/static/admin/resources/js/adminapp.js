@@ -82,7 +82,7 @@ app.controller('LoginController', function($rootScope, $scope, $http,
 	$http.get("/data/auth/isloggedin").success(function(data) {
 		$scope.showLogin = !data;
 		if (data) {
-			$window.location.href = "/";
+			//$window.location.href = "/";
 		}
 	});
 
@@ -101,7 +101,6 @@ app.controller('LoginController', function($rootScope, $scope, $http,
 							+ password).success(function(data) {
 				$scope.success = data;
 				$window.location.href = "/";
-				// $location.path( '/' );
 			});
 
 		} else {
@@ -109,7 +108,11 @@ app.controller('LoginController', function($rootScope, $scope, $http,
 				"message" : "Nav aizpilditi visi lauki!"
 			};
 		}
-
+	};
+	$scope.LogOut = function() {
+		$http.get("/data/auth/logout").success(function(data) {
+			$window.location.href = "/#/login";
+		});
 	};
 
 });
@@ -377,9 +380,10 @@ app.controller('TestsController', function($rootScope, $scope, $http,
 	var questionType;
 
 	$scope.changedValue = function(item) {
-		
+
 		questionType = item;
-		$http.get("/data/tests/setQuestionType?questionType=" + questionType
+		$http.get(
+				"/data/tests/setQuestionType?questionType=" + questionType
 						+ "&questionID=" + thisQuestionID).success(
 				function(data) {
 					if (data) {
@@ -389,8 +393,8 @@ app.controller('TestsController', function($rootScope, $scope, $http,
 						$scope.choiceWarning = "No question selected!";
 					}
 				}).error(function() {
-					//$scope.showAlertChoices = true;
-					//$scope.choiceWarning = "No question created!";
+			// $scope.showAlertChoices = true;
+			// $scope.choiceWarning = "No question created!";
 		});
 
 		if (item == 1 || item == 2) {
@@ -452,10 +456,12 @@ app.controller('TestsController', function($rootScope, $scope, $http,
 	};
 
 	$scope.edit = function(id, title, desc) {
-		$http.get( "/data/tests/edit?id=" + id + "&title=" + title + "&description=" + desc).success( function(data) {
+		$http.get(
+				"/data/tests/edit?id=" + id + "&title=" + title
+						+ "&description=" + desc).success(function(data) {
 			$scope.loadTests();
-							
-		});				
-	};	
+
+		});
+	};
 
 });
