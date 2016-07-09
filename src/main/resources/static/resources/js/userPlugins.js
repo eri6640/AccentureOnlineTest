@@ -73,12 +73,12 @@
               toolBarHTML = "";
               
               // add buttons
-              if (self.toolbar.clearButton) {
+              /*if (self.toolbar.clearButton) {
 
                   if (self.toolbar.clearButton) {
                       toolBarHTML += '<input type="button" class="btn btn-warning" style="float:left" value="' + self.toolbar.clearButton.text + '"' + " onclick=\"RoCanvasInstances['" + self.id + "'].clearCanvas();\">";
                   }
-              }
+              }*/
 
               toolBarDOM.innerHTML = toolBarHTML;
               parent.appendChild(toolBarDOM);
