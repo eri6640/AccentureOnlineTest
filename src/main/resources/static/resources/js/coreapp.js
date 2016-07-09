@@ -1,22 +1,32 @@
 
-var app = angular.module( 'CoreAPP', [ 'ngRoute', 'ngAnimate' ] );
+var app = angular.module( 'CoreAPP', [ 'ngRoute', 'ngCookies', 'ngAnimate' ] );
 
 app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 	
 	$routeProvider.when('/home', {
 		controller : 'TestListController',
 		templateUrl : 'page/home.html'
-	}).when('/', {
+	});
+	
+	$routeProvider.when('/', {
 		redirectTo: '/home'
-	}).when('/login', {
+	});
+	
+	$routeProvider.when('/login', {
 		templateUrl : 'page/login.html'
-	}).when('/question', {
+	});
+	
+	$routeProvider.when('/question', {
 		controller : 'QuestionController',
 		templateUrl : 'page/question.html'
-	}).when('/question-end', {
+	});
+	
+	$routeProvider.when('/question-end', {
 		controller : 'MainController',
 		templateUrl : 'page/question_end.html'
-	}).otherwise({ redirectTo: '/home' });
+	});
+	
+	$routeProvider.otherwise({ redirectTo: '/home' });
 
 	//$locationProvider.html5Mode({
 	//	enabled: true,
@@ -44,6 +54,77 @@ app.run( [ '$route', '$rootScope', '$location', function ( $route, $rootScope, $
 
 
 
+
+
+
+app.controller( 'LoginController', function( $rootScope, $scope, $http, $cookies, $location, $window ) {
+
+	$scope.showLogin = false;
+	$scope.error = false;
+	$scope.success = false;
+	
+	var loggedInRes = $http.post( '/data/auth/isloggedin' );
+	loggedInRes.success( function( data, status, headers, config ) {
+		$scope.showLogin = ! data;
+	});
+	
+	/*var req = {
+		method: 'POST',
+		url: '/data/auth/isloggedin',
+		headers: {
+			'X-Requested-With': 'XMLHttpRequest',
+	        'Accept': 'application/json'
+		}
+	}**/
+
+	$location.path( '/login', false );
+	
+	
+	$scope.loginSubmit = function() {
+		
+		if( $scope.email && $scope.password ){
+			//$window.alert( "email: " + $scope.email + " password: " + $scope.password );
+			
+			$scope.success = false;
+			
+			var dataObj = {
+				email : $scope.email,
+				password : $scope.password
+			};
+			
+			var doLoginRes = $http.post( '/data/auth/doLogin', dataObj );
+			
+			doLoginRes.success( function( data, status, headers, config ) {
+				$scope.success = data;
+				$scope.success = { "message" : "Success" };
+				$window.location.href = "/";
+			});
+			
+		}
+		else{
+			$scope.error = { "message" : "error" };
+		}
+		
+	};
+	
+	$scope.logout = function() {
+
+		var logoutRes = $http.post( '/data/auth/doLogout' );
+		logoutRes.success( function( data, status, headers, config ) {
+			$window.location.href = "/#/login";
+		});
+
+	};
+	
+  
+});//login controller
+
+
+
+
+
+
+
 app.controller( 'MainController', function( $rootScope, $scope, $http, $location, $window ) {
 
 });
@@ -56,32 +137,23 @@ app.controller( 'TestListController', function( $rootScope, $scope, $http, $loca
 	$scope.show_desc = false;
 	
 	$scope.getAvailableTests =  function( testId ) {
-		$http.get( "/data/tests/selectAvailableTests" ).success( function ( data ) {
-	
+		
+		var selectAvailableTestsRes = $http.post( '/data/tests/selectAvailableTests' );
+		selectAvailableTestsRes.success( function( data, status, headers, config ) {
 			if( data ){
-				//$window.alert( data );
 				$scope.test_list = data;
 			}
-			else{
-				//$window.alert("false");
-			}
 		});
+		
 	};
 	$scope.getAvailableTests();
 	
 	
-	$scope.testDescription = function( testId ) {
+	$scope.showTestDescription = function( test_title, test_description ) {
 		
-		$http.get( "/data/tests/getTest?testId=" + testId ).success( function ( data ) {
-			if( data ){
-				$scope.test_title = data.test.title;
-				$scope.test_description = data.test.description;
-				$scope.show_desc = true;
-			}
-			else{
-				$scope.show_desc = false;
-			}
-		});
+		$scope.test_title = test_title;
+		$scope.test_description = test_description;
+		$scope.show_desc = true;
 		
 	};
 	
@@ -89,27 +161,32 @@ app.controller( 'TestListController', function( $rootScope, $scope, $http, $loca
 		
 		if( $scope.selectedTest ) {
 			
-			$http.get( "/data/tests/getTestInProgress" ).success( function ( data ) {
-				
+			var getTestInProgressRes = $http.post( '/data/tests/getTestInProgress' );
+			getTestInProgressRes.success( function( data, status, headers, config ) {
 				if( ! data ){
-					$http.get( "/data/tests/startTest?testId=" + $scope.selectedTest ).success( function ( data ) {
-						
+					
+					var dataObj = {
+							id : $scope.selectedTest - 0
+						};
+					
+					var startTestRes = $http.post( '/data/tests/startTest', dataObj );
+					startTestRes.success( function( data, status, headers, config ) {
 						if( data ){
 							$window.location.href = "/#/question";
 						}
 						else{
 							$window.alert("izveletais tekts jau izpildits");
 						}
-						
 					});
+					
 				}
 				else{
 					//jau ir tests progressa
 					$window.alert("tests jau progressaa");
 					$window.location.href = "/#/question";
 				}
-				
 			});
+			
 		}
 		else{
 			//nav izveletes neviens tests
@@ -128,10 +205,11 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 	
 	$scope.nextQuestion = function( testId ) {
 		
-		$http.get( "/data/tests/getNextQuestion?testId=" + testId ).success( function ( data ) {
-			
+		var getNextQuestionRes = $http.post( '/data/tests/getNextQuestion', { id : testId - 0 } );
+		getNextQuestionRes.success( function( data, status, headers, config ) {
+
 			if( data ){
-				$scope.question = data.question;
+				$scope.question = data;
 				
 				switch( $scope.question.type ) {
 					case 1:
@@ -149,9 +227,10 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 					default:
 						$scope.loadQuestionHTML = 'page/answer_types/single.html';
 				}
-
-				$http.get( "/data/tests/getQuestionChoices?questionId=" + $scope.question.id ).success( function ( data ) {
-					
+				
+				
+				var getQuestionChoicesRes = $http.post( '/data/tests/getQuestionChoices', { id : $scope.question.id - 0 } );
+				getQuestionChoicesRes.success( function( data, status, headers, config ) {
 					if( data ){
 						$scope.answers = data;
 					}
@@ -159,11 +238,10 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 						//metam atpakalj uz izvelni
 						$scope.forceStopTest( testId );
 					}
-					
 				});
 				
-				$http.get( "/data/tests/getTimerTime?testId=" + testId ).success( function ( data ) {
-					
+				var getTimerTimeRes = $http.post( '/data/tests/getTimerTime', { id : testId - 0 } );
+				getTimerTimeRes.success( function( data, status, headers, config ) {
 					if( data ){
 						$scope.timerTime = data;
 					}
@@ -171,7 +249,6 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 						//metam atpakalj uz izvelni
 						$scope.forceStopTest( testId );
 					}
-					
 				});
 				
 			}
@@ -182,19 +259,23 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 			
 		});
 		
+		//
+		//
+		//
+		
 	};
 	
 	$scope.loadTestInProgress = function() {
-		$http.get( "/data/tests/getTestInProgress" ).success( function ( data ) {
-			
+		
+		var getTestInProgressRes = $http.post( '/data/tests/getTestInProgress' );
+		getTestInProgressRes.success( function( data, status, headers, config ) {
 			if( data ){
-				$scope.nextQuestion( data.test.id );
+				$scope.nextQuestion( data.id );
 			}
 			else{
 				//metam atpakalj uz izvelni
 				$window.location.href = "/";
 			}
-			
 		});
 	};
 	$scope.loadTestInProgress();
@@ -254,9 +335,13 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 		
 		if( $scope.question ){
 			
-
-			$http.get( "/data/tests/saveAnswer?questionId=" + $scope.question.id + "&answer=" + user_answers ).success( function ( data ) {
+			var dataObj = {
+				id : $scope.question.id,
+				answer : user_answers
+			};
 			
+			var saveAnswerRes = $http.post( '/data/tests/saveAnswer', dataObj );
+			saveAnswerRes.success( function( data, status, headers, config ) {
 				if( data ){
 					//$window.alert( "saved" );
 					$scope.loadTestInProgress();
@@ -264,7 +349,6 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 				else{
 					//$window.alert( "save error" );
 				}
-				
 			});
 		}
 		else{
@@ -273,12 +357,16 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 		
 	};
 	
-	$scope.forceStopTest = function( test_id ) {
+	$scope.forceStopTest = function( testId ) {
 		
-		$http.get( "/data/tests/forceStopTest?testId=" + test_id ).success( function ( data ) {
-			
-			$window.location.href = "/#/question-end";
-			
+		var forceStopTestRes = $http.post( '/data/tests/forceStopTest', { id : testId - 0 } );
+		forceStopTestRes.success( function( data, status, headers, config ) {
+			if( data ){
+				$window.location.href = "/#/question-end";
+			}
+			else{
+				//$window.alert( "save error" );
+			}
 		});
 		
 		
@@ -297,8 +385,8 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 	
 	$scope.pinPoint = function( question_id ) {
 		
-		$http.get( "/data/tests/pinPoint?questionId=" + question_id ).success( function ( data ) {
-			
+		var forceStopTestRes = $http.post( '/data/tests/pinPoint', { id : question_id - 0 } );
+		forceStopTestRes.success( function( data, status, headers, config ) {
 			if(data){
 				$scope.loadTestInProgress();
 				$window.alert( "pinPoint success" );
@@ -306,7 +394,6 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 			else{
 				$window.alert( "pinPoint error" );
 			}
-			
 		});
 		
 	};
@@ -328,53 +415,6 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 	
 	
 });
-
-
-
-app.controller( 'LoginController', function( $rootScope, $scope, $http, $location, $window ) {
-
-	$scope.showLogin = false;
-	$scope.error = false;
-	$scope.success = false;
-	
-	$http.get( "/data/auth/isloggedin" ).success( function ( data ) {
-		$scope.showLogin = ! data;
-		/*if( data ){
-			$window.location.href = "/";
-		}*/
-	});
-	
-
-	$location.path( '/login', false );
-	
-	
-	$scope.loginSubmit = function() {
-		
-		if( $scope.email && $scope.password ){
-			//$window.alert( "email: " + $scope.email + " password: " + $scope.password );
-			
-			var email = $scope.email;
-			var password = $scope.password;
-			$scope.success = false;
-			
-			$http.get( "/data/auth/submitlogin?email="+email+"&password="+password ).success( function ( data ){
-				$scope.success = data;
-				$scope.success = { "message" : "Success" };
-				$window.location.href = "/";
-				//$location.path( '/' );
-			});
-			
-		}
-		else{
-			$scope.error = { "message" : "error" };
-		}
-		
-	};
-	
-  
-});
-
-
 
 
 
@@ -401,7 +441,7 @@ app.controller( 'TimerController', [ '$scope', '$interval', '$window', function(
 		}, 1000);
     };
 
-    $scope.stopTimer = function() {
+    $scope.stopTimer = function( testId ) {
     	if( angular.isDefined( timer ) ) {
     		$interval.cancel( timer );
     		timer = undefined;
@@ -410,7 +450,7 @@ app.controller( 'TimerController', [ '$scope', '$interval', '$window', function(
     };
 
     $scope.$on('$destroy', function() {
-    	$scope.stopTimer();
+    	$scope.stopTimer( $scope.question.tests.id );
 	});
     
     startTimer();

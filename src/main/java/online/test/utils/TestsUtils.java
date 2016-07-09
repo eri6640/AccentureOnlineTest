@@ -37,7 +37,21 @@ public class TestsUtils {
 	
 	MainUtils utils = new MainUtils();
 	
-	public Map<String,Object> getTest( String testId_string ){
+	/*public Map<String,Object> getTest( String testId_string ){
+		
+		if( testId_string.isEmpty() ) return null;
+		int testId = 0;
+		try{
+			testId = Integer.parseInt( testId_string );
+		}
+		catch( Exception error ){
+			return null;
+		}
+		
+		return this.getTest( testId );
+	}*/
+	
+	public Tests getTest( String testId_string ){
 		
 		if( testId_string.isEmpty() ) return null;
 		int testId = 0;
@@ -51,47 +65,9 @@ public class TestsUtils {
 		return this.getTest( testId );
 	}
 	
-	public Map<String,Object> getTest( int testId ){
+	public Tests getTest( int testId ){
 		
 		if( testId <= 0 ) return null;
-		
-		Map<String,Object> model = new HashMap<String,Object>();
-		
-		Tests test_test = null;
-		
-		try{
-			test_test = testsDao.findById( (long)testId );
-		}
-		catch( Exception error ){
-			utils.showThis( "Tests null, id:" + testId );
-			return null;
-		}
-		
-		model.put( "test", test_test );
-		
-		return test_test != null ? model : null;
-	}
-
-	
-	public Tests getTestObject( String testId_string ){
-		
-		if( testId_string.isEmpty() ) return null;
-		int testId = 0;
-		try{
-			testId = Integer.parseInt( testId_string );
-		}
-		catch( Exception error ){
-			return null;
-		}
-		
-		return this.getTestObject( testId );
-	}
-	
-	public Tests getTestObject( int testId ){
-		
-		if( testId <= 0 ) return null;
-		
-		Map<String,Object> model = new HashMap<String,Object>();
 		
 		Tests test_test = null;
 		
@@ -172,9 +148,8 @@ public class TestsUtils {
 	 * 
 	 */
 	
-	public Map<String,Object> getStartedTest( User user_user ){
+	public Tests getStartedTest( User user_user ){
 		
-		Map<String, Object> model = new HashMap<String,Object>();
 		List<UserAnswers> tests_started = userAnswersDao.getCurrentUserStartedTests( user_user.getId() );
 		List<UserAnswers> tests_stoped = userAnswersDao.getCurrentUserStopedTests( user_user.getId() );
 				
@@ -184,9 +159,8 @@ public class TestsUtils {
 		}
 		
 		if( tests_started.size() == 1 && tests_stoped.isEmpty() ){
-			model.put( "test", tests_started.get( 0 ).getTests() );
 			utils.showThis( "tests_started.size() == 1 && tests_stoped.isEmpty()" );
-			return model;
+			return tests_started.get( 0 ).getTests();
 		}
 		
 		List<Long> test_startedIds = new ArrayList<Long>();
@@ -198,8 +172,7 @@ public class TestsUtils {
 		for( UserAnswers answerStart : tests_started ){
 			if( ! test_startedIds.contains( answerStart.getTests().getId() ) ){
 				utils.showThis( "have started test" );
-				model.put( "test", answerStart.getTests() );
-				return model;
+				return answerStart.getTests();
 			}
 		}
 				

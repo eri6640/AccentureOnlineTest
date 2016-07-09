@@ -11,6 +11,7 @@ import online.test.models.dao.TestQuestionsDao;
 import online.test.models.dao.TestsDao;
 import online.test.models.dao.UserAnswersDao;
 import online.test.models.dao.UserDao;
+import online.test.post.classes.IdObj;
 import online.test.utils.MainUtils;
 import online.test.utils.TestQuestionsUtils;
 import online.test.utils.TestsUtils;
@@ -24,7 +25,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -75,8 +78,7 @@ public class TestQuestionsController {
 	 
 	@RequestMapping("/data/testquestions/delete")
 	@ResponseBody
-	public boolean removeQuestion(int type, String question, Tests tests, User user, String answer
-				){
+	public boolean removeQuestion(int type, String question, Tests tests, User user, String answer ){
 		TestQuestions testQuestion = null;
 			try {
 				testQuestion = new TestQuestions(type, question, tests, user, answer);
@@ -91,9 +93,8 @@ public class TestQuestionsController {
 	
 	
 	
-	@RequestMapping("/data/tests/getTestInProgress")
-	@ResponseBody
-	public Map<String,Object> getTestInProgress( HttpServletRequest request ){
+	@RequestMapping( value = "/data/tests/getTestInProgress", method = RequestMethod.POST )
+	public @ResponseBody Tests getTestInProgress( HttpServletRequest request ){
 		
 		User user_user = null;
 		if( ( user_user = userUtils.getUserFromRequest( request ) ) == null ){
@@ -107,12 +108,13 @@ public class TestQuestionsController {
 
 	
 	
-	@RequestMapping("/data/tests/getNextQuestion")
-	@ResponseBody
-	public Map<String,Object> getNextQuestion( @RequestParam("testId") String testId_string, HttpServletRequest request ) {
+	@RequestMapping( value = "/data/tests/getNextQuestion", method = RequestMethod.POST )
+	public @ResponseBody TestQuestions getNextQuestion( @RequestBody IdObj test_idObj, HttpServletRequest request ) {
 
+		if( test_idObj.getId() <= 0 ) return null;
+		
 		//iegustam testu pec string id
-		Tests test_test = testsUtils.getTestObject( testId_string );
+		Tests test_test = testsUtils.getTest( test_idObj.getId() );
 		if( test_test == null ){
 			mainUtils.showThis( "Test null" );
 			return null;
@@ -128,62 +130,36 @@ public class TestQuestionsController {
 		//iegustam nakosho jautajumu, kur status == 2
 		TestQuestions question = testQuestionsUtils.getUserNextQuestion( user_user, test_test );
 		
-		if( question == null ) return null;
-		
-		Map<String,Object> model = new HashMap<String,Object>();
-		
-		model.put( "question", question);
-		
-		return model;
+		return question != null ? question : null;
 	}
 	
 	
-	@RequestMapping("/data/tests/getQuestionChoices")
-	@ResponseBody
-	public Iterable<QuestionChoices> getQuestionChoices( @RequestParam("questionId") String questionId_string, HttpServletRequest request ) {
+	@RequestMapping( value = "/data/tests/getQuestionChoices", method = RequestMethod.POST )
+	public @ResponseBody Iterable<QuestionChoices> getQuestionChoices( @RequestBody IdObj question_idObj, HttpServletRequest request ) {
 		
-		int question_id = 0;
+		if( question_idObj.getId() <= 0 ) return null;
 		
-		try{
-			question_id = Integer.parseInt( questionId_string );
-		}
-		catch ( Exception error ){
-			question_id = 0;
-		}
-		
-		if( question_id <= 0 ) return null;
-		
-		Iterable<QuestionChoices> list = questionChoicesDao.getCurrentTestQuestions( (long) question_id );
+		Iterable<QuestionChoices> list = questionChoicesDao.getCurrentTestQuestions( (long) question_idObj.getId() );
 		return list;
 		
 	}
 	
 	
-	@RequestMapping("/data/tests/pinPoint")
-	@ResponseBody
-	public boolean pinPoint( @RequestParam("questionId") String questionId_string, HttpServletRequest request ) {
+	@RequestMapping( value = "/data/tests/pinPoint", method = RequestMethod.POST )
+	public @ResponseBody boolean pinPoint( @RequestBody IdObj question_idObj, HttpServletRequest request ) {
+		
+		if( question_idObj.getId() <= 0 ) return false;
 		
 		User user_user = null;
 		if( ( user_user = userUtils.getUserFromRequest( request ) ) == null ){
-			mainUtils.showThis( "User null" );
-			mainUtils.showThis( "User null" );
-			mainUtils.showThis( "User null" );
-			mainUtils.showThis( "User null" );
-			mainUtils.showThis( "User null" );
 			mainUtils.showThis( "User null" );
 			return false;
 		}
 		
 		//if( testsUtils.getStartedTest( user_user ) == null ) return false;
 		
-		TestQuestions question = testQuestionsUtils.getQuestion( questionId_string );
+		TestQuestions question = testQuestionsUtils.getQuestion( question_idObj.getId() );
 		if( question == null ){
-			mainUtils.showThis( "Test null" );
-			mainUtils.showThis( "Test null" );
-			mainUtils.showThis( "Test null" );
-			mainUtils.showThis( "Test null" );
-			mainUtils.showThis( "Test null" );
-			mainUtils.showThis( "Test null" );
 			mainUtils.showThis( "Test null" );
 			return false;
 		}
@@ -191,12 +167,13 @@ public class TestQuestionsController {
 		return testQuestionsUtils.pinPoint( user_user, question );
 	}
 	
-	@RequestMapping("/data/tests/getTimerTime")
-	@ResponseBody
-	public long getTimerTime( @RequestParam("testId") String testId_string, HttpServletRequest request ) {
+	@RequestMapping( value = "/data/tests/getTimerTime", method = RequestMethod.POST )
+	public @ResponseBody long getTimerTime( @RequestBody IdObj test_idObj, HttpServletRequest request ) {
+		
+		if( test_idObj.getId() <= 0 ) return -7;
 		
 		//iegustam testu pec string id
-		Tests test_test = testsUtils.getTestObject( testId_string );
+		Tests test_test = testsUtils.getTest( test_idObj.getId() );
 		if( test_test == null ){
 			mainUtils.showThis( "Test null" );
 			return -7;
