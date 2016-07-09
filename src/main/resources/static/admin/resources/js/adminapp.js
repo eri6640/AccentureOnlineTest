@@ -49,67 +49,17 @@ app.run([
 app.controller('MainController', function($rootScope, $scope, $http, $location,
 		$window) {
 
-	if ($location.path == "/login") {
-		$location.path('/');
-	}
-
-	$scope.logout = function() {
-
-		$http.get("/data/auth/isloggedin").success(function(data) {
-			$scope.loggedIn = data;
-		});
-
-		if ($scope.loggedIn) {
-			$http.get("/data/auth/logout").success(function(data) {
-				$scope.loggedIn = data;
-			});
-		}
-
-		$location.path('/');
-
-	};
-
 });
 
 app.controller('LoginController', function($rootScope, $scope, $http,
 		$location, $window) {
 
-	$scope.showLogin = false;
-	$scope.error = false;
-	$scope.success = false;
-
-	$http.get("/data/auth/isloggedin").success(function(data) {
-		$scope.showLogin = !data;
-		if (data) {
-			//$window.location.href = "/";
-		}
-	});
-
-	$location.path('/login', false);
-
-	$scope.loginSubmit = function() {
-
-		if ($scope.email && $scope.password) {
-
-			var email = $scope.email;
-			var password = $scope.password;
-			$scope.success = false;
-
-			$http.get(
-					"/data/auth/submitlogin?email=" + email + "&password="
-							+ password).success(function(data) {
-				$scope.success = data;
-				$window.location.href = "/";
-			});
-
-		} else {
-			$scope.error = {
-				"message" : "Nav aizpilditi visi lauki!"
-			};
-		}
-	};
 	$scope.LogOut = function() {
-		$http.get("/data/auth/logout").success(function(data) {
+		/*$http.get("/data/auth/logout").success(function(data) {
+			$window.location.href = "/#/login";
+		});*/
+		var logoutRes = $http.post( '/data/auth/doLogout' );
+		logoutRes.success( function( data, status, headers, config ) {
 			$window.location.href = "/#/login";
 		});
 	};
