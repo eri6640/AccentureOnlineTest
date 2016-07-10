@@ -254,6 +254,19 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 					}
 				});
 				
+				var getAnswerCountDataRes = $http.post( '/data/tests/getAnswerCountData', { id : testId - 0 } );
+				getAnswerCountDataRes.success( function( data, status, headers, config ) {
+					if( data ){
+						$scope.progressbar = {};
+						$scope.progressbar.answers = data.json.answers;
+						$scope.progressbar.pinpointed_answers = data.json.pinpointed_answers;
+						$scope.progressbar.questions = data.json.questions;
+					}
+					else{
+						$window.alert( "getAnswerCountData error" );
+					}
+				});
+				
 			}
 			else{
 				//paradam, ka visi jautajumi ir izpilditi
@@ -281,7 +294,8 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 			}
 		});
 	};
-	$scope.loadTestInProgress();
+	$scope.loadTestInProgress();	
+	
 	
 	$scope.selectRatio = function( value ) {
 		$scope.selectedData = value;

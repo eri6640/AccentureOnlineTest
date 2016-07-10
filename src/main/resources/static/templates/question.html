@@ -27,12 +27,9 @@
 			</div>
 			
 
-			<div class="col-md-12">
-            <!-- width: <value> %. Will be dynamic. -->
-				<div id="myProgressbar" class="progress">
-					<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-						<span class="sr-only"> <value>% Complete</span>
-					</div>
+			<div class="progress" style="margin-top:20px;">
+				<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ 100 / progressbar.questions * progressbar.answers }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ 100 / progressbar.questions * progressbar.answers }}%;color:#4b4b4b;">
+					{{ progressbar.answers }} / {{ progressbar.questions }}
 				</div>
 			</div>
 
