@@ -22,7 +22,7 @@ app.config( function( $routeProvider, $httpProvider, $locationProvider ) {
 	});
 	
 	$routeProvider.when('/question-end', {
-		controller : 'MainController',
+		controller : 'QuestionEndController',
 		templateUrl : 'page/question_end.html'
 	});
 	
@@ -211,6 +211,9 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 			if( data ){
 				$scope.question = data;
 				
+				$scope.loadQuestionHTML = null;
+				$scope.answer_testfield = null;
+				
 				switch( $scope.question.type ) {
 					case 1:
 						$scope.loadQuestionHTML = 'page/answer_types/single.html';
@@ -251,6 +254,19 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 					}
 				});
 				
+				var getAnswerCountDataRes = $http.post( '/data/tests/getAnswerCountData', { id : testId - 0 } );
+				getAnswerCountDataRes.success( function( data, status, headers, config ) {
+					if( data ){
+						$scope.progressbar = {};
+						$scope.progressbar.answers = data.json.answers;
+						$scope.progressbar.pinpointed_answers = data.json.pinpointed_answers;
+						$scope.progressbar.questions = data.json.questions;
+					}
+					else{
+						$window.alert( "getAnswerCountData error" );
+					}
+				});
+				
 			}
 			else{
 				//paradam, ka visi jautajumi ir izpilditi
@@ -278,7 +294,8 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 			}
 		});
 	};
-	$scope.loadTestInProgress();
+	$scope.loadTestInProgress();	
+	
 	
 	$scope.selectRatio = function( value ) {
 		$scope.selectedData = value;
@@ -399,23 +416,29 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 	};
 	
 	
-	/*$scope.stylePath = 'css/style.css';
+	$scope.stylePath = 'resources/css/question_themes/theme1.css';
 
 	$scope.changePath = function() {
-		$scope.stylePath = 'css/style.css';
+		$scope.stylePath = 'resources/css/question_themes/theme1.css';
 	};
 
 	$scope.changePath2 = function() {
-		$scope.stylePath = 'css/style2.css';
+		$scope.stylePath = 'resources/css/question_themes/theme2.css';
 	};
 
 	$scope.changePath3 = function() {
-		$scope.stylePath = 'css/style4.css';
-	};*/
+		$scope.stylePath = 'resources/css/question_themes/theme3.css';
+	};
 	
 	
 });
 
+app.controller( 'QuestionEndController', function( $rootScope, $scope, $window ) {
+	
+	$scope.backToStart = function() {
+		$window.location.href = "/#/home";
+	};
+});
 
 
 

@@ -17,7 +17,7 @@ public interface UserAnswersDao extends CrudRepository<UserAnswers, Long> {
 	 * 
 	 * @param testID
 	 * @param userID
-	 * @return user tests where status = 4(answered)
+	 * @return user tests where status = 3(answered)
 	 */
 	@Query("select a from UserAnswers a inner join a.tests as t inner join a.user as u where t.id= :testID and u.id= :userID and a.status = 3")
 	public List<UserAnswers> getCurrentUserTestAnswers(@Param("testID") Long testID, @Param("userID")Long userID);
@@ -30,7 +30,7 @@ public interface UserAnswersDao extends CrudRepository<UserAnswers, Long> {
 	 * 
 	 * @param testID
 	 * @param userID
-	 * @return user tests where status = 3(pinpointed)
+	 * @return user tests where status = 2(pinpointed)
 	 */
 	@Query("select a from UserAnswers a inner join a.tests as t inner join a.user as u where t.id= :testID and u.id= :userID and a.status = 2")
 	public List<UserAnswers> getCurrentUserTestAnswersPinPointed(@Param("testID") Long testID, @Param("userID")Long userID);
