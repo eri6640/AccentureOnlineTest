@@ -32,7 +32,7 @@ public class TestsController {
 	private UserDao userDao;
 
 	
-	MainUtils mainUtils = new MainUtils();
+	MainUtils utils = new MainUtils();
 	
 	@Autowired
 	TestsUtils testsUtils = new TestsUtils();
@@ -119,11 +119,14 @@ public class TestsController {
 	@RequestMapping( value = "/data/tests/startTest", method = RequestMethod.POST )
 	public @ResponseBody boolean startTest( @RequestBody IdObj test_idObj, HttpServletRequest request ) {
 		
-		if( test_idObj.getId() <= 0 ) return false;
+		if( test_idObj.getId() <= 0 ){
+			utils.showThis( "test_idObj.getId() <= 0" );
+			return false;
+		}
 		
 		User user_user = null;
 		if( ( user_user = userUtils.getUserFromRequest( request ) ) == null ){
-			mainUtils.showThis( "User null" );
+			utils.showThis( "User null" );
 			return false;
 		}
 		
@@ -131,7 +134,7 @@ public class TestsController {
 		
 		Tests test_test = testsUtils.getTest( test_idObj.getId() );
 		if( test_test == null ){
-			mainUtils.showThis( "Test null" );
+			utils.showThis( "Test null" );
 			return false;
 		}
 		
@@ -146,7 +149,7 @@ public class TestsController {
 		
 		User user_user = null;
 		if( ( user_user = userUtils.getUserFromRequest( request ) ) == null ){
-			mainUtils.showThis( "User null" );
+			utils.showThis( "User null" );
 			return false;
 		}
 		
@@ -154,7 +157,7 @@ public class TestsController {
 		
 		Tests test_test = testsUtils.getTest( test_idObj.getId() );
 		if( test_test == null ){
-			mainUtils.showThis( "Test null" );
+			utils.showThis( "Test null" );
 			return false;
 		}
 		
