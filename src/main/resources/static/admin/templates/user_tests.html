@@ -35,7 +35,7 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="userAnswer in userAnswers | filter:searchInput">
-						<td>{{userAnswer.id}}</td>
+						<td>{{userAnswer.tests.id}}</td>
 						<td>{{userAnswer.user.email}}</td>
 						<td>{{userAnswer.tests.title}}</td>
 						<td><input type="button" value="View"
