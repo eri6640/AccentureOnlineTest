@@ -93,9 +93,10 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 	}
 	
 	$scope.getTests();
-	
+	$scope.curentTest;
 	$scope.editData = {};
 	$scope.Edit = function(test) {
+	    currentTest=test;
 		$scope.showQuestionChoices = false;
 		$scope.showTestQuestions = false;
 		var testId = test.id;
@@ -111,9 +112,12 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 		});
 
 	}
+	
+	$scope.currentQuestion;
 	$scope.ViewChoices = function(question) {
-			
+		currentQuestion=question;
 		var ID = question.id;
+		
 		
 		$http.get("/data/tests/questionChoices?testID=" + ID).success(
 			function(data) {
@@ -126,7 +130,7 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 
 	$scope.DeleteQuestion = function(testQuestion) {
 		var questionID = testQuestion.tests.id;
-		var testsID = testQuestion.id
+		var testsID=testQuestion.id;
 		
 		var data = $.param({
 			testsID : testsID,
@@ -142,6 +146,7 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 			} else {
 				$scope.showInfoActiveTests = true;
 				$scope.activeTestInfo = "Question deleted";
+				$scope.Edit(currentTest);
 				
 			}
 		}).error(function() {
@@ -161,6 +166,7 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 					if (data) {
 						$scope.showInfoActiveTests = true;
 						$scope.activeTestInfo = "Question choice deleted";
+						$scope.ViewChoices(currentQuestion);
 										
 					} else {
 						$scope.showInfoActiveTests = true;
