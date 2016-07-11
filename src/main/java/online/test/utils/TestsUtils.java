@@ -13,12 +13,10 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
-import online.test.models.QuestionChoices;
 import online.test.models.TestQuestions;
 import online.test.models.Tests;
 import online.test.models.User;
 import online.test.models.UserAnswers;
-import online.test.models.dao.QuestionChoicesDao;
 import online.test.models.dao.TestQuestionsDao;
 import online.test.models.dao.TestsDao;
 import online.test.models.dao.UserAnswersDao;
@@ -32,16 +30,10 @@ public class TestsUtils {
 	@Autowired
 	private UserDao userDao;
 	@Autowired
-	private TestQuestionsDao questionDao;
-	@Autowired
 	private UserAnswersDao userAnswersDao;
-	@Autowired
-	private QuestionChoicesDao questionChoicesDao;
 
 	@Autowired
 	TestQuestionsUtils testQuestionsUtils = new TestQuestionsUtils();
-	@Autowired
-	private UserUtils userUtils;
 	
 	MainUtils utils = new MainUtils();
 	
@@ -92,7 +84,7 @@ public class TestsUtils {
 	
 	public ArrayList<Tests> getAvailableTests( HttpServletRequest request ){
 		
-		/*CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
+		CsrfToken csrf = (CsrfToken) request.getAttribute( CsrfToken.class .getName() );
 		if( csrf == null ) return null;
 		
 		Cookie cookie = WebUtils.getCookie( request, utils.TokenName );
@@ -112,9 +104,7 @@ public class TestsUtils {
 		catch ( Exception error ){
 			token_user = null;
 			utils.showThis( "user null" );
-		}*/
-		
-		User token_user = userUtils.getUserFromRequest( request );
+		}
 		
 		if( token_user == null ) return null;
 		
@@ -127,29 +117,7 @@ public class TestsUtils {
 		for( Tests test : tests ){
 			
 			if( ! testAlreadyStarted( token_user, test ) ){
-				
-				List<TestQuestions> question_list = questionDao.getCurrentTestQuestions( test.getId() );
-				
-				if( ! question_list.isEmpty() ){
-					
-					boolean error = true;
-					
-					for( TestQuestions question : question_list ){
-						if( question.getType() == 1 || question.getType() == 2 ){
-							
-							List<QuestionChoices> list = questionChoicesDao.getCurrentTestQuestions( question.getId() );
-							
-							if( ! list.isEmpty() ){
-								error = false;
-							}
-						}
-						else{
-							error = false;
-						}
-					}
-					
-					if( ! error ) availableTests.add( test );
-				}
+				availableTests.add( test );
 			}
 			
 		}

@@ -105,23 +105,23 @@ app.controller( 'LoginController', function( $rootScope, $scope, $http, $cookies
 			$scope.error = { "message" : "error" };
 		}
 		
-	};	
-  
-});//login controller
-
-app.controller( 'LoginOutController', function( $rootScope, $scope, $http, $cookies, $location, $window ) {
-
+	};
+	
 	$scope.logout = function() {
 
 		var logoutRes = $http.post( '/data/auth/doLogout' );
 		logoutRes.success( function( data, status, headers, config ) {
-			$window.location.href = "/";
+			$window.location.href = "/#/login";
 		});
 
 	};
 	
   
-});//LoginOutController
+});//login controller
+
+
+
+
 
 
 
@@ -132,7 +132,6 @@ app.controller( 'MainController', function( $rootScope, $scope, $http, $location
 app.controller( 'TestListController', function( $rootScope, $scope, $http, $location, $window ) {
 	
 	if( $location.path() == '/login' ) return;
-	$scope.haveTestInProgress = false;
 	
 	$scope.test_list = null;
 	$scope.show_desc = false;
@@ -148,13 +147,6 @@ app.controller( 'TestListController', function( $rootScope, $scope, $http, $loca
 		
 	};
 	$scope.getAvailableTests();
-	
-	var getTestInProgressRes = $http.post( '/data/tests/getTestInProgress' );
-	getTestInProgressRes.success( function( data, status, headers, config ) {
-		if( data ){
-			$scope.haveTestInProgress = true;
-		}
-	});
 	
 	
 	$scope.showTestDescription = function( test_title, test_description ) {
@@ -220,6 +212,7 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 				$scope.question = data;
 				
 				$scope.loadQuestionHTML = null;
+				$scope.answer_testfield = null;
 				
 				switch( $scope.question.type ) {
 					case 1:
@@ -230,7 +223,6 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 						break;
 					case 3:
 						$scope.loadQuestionHTML = 'page/answer_types/text.html';
-						$scope.answer_testfield = null;
 						break;
 					case 4:
 						$scope.loadQuestionHTML = 'page/answer_types/drawing.html';
@@ -347,8 +339,9 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 			case 4:
 				var id = document.getElementById("sampleBoard");
 			    var img = id.toDataURL("image/png");
-			    //$scope.saveAnswer( img );
-			    $scope.saveAnswer( "image" );
+			    $scope.saveAnswer( img );
+			    
+			    //$scope.saveAnswer( "image" );
 				break;
 			default:
 				//dsfg
@@ -410,15 +403,16 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 	
 	$scope.pinPoint = function( question_id ) {
 		
-		if( $scope.progressbar.answers < $scope.progressbar.questions - 1 ){
-			var forceStopTestRes = $http.post( '/data/tests/pinPoint', { id : question_id - 0 } );
-			forceStopTestRes.success( function( data, status, headers, config ) {
+		var forceStopTestRes = $http.post( '/data/tests/pinPoint', { id : question_id - 0 } );
+		forceStopTestRes.success( function( data, status, headers, config ) {
+			if(data){
 				$scope.loadTestInProgress();
-			});
-		}
-		else{
-			$window.alert( "You cant pin point last question!" );
-		}
+				$window.alert( "pinPoint success" );
+			}
+			else{
+				$window.alert( "pinPoint error" );
+			}
+		});
 		
 	};
 	
