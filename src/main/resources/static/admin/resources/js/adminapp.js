@@ -1,6 +1,7 @@
 var app = angular.module('AdminAPP', [ 'ngRoute' ]);
 
-app.config(function($routeProvider, $httpProvider, $locationProvider) {
+app
+		.config(function($routeProvider, $httpProvider, $locationProvider) {
 
 			$routeProvider.when('/home', {
 				controller : 'MainController',
@@ -55,11 +56,12 @@ app.controller('LoginController', function($rootScope, $scope, $http,
 		$location, $window) {
 
 	$scope.LogOut = function() {
-		/*$http.get("/data/auth/logout").success(function(data) {
-			$window.location.href = "/#/login";
-		});*/
-		var logoutRes = $http.post( '/data/auth/doLogout' );
-		logoutRes.success( function( data, status, headers, config ) {
+		/*
+		 * $http.get("/data/auth/logout").success(function(data) {
+		 * $window.location.href = "/#/login"; });
+		 */
+		var logoutRes = $http.post('/data/auth/doLogout');
+		logoutRes.success(function(data, status, headers, config) {
 			$window.location.href = "/#/login";
 		});
 	};
@@ -68,8 +70,8 @@ app.controller('LoginController', function($rootScope, $scope, $http,
 
 app.controller('AdminController', function($rootScope, $scope, $http,
 		$location, $window) {
-	
-	var searchinput='';
+
+	var searchinput = '';
 	var urlBase = "";
 	$scope.toggle = true;
 	$scope.selection = [];
@@ -87,33 +89,34 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 
 	$scope.editData = {};
 	$scope.Edit = function(test) {
+		$scope.showQuestionChoices = false;
+		$scope.showTestQuestions = false;
 		var testId = test.id;
 		var data = $.param({
 			testID : testId
 		})
-		
+
 		$http.get("/data/tests/getTestsQuestions?testID=" + testId).success(
 				function(data) {
 					$scope.questions = data;
 					$scope.showTestQuestions = true;
 				}).error(function() {
 		});
-		
+
 	}
-	
+
 	$scope.ViewChoices = function(question) {
 		var ID = question.id;
-
-$http.get("/data/tests/questionChoices?testID=" + ID).success(
-		function(data) {
-			$scope.questionChoices = data;
-		}).error(function() {
-	alert("CAN'T DELETE THIS CHOICE");
-});
-
+		$scope.showQuestionChoices = true;
+		$http.get("/data/tests/questionChoices?testID=" + ID).success(
+				function(data) {
+					$scope.questionChoices = data;
+				}).error(function() {
+			alert("CAN'T DELETE THIS CHOICE");
+		});
 
 	}
-	
+
 	$scope.DeleteQuestion = function(testQuestion) {
 		var questionID = testQuestion.tests.id;
 		var testsID = testQuestion.id;
@@ -158,7 +161,7 @@ $http.get("/data/tests/questionChoices?testID=" + ID).success(
 
 app.controller('UserTestController', function($rootScope, $scope, $http,
 		$location, $window) {
-	var searchInput='';
+	var searchInput = '';
 	var urlBase = "";
 	$scope.toggle = true;
 	$scope.selection = [];
@@ -189,23 +192,14 @@ app.controller('UserTestController', function($rootScope, $scope, $http,
 						+ testId).success(function(data) {
 			$scope.currentUserAnswers = data;
 		});
-
-		$http.get(
-				"/data/tests/userAnswers?userID=" + userId + "&testID="
-						+ testId).success(function(data) {
-			$scope.currentUserAnswers = data;
-			$scope.success = {
-				"message" : "Success"
-			};
-		});
 	};
 
 });
 
 app.controller('UserController', function($rootScope, $scope, $http, $location,
 		$window) {
-	
-	var searchinput='';
+
+	var searchinput = '';
 	$scope.showInfoUsers = false;
 	$scope.userInfo = "";
 
@@ -227,7 +221,7 @@ app.controller('UserController', function($rootScope, $scope, $http, $location,
 	};
 
 	$scope.loadUsers();
-	
+
 	$scope.addUser = function() {
 
 		$http.get(
@@ -241,15 +235,13 @@ app.controller('UserController', function($rootScope, $scope, $http, $location,
 
 		});
 	};
-	
-	$scope.resetPassword=function(id){
-		
+	$scope.resetPassword = function(id) {
 		$http.get("/data/user/reset?id=" + id).success(function(data) {
 			$scope.showInfoUsers = true;
 			$scope.userInfo = "Password reset!";
 		});
 	};
-	
+
 	$scope.delUser = function(id) {
 
 		$http.get("/data/user/delete?id=" + id).success(function(data) {
@@ -263,8 +255,8 @@ app.controller('UserController', function($rootScope, $scope, $http, $location,
 
 app.controller('TestsController', function($rootScope, $scope, $http,
 		$location, $window) {
-	
-	var searchinput='';
+
+	var searchinput = '';
 	var thisTestID;
 	var thisUserID;
 	var thisQuestionID;
@@ -389,18 +381,18 @@ app.controller('TestsController', function($rootScope, $scope, $http,
 			$http.get(
 					"/data/tests/addQuestion?type=" + questionType + "&testID="
 							+ thisTestID + "&userID=" + thisUserID
-							+ "&question=" + $scope.Question +"&answer=" + $scope.Answer).success(
-					function(data) {
-						if (data) {
-							$scope.showAlertChoices = true;
-							$scope.choiceWarning = "Question created!";
-							$scope.AddTestQuestion(activeTest);
-						} else {
-							$scope.showAlertChoices = true;
-							$scope.choiceWarning = "Can't create question!";
-						}
-						;
-					}).error(function() {
+							+ "&question=" + $scope.Question + "&answer="
+							+ $scope.Answer).success(function(data) {
+				if (data) {
+					$scope.showAlertChoices = true;
+					$scope.choiceWarning = "Question created!";
+					$scope.AddTestQuestion(activeTest);
+				} else {
+					$scope.showAlertChoices = true;
+					$scope.choiceWarning = "Can't create question!";
+				}
+				;
+			}).error(function() {
 				$scope.showAlertChoices = true;
 				$scope.choiceWarning = "No question type chosen!";
 			});

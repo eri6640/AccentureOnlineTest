@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import online.test.models.QuestionChoices;
 import online.test.models.TestQuestions;
 import online.test.models.Tests;
 import online.test.models.User;
 import online.test.models.UserAnswers;
+import online.test.models.dao.QuestionChoicesDao;
 import online.test.models.dao.TestQuestionsDao;
 import online.test.models.dao.UserAnswersDao;
 
@@ -20,7 +22,7 @@ public class TestQuestionsUtils {
 	@Autowired
 	private UserAnswersDao userAnswersDao;
 	@Autowired
-	UserAnswersDao userAnswerDao;
+	private QuestionChoicesDao questionChoicesDao;
 	
 	MainUtils utils = new MainUtils();
 	
@@ -64,7 +66,17 @@ public class TestQuestionsUtils {
 		for( TestQuestions question : question_list ){
 			
 			if( ! isAlreadyAnswered( user_user, question ) && ! isPinPointed( user_user, question ) ){
-				return question;
+				if( question.getType() == 1 || question.getType() == 2 ){
+					
+					List<QuestionChoices> list = questionChoicesDao.getCurrentTestQuestions( question.getId() );
+					
+					if( ! list.isEmpty() ){
+						return question;
+					}
+				}
+				else{
+					return question;
+				}
 			}
 			
 		}
@@ -157,7 +169,7 @@ public class TestQuestionsUtils {
 		int pined_answerId = 0;
 		
 		if( ( pined_answerId = getPinPointedAnswerId( user_user, question ) ) > 0  ){
-			userAnswerDao.delete( (long) pined_answerId );
+			userAnswersDao.delete( (long) pined_answerId );
 		}
 		
 		userAnswersDao.save( user_answer );
