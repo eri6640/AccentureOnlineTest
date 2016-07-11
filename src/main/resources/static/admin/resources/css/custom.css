@@ -56,10 +56,15 @@ font-size: 16px;
 .sidebar-collapse > .nav > li {
 	border-bottom:1px solid #e1e1e1;
 }
-.sidebar-collapse .nav > li > a:hover,
 .sidebar-collapse .nav > li > a:focus {
 	
-	background:#F3F3F3;
+	background: #d7e8f4;
+	outline:0;
+}
+
+.sidebar-collapse .nav > li > a:hover {
+	
+	background:#ebf3fa;
 	outline:0;
 }
 
@@ -94,6 +99,51 @@ min-height: 80px;
     background-color:#f3f3f3;
 }
     
+    /*header*/
+    
+.navbar-fixed-top {
+height: 50px;
+    background-color: rgba(77, 153, 203, 0.5) !important;
+    border: none !important;
+    
+/* For browsers that do not support gradients */
+   /* background: -webkit-linear-gradient(#4d99cb,  rgba(255,0,0,0)); */ /* For Safari 5.1 to 6.0 */
+   /* background: -o-linear-gradient(#4d99cb,  rgba(255,0,0,0));      */ /* For Opera 11.1 to 12.0 */
+   /* background: -moz-linear-gradient(#4d99cb, rgba(255,0,0,0));     */ /* For Firefox 3.6 to 15 */
+   /* background: linear-gradient(#4d99cb,  rgba(255,0,0,0))          */ /* Standard syntax */
+   }
+   .logout-spn a{
+   color: white !important;
+   cursor: pointer;
+   text-decoration: none;
+   }
+   
+  a.navbar-brand img{
+  position: absolute;
+ 
+ line-height: 50px !important;
+ opacity: 0.8;
+ 
+   }
+/*==============================================
+    DASHBOARD STYLES    
+    =============================================*/
+.div-square {
+    padding:5px;
+    border:3px double #e1e1e1;
+    -webkit-border-radius:8px;
+   -moz-border-radius:8px;
+    border-radius:8px;
+    margin:5px;
+
+}
+
+.div-square> a,.div-square> a:hover {
+    color:#808080;
+     text-decoration:none;
+}
+
+
 /*==============================================
     DASHBOARD STYLES    
     =============================================*/
@@ -149,5 +199,33 @@ min-height: 80px;
     }
 
  
+}
+
+
+.div-square * {
+	color:  #ff9900;
+}
+
+.div-square:hover * {
+  
+    color: white;
+}
+
+.div-square:hover  {
+    background: #4d99cb;
+    }
+    /*
+.manageUsers *{
+	color: #4d99cb;
+}*/
+    
+#page-wrapper{
+	background-color: #d7e8f4;
+	
+}
+
+.active-link {
+	background-color: white;
+	
 }
 
