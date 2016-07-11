@@ -1,6 +1,7 @@
 var app = angular.module('AdminAPP', [ 'ngRoute' ]);
 
-app.config(function($routeProvider, $httpProvider, $locationProvider) {
+app
+		.config(function($routeProvider, $httpProvider, $locationProvider) {
 
 			$routeProvider.when('/home', {
 				controller : 'MainController',
@@ -69,34 +70,25 @@ app.controller('LoginController', function($rootScope, $scope, $http,
 
 app.controller('AdminController', function($rootScope, $scope, $http,
 		$location, $window) {
-	
-	$scope.showInfoActiveTests = false;
-	$scope.activeTestInfo = "";	
-	var searchinput='';
+
+	var searchinput = '';
 	var urlBase = "";
-	
-	
-	$scope.getTests = function(){
-		$scope.toggle = true;
-		$scope.selection = [];
-		$scope.statuses = [ 'ACTIVE', 'COMPLETED' ];
-		$scope.priorities = [ 'HIGH', 'LOW', 'MEDIUM' ];
-		$http.defaults.headers.post["Content-Type"] = "application/json";
-		$http.get(urlBase + '/data/tests/getAllTests').success(function(data) {
-	
-			if (data != undefined) {
-				$scope.tests = data;
-			} else {
-				$scope.tests = [];
-			}
-		});
-	}
-	
-	$scope.getTests();
-	$scope.curentTest;
+	$scope.toggle = true;
+	$scope.selection = [];
+	$scope.statuses = [ 'ACTIVE', 'COMPLETED' ];
+	$scope.priorities = [ 'HIGH', 'LOW', 'MEDIUM' ];
+	$http.defaults.headers.post["Content-Type"] = "application/json";
+	$http.get(urlBase + '/data/tests/getAllTests').success(function(data) {
+
+		if (data != undefined) {
+			$scope.tests = data;
+		} else {
+			$scope.tests = [];
+		}
+	});
+
 	$scope.editData = {};
 	$scope.Edit = function(test) {
-	    currentTest=test;
 		$scope.showQuestionChoices = false;
 		$scope.showTestQuestions = false;
 		var testId = test.id;
@@ -112,26 +104,22 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 		});
 
 	}
-	
-	$scope.currentQuestion;
+
 	$scope.ViewChoices = function(question) {
-		currentQuestion=question;
 		var ID = question.id;
-		
-		
+		$scope.showQuestionChoices = true;
 		$http.get("/data/tests/questionChoices?testID=" + ID).success(
-			function(data) {
-				$scope.questionChoices = data;
-				$scope.showQuestionChoices = true;
-			}).error(function() {
-			
-			});
+				function(data) {
+					$scope.questionChoices = data;
+				}).error(function() {
+			alert("CAN'T DELETE THIS CHOICE");
+		});
+
 	}
 
 	$scope.DeleteQuestion = function(testQuestion) {
 		var questionID = testQuestion.tests.id;
-		var testsID=testQuestion.id;
-		
+		var testsID = testQuestion.id;
 		var data = $.param({
 			testsID : testsID,
 			questionID : questionID
@@ -141,17 +129,12 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 				"/data/tests/deleteQuestion?testsID=" + testsID
 						+ "&questionID=" + questionID).success(function(data) {
 			if (data) {
-				$scope.showInfoActiveTests = true;
-				$scope.activeTestInfo = "Can't delete question if user has answered it";
+				alert("CANT DELETE!");
 			} else {
-				$scope.showInfoActiveTests = true;
-				$scope.activeTestInfo = "Question deleted";
-				$scope.Edit(currentTest);
-				
+				alert("DELETED!");
 			}
 		}).error(function() {
-			$scope.showInfoActiveTests = true;
-			$scope.activeTestInfo = "Can't delete this question!";
+			alert("CAN'T DELETE THIS QUESTION");
 		});
 	}
 
@@ -164,17 +147,12 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 		$http.get("/data/tests/deleteQuestionChoices?choiceID=" + choiceID)
 				.success(function(data) {
 					if (data) {
-						$scope.showInfoActiveTests = true;
-						$scope.activeTestInfo = "Question choice deleted";
-						$scope.ViewChoices(currentQuestion);
-										
+						alert("DELETED!");
 					} else {
-						$scope.showInfoActiveTests = true;
-						$scope.activeTestInfo = "Can't delete question choice!";
+						alert("CANT DELETE!");
 					}
 				}).error(function() {
-					$scope.showInfoActiveTests = true;
-					$scope.activeTestInfo = "Can't delete this question choice!";
+					alert("CAN'T DELETE THIS Choice");
 				});
 
 	}
@@ -200,9 +178,8 @@ app.controller('UserTestController', function($rootScope, $scope, $http,
 	});
 
 	$scope.editData = {};
-	$scope.showUserAnswers=false;
+
 	$scope.Edit = function(userAnswer) {
-		$scope.showUserAnswers=true;
 		var userId = userAnswer.user.id;
 		var testId = userAnswer.tests.id;
 		var data = $.param({

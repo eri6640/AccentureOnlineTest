@@ -52,7 +52,9 @@
                       <td>{{test.id}}</td>
                       <td>{{test.title}}</td>
                       <td>{{test.created | date:'dd-MM-yyyy HH:mm:ss'}}</td>
-                      <td><button type="button" class="btn btn-success" ng-click="AddTestQuestion(test)">Add</button></td>
+                      <td><button type="button" ng-click="AddTestQuestion(test)"
+							style="text-decoration: none; color: white; background-color: #428bca;
+							padding: 4px; border-radius: 28px;">Add</button></td>
 					  <td>
 					  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal{{test.id}}">Edit</button>                                                       	
                            	<div class="modal fade" id="myModal{{test.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
