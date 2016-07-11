@@ -339,8 +339,9 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 			case 4:
 				var id = document.getElementById("sampleBoard");
 			    var img = id.toDataURL("image/png");
-			    //$scope.saveAnswer( img );
-			    $scope.saveAnswer( "image" );
+			    $scope.saveAnswer( img );
+			    
+			    //$scope.saveAnswer( "image" );
 				break;
 			default:
 				//dsfg
