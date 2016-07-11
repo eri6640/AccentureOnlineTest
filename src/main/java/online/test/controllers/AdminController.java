@@ -103,7 +103,7 @@ public class AdminController {
 			}
 		}
 		if (questionExists == false) {
-			Iterable<QuestionChoices> choices = adminUtils.selectCurrentQuestionChoices(testsID);
+			Iterable<QuestionChoices> choices = adminUtils.selectCurrentQuestionChoices(questionID);
 			for (QuestionChoices questionChoices : choices) {
 				if (questionChoices.getTestQuestion().getId() == questionID) {
 					adminUtils.deleteChoice(questionChoices.getId());
