@@ -56,8 +56,20 @@ public class AdminUtils{
 	}
 
 	public Iterable<UserAnswers> getAllUserTests() {
+		List<UserAnswers>  list = new ArrayList<UserAnswers>();
+		boolean repeat=false;
 		Iterable<UserAnswers> userTestList = userAnswerDao.findAll();
-		return userTestList;
+		Iterable<Tests>tests=testsDao.findAll();
+		for (Tests test : tests) {
+			repeat=false;
+			for (UserAnswers answer : userTestList) {
+				if(answer.getTests().getId()==test.getId()&&repeat==false){
+					list.add(answer);
+					repeat=true;
+				}
+			}
+		}
+		return list;
 	}
 
 	public void addQuestion(int type, Long testID, Long userID, String question, String answer) {
