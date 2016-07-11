@@ -35,12 +35,11 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="userAnswer in userAnswers | filter:searchInput">
-						<td>{{userAnswer.id}}</td>
+						<td>{{userAnswer.tests.id}}</td>
 						<td>{{userAnswer.user.email}}</td>
 						<td>{{userAnswer.tests.title}}</td>
-						<td><input type="button" value="View"
-							ng-click=" Edit( userAnswer )"
-							style="text-decoration: none; color: white; background-color: #428bca; padding: 4px; border-radius: 28px;"></td>
+						<td><input type="button" class="btn btn-success" value="View"
+							ng-click=" Edit( userAnswer )"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -60,7 +59,9 @@
 					<tr ng-repeat="currentUserAnswer in currentUserAnswers">
 						<td>{{currentUserAnswer.id}}</td>
 						<td>{{currentUserAnswer.answer}}</td>
-						<td style="word-break: break-all;">{{currentUserAnswer.imageAnswer}}</td>
+						<td>
+							<img src={{currentUserAnswer.imageAnswer}}>
+						</td>
 						<td>{{currentUserAnswer.testsQuestions.question}}</td>
 					</tr>
 				</tbody>
