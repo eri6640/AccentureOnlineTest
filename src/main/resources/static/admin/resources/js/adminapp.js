@@ -200,8 +200,9 @@ app.controller('UserTestController', function($rootScope, $scope, $http,
 	});
 
 	$scope.editData = {};
-
+	$scope.showUserAnswers = false;
 	$scope.Edit = function(userAnswer) {
+		$scope.showUserAnswers = true;
 		var userId = userAnswer.user.id;
 		var testId = userAnswer.tests.id;
 		var data = $.param({
