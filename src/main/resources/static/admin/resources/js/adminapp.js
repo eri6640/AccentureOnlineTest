@@ -91,18 +91,32 @@ app.controller('AdminController', function($rootScope, $scope, $http,
 		var data = $.param({
 			testID : testId
 		})
-		$http.get("/data/tests/questionChoices?testID=" + testId).success(
+		
+		$http.get("/data/tests/getTestsQuestions?testID=" + testId).success(
 				function(data) {
-					$scope.questionChoices = data;
+					$scope.questions = data;
+					$scope.showTestQuestions = true;
 				}).error(function() {
-			alert("CAN'T DELETE THIS CHOICE");
 		});
+		
+	}
+	
+	$scope.ViewChoices = function(question) {
+		var ID = question.id;
+
+$http.get("/data/tests/questionChoices?testID=" + ID).success(
+		function(data) {
+			$scope.questionChoices = data;
+		}).error(function() {
+	alert("CAN'T DELETE THIS CHOICE");
+});
+
 
 	}
-
-	$scope.DeleteQuestion = function(questionChoice) {
-		var questionID = questionChoice.testQuestion.tests.id;
-		var testsID = questionChoice.testQuestion.id;
+	
+	$scope.DeleteQuestion = function(testQuestion) {
+		var questionID = testQuestion.tests.id;
+		var testsID = testQuestion.id;
 		var data = $.param({
 			testsID : testsID,
 			questionID : questionID
