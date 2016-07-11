@@ -382,6 +382,6 @@
 function SaveImageAsURL() {
     var id = document.getElementById("sampleBoard");
     var img = id.toDataURL("image/png");
-    window.open(img);
+    //window.open(img);
 }
 /* *** SAVE CANVAS IMAGE AS URL *** */
