@@ -17,8 +17,9 @@ body { background-image: none; }
 					<option ng-repeat="test in test_list" value="{{test.id}}" ng-click="showTestDescription( test.title, test.description )">{{test.title}}</option>
 				</select>
 				<div class="container-fluid" style="max-width:335px;">
+					<a ng-show="haveTestInProgress" class="btn btn-danger btn-sm btn-block" href="/#/question">Test in progress</a>
 					<button type="submit" value="submit" id="submit" class="btn btn-primary btn-sm btn-block">Start</button>
-					<button class="btn btn-danger btn-sm btn-block">Log Out</button>
+					<a ng-controller="LoginOutController" ng-click="logout()" class="btn btn-danger btn-sm btn-block">Log Out</a>
 				</div>
 			</form>
 		</div>
