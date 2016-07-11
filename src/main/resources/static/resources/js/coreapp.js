@@ -402,16 +402,15 @@ app.controller( 'QuestionController', function( $rootScope, $scope, $http, $loca
 	
 	$scope.pinPoint = function( question_id ) {
 		
-		var forceStopTestRes = $http.post( '/data/tests/pinPoint', { id : question_id - 0 } );
-		forceStopTestRes.success( function( data, status, headers, config ) {
-			if(data){
+		if( $scope.progressbar.answers < $scope.progressbar.questions - 1 ){
+			var forceStopTestRes = $http.post( '/data/tests/pinPoint', { id : question_id - 0 } );
+			forceStopTestRes.success( function( data, status, headers, config ) {
 				$scope.loadTestInProgress();
-				$window.alert( "pinPoint success" );
-			}
-			else{
-				$window.alert( "pinPoint error" );
-			}
-		});
+			});
+		}
+		else{
+			$window.alert( "You cant pin point last question!" );
+		}
 		
 	};
 	
