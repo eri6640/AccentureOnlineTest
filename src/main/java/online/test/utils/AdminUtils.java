@@ -50,7 +50,7 @@ public class AdminUtils{
 		questionChoiceDao.delete(choiceID);
 	}
 	
-	
+
 	public void deleteQuestion(Long questionID) {
 		testQuestionsDao.delete(questionID);
 	}
@@ -155,16 +155,16 @@ public class AdminUtils{
 	public Iterable<QuestionChoices> selectCurrentQuestionChoices(Long testID) {
 		List<QuestionChoices> choices = new ArrayList<QuestionChoices>();
 		Iterable<QuestionChoices> choiceList = questionChoiceDao.findAll();
-		Iterable<TestQuestions> questionList = testQuestionsDao.getCurrentTestQuestions(testID);
-		for (TestQuestions testQuestions : questionList) {
+		
+	
 			for (QuestionChoices questionChoices : choiceList) {
-				if (testQuestions.getId() == questionChoices.getTestQuestion().getId()) {
+				if (testID == questionChoices.getTestQuestion().getId()) {
 					choices.add(questionChoices);
 				}
 			}
-		}
 		return (Iterable<QuestionChoices>) choices;
 	}
+
 
 
 	public User getActiveUser(HttpServletRequest request) {
